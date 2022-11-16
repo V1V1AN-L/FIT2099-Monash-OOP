@@ -1,4 +1,4 @@
-# FIT2099 Assignment (Semester 2 - 2022) - Pokemon!
+# FIT2099 Assignment (November 2022) - Pokemon!
 
 ## XX_LabYYTeamZZ
 Team members:
@@ -6,7 +6,7 @@ Team members:
 *
 *
 
-Link to contribution logs spreadsheet: ...
+Link to contribution logs spreadsheet: [...](put your spreadsheet url here)
 
 ## Design Rationale
 
