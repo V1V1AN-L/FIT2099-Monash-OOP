@@ -1,4 +1,4 @@
-package game;
+package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
 
@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.positions.Ground;
  * Modified by:
  *
  */
-public class Floor extends Ground {
+public class Floor extends Ground implements NonCovertibleGround{
 	public Floor() {
 		super('_');
 	}

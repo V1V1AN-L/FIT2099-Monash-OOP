@@ -1,4 +1,4 @@
-package game;
+package game.pokemon;
 
 
 import edu.monash.fit2099.engine.actions.Action;
@@ -7,6 +7,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Element;
+import game.action.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 
@@ -19,7 +21,7 @@ import java.util.Map;
  * @author Riordan D. Alfredo
  * Modified by: Ian K. Felix
  */
-public class Torchic extends Actor {
+public class Torchic extends PokemonBase {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
