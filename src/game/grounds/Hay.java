@@ -1,10 +1,7 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
-import game.Element;
-import game.items.Candy;
-
-import java.util.Random;
+import game.tools.Element;
 
 public class Hay extends Ground {
     /**

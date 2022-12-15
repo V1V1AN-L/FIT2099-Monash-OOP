@@ -1,4 +1,4 @@
-package game;
+package game.tools;
 
 public enum Element {
     WATER("Water"),

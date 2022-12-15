@@ -1,7 +1,7 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
+import game.tools.Element;
 import game.pokemon.Mudkip;
 import game.pokemon.PokemonBase;
 
@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class Waterfall extends SpawningGround{
 
-    private List<PokemonBase> MudkipList = new ArrayList<PokemonBase>();
+//    private List<PokemonBase> MudkipList = new ArrayList<PokemonBase>();
 
     /**
      * Constructor.
@@ -23,13 +23,13 @@ public class Waterfall extends SpawningGround{
         super('W', Element.WATER);
     }
 
-    public List<PokemonBase> getMudkipList() {
-        return MudkipList;
-    }
-
-    public void setMudkipList(List<PokemonBase> mudkipList) {
-        MudkipList = mudkipList;
-    }
+//    public List<PokemonBase> getMudkipList() {
+//        return MudkipList;
+//    }
+//
+//    public void setMudkipList(List<PokemonBase> mudkipList) {
+//        MudkipList = mudkipList;
+//    }
 
     @Override
     public PokemonBase SpawnPokemon(Location location) {
@@ -45,7 +45,7 @@ public class Waterfall extends SpawningGround{
         super.tick(location);
         int randomNum = new Random().nextInt(9);
         if (randomNum < 2){
-           MudkipList.add(SpawnPokemon(location));
+           location.addActor(SpawnPokemon(location));
         }
     }
 }

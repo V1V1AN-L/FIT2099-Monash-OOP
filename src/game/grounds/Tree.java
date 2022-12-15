@@ -1,9 +1,7 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.pokemon.Mudkip;
+import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Treecko;
 

@@ -1,7 +1,7 @@
 package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
+import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
@@ -12,7 +12,7 @@ import java.util.Random;
 public class Crater extends SpawningGround{
 
 
-    private List<PokemonBase> TorchicList = new ArrayList<PokemonBase>();
+//    private List<PokemonBase> TorchicList = new ArrayList<PokemonBase>();
     /**
      * Constructor.
      *
@@ -23,13 +23,13 @@ public class Crater extends SpawningGround{
         super('C', Element.FIRE);
     }
 
-    public List<PokemonBase> getTorchicList() {
-        return TorchicList;
-    }
-
-    public void setTorchicList(List<PokemonBase> torchicList) {
-        TorchicList = torchicList;
-    }
+//    public List<PokemonBase> getTorchicList() {
+//        return TorchicList;
+//    }
+//
+//    public void setTorchicList(List<PokemonBase> torchicList) {
+//        TorchicList = torchicList;
+//    }
 
     @Override
     public PokemonBase SpawnPokemon(Location location) {
@@ -42,7 +42,7 @@ public class Crater extends SpawningGround{
         super.tick(location);
         int randomNum = new Random().nextInt(9);
         if (randomNum == 0){
-            TorchicList.add(SpawnPokemon(location));
+            location.addActor(SpawnPokemon(location));
         }
     }
 }

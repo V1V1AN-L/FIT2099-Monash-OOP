@@ -1,13 +1,7 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.positions.Exit;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
-import game.time.TimePerception;
+import game.tools.Element;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**

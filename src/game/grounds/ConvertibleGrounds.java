@@ -3,7 +3,7 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Element;
+import game.tools.Element;
 import game.time.TimePerception;
 
 import java.util.ArrayList;
