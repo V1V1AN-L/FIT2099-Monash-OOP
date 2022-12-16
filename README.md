@@ -4,8 +4,8 @@
 Team members:
 
 Zecan Liu 25348914 zliu0207@student.monash.edu
-Ethan Kouris (dropped this unit)
-Minh Anh Phan (did not show up at all)
+
+Jordan Nathanael 31893902  jnat0012@student.monash.edu
 
 Link to contribution logs spreadsheet: [https://docs.google.com/spreadsheets/d/1QeySXoTWwXk9gglpJQzY4sfR8xn8tGG2epjmaYE85BM/edit?usp=sharing]
 
