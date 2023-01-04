@@ -11,11 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Waterfall extends Ground implements SpawnGround {
+public class Waterfall extends SpawningGround {
 
-    private Element element;
-
-    private Location location;
     /**
      * Constructor.
      *
@@ -24,21 +21,6 @@ public class Waterfall extends Ground implements SpawnGround {
         super('W');
         this.element = Element.WATER;
         addCapability(this.element);
-    }
-
-
-
-
-    public int getSurrounding(Location location){
-        int counter = 0;
-
-        List<Exit> availableExits = new ArrayList<>(location.getExits());
-        for (Exit availableExit : availableExits) {
-            if(availableExit.getDestination().getGround().hasCapability(element)){
-                counter++;
-            }
-        }
-        return counter;
     }
 
     @Override

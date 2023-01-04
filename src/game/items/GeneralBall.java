@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
+import game.action.CatchAction;
 import game.pokemon.PokemonBase;
 
 public abstract class GeneralBall extends Item {
@@ -14,6 +15,7 @@ public abstract class GeneralBall extends Item {
      */
     public GeneralBall(String name, char displayChar, boolean portable) {
         super(name, displayChar, portable);
+
     }
 
     public PokemonBase getStoredPokemon() {

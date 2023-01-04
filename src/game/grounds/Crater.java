@@ -8,11 +8,7 @@ import game.pokemon.Torchic;
 
 import java.util.Random;
 
-public class Crater extends Ground implements SpawnGround {
-    private Element element;
-
-    private Location location;
-
+public class Crater extends SpawningGround {
     /**
      * Constructor.
      *
@@ -31,8 +27,8 @@ public class Crater extends Ground implements SpawnGround {
     public void tick(Location location) {
         super.tick(location);
         this.location = location;
-        if (Math.random()<=0.1 && !location.containsAnActor()) {
-            location.addActor(spawnPokemon());
+        if (Math.random()<=0.1 && !this.location.containsAnActor()) {
+            this.location.addActor(spawnPokemon());
         }
     }
 }

@@ -18,9 +18,4 @@ public class Hay extends Ground {
         addCapability(Element.GRASS);
     }
 
-    @Override
-    public void tick(Location location) {
-        super.tick(location);
-        this.location = location;
-    }
 }

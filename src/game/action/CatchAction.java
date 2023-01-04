@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.affection.AffectionManager;
+import game.items.Candy;
 import game.items.GeneralBall;
 import game.items.Pokeball;
 import game.pokemon.PokemonBase;
@@ -53,6 +54,8 @@ public class CatchAction extends Action {
 
             // delete the captured pokemon from the map
             map.removeActor(captured);
+
+            map.locationOf(captured).addItem(new Candy());
 
             result += " is successful";
             return result;
