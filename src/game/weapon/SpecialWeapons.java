@@ -20,15 +20,9 @@ import java.util.Map;
  * @see Actor#getWeapon() method.
  * @see AttackAction uses getWeapon() in the execute() method.
  */
-public class BackupWeapons{
-    // Use this class to store the backupWeapons
-    private static Map<PokemonBase, SpecialWeapons> backupWeapons = new HashMap<>();
-
-    public static void addBackupWeapons(PokemonBase pokemon, SpecialWeapons specialWeapons){
-        backupWeapons.put(pokemon, specialWeapons);
-    }
-    
-    public static SpecialWeapons getBackupWeapons(PokemonBase pokemon){
-        return backupWeapons.get(pokemon);
+public class SpecialWeapons extends WeaponItem {
+    public SpecialWeapons(PokemonBase pokemon, String name, char displayChar, int damage, String verb, int hitRate){
+        super(name, displayChar, damage, verb, hitRate);
+        BackupWeapons.addBackupWeapons(pokemon, this);
     }
 }

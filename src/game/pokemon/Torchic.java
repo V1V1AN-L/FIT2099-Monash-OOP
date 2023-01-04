@@ -16,6 +16,7 @@ import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
+import game.weapon.SpecialWeapons;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +49,7 @@ public class Torchic extends PokemonBase {
 
     @Override
     public void backupWeapon(){
-        addItemToInventory(new BackupWeapons("Ember", ' ', 30, "sparks", 65));
+        new SpecialWeapons(this, "Ember", ' ', 30, "sparks", 65);
     }
 
     @Override

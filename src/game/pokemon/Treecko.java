@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
+import game.weapon.SpecialWeapons;
 
 public class Treecko extends PokemonBase{
     /**
@@ -27,7 +28,7 @@ public class Treecko extends PokemonBase{
 
     @Override
     public void backupWeapon(){
-        addItemToInventory(new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90));
+        new SpecialWeapons(this, "Blade Cutter", ' ', 20, "whips", 90);
     }
 
     @Override

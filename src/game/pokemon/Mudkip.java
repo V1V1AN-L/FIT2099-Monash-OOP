@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
+import game.weapon.SpecialWeapons;
 
 public class Mudkip extends PokemonBase{
     /**
@@ -28,7 +29,7 @@ public class Mudkip extends PokemonBase{
 
     @Override
     public void backupWeapon(){
-        addItemToInventory(new BackupWeapons("Water Blast", ' ', 25, "burbles", 80));
+        new SpecialWeapons(this, "Water Blast", ' ', 25, "burbles", 80);
     }
 
     @Override

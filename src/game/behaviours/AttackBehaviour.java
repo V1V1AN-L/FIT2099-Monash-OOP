@@ -11,9 +11,6 @@ import game.tools.Element;
 import game.tools.ElementsHelper;
 import game.tools.Status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by:
  * @author Riordan D. Alfredo
@@ -27,43 +24,22 @@ public class AttackBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         // check surrounding
-        Location targetLoc = null;
-        List<Actor> targetActor = new ArrayList<Actor>();
-
         for (Exit exit : map.locationOf(actor).getExits()){
-            targetLoc = exit.getDestination();
+            Location targetLoc = exit.getDestination();
             if (targetLoc.containsAnActor()){
-                int index = 0;
-                targetActor.add(targetLoc.getActor());
-                actor.allowableActions(targetActor.get(index), targetLoc.toString(), map);
-                index += 1;
-            }
-        }
+                Actor targetActor = targetLoc.getActor();
+                actor.allowableActions(targetActor, targetLoc.toString(), map);
 
-        System.out.println(targetActor);
-
-        if (targetActor != null){
-            // check target is IMMUNE or not
-            for (Actor target : targetActor){
-                if (target.hasCapability(Status.IMMUNE)){
-                    return null;
-                }
-
-                // check elements
-                // can attack if actor and target has different element
-                if(! ElementsHelper.hasAnySimilarElements(target, actor.findCapabilitiesByType(Element.class))){
-                    // if pokemon wants to attack, check the ground first, and then create the special Weapon
-                    Location steppedGround = map.locationOf(actor);
-
-                    if(ElementsHelper.hasAnySimilarElements(steppedGround.getGround(), actor.findCapabilitiesByType(Element.class))){
-                        ((PokemonBase) actor).toggleWeapon(false);
+                // if the target is not IMMUNE attack it.
+                if (! targetActor.hasCapability(Status.IMMUNE)){
+                    // check elements
+                    // can attack if actor and target has different element
+                    if(! ElementsHelper.hasAnySimilarElements(targetActor, actor.findCapabilitiesByType(Element.class))){
+                        //return the action to attack
+                        return new AttackAction(targetActor, targetLoc.toString()); // behaviour will stop here.
                     }
-
-                    //return the action to attack
-                    return new AttackAction(target, targetLoc.toString()); // behaviour will stop here.
                 }
             }
-
         }
         return null; // go to next behaviour
     }
