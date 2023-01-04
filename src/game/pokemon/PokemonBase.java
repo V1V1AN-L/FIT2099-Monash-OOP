@@ -8,10 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 import game.time.TimePerception;
 import game.weapon.BackupWeapons;
 
@@ -35,8 +32,12 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      */
     public PokemonBase(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        // Create the SpecialWeapons
+        backupWeapon();
+
         // These two behaviors are a mush for each pokemon
         // FIXME change the order key to final variable instead of magic number
+        behaviours.put(0, new ToogleWeaponBehavior(this));
         behaviours.put(1, new AttackBehaviour());
         behaviours.put(3, new WanderBehaviour());
         registerInstance();
@@ -91,9 +92,9 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      * However, once the actor is moved, and the condition isn't matched, so the actor will go back again into the intrinsic weapon... maybe
      */
     public void toggleWeapon(boolean isEquipping){
-        if (! isEquipping){
-            backupWeapon();
-        } else {
+        if (isEquipping){
+            addItemToInventory(BackupWeapons.getBackupWeapons(this));
+        } else if (!isEquipping && getInventory().contains(BackupWeapons.getBackupWeapons(this))) {
             removeItemFromInventory((Item) getWeapon());
         }
     };

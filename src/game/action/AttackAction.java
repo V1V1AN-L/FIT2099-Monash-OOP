@@ -50,10 +50,6 @@ public class AttackAction extends Action {
 
         Weapon weapon = actor.getWeapon();
 
-        if (target.hasCapability(Status.IMMUNE)){
-            return target + " can't be attacked.";
-        }
-
         if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
             return actor + " misses " + target + ".";
         }
