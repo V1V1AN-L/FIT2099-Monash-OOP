@@ -8,8 +8,10 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.affection.AffectionManager;
 import game.grounds.*;
 import game.items.Clock;
+import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
 /**
@@ -49,18 +51,19 @@ public class Application {
         Clock clock = new Clock();
         gameMap.at(58,12).addItem(clock);
 
+        // AffectionManager
+        AffectionManager am = AffectionManager.getInstance();
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
         world.addPlayer(ash, gameMap.at(32, 10));
+        am.registerTrainer(ash);
 
         //Add first pokemon - Torchic
         Actor torchic = new Torchic();
         gameMap.at(33, 10).addActor(torchic);
+        am.registerPokemon((PokemonBase) torchic);
 //        System.out.println("print" + (0/5) % 2);
-
-
-
 
         world.run();
 
