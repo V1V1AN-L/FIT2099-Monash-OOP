@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.affection.AffectionManager;
 import game.grounds.*;
+import game.pokemon.Mudkip;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
@@ -36,13 +37,13 @@ public class Application {
                 ".............................................C.......^^^^^^",
                 "...........C............................................^^^",
                 "..........................#######........................^^",
-                "......W...................#_____#............+............^",
+                "......W...................#_____#............++++.........^",
                 ".....................+....#_____#..........................",
                 "...+.......~..............###_###..........................",
                 "...~~~~~~~~................................................",
-                "....~~~~~...............W.....................C............",
-                "~~~~~~~....................................................",
-                "~~~~~~..+.............W...............+....................",
+                "...W~~~~~W..............WWWW..................C............",
+                "~~~~~~~W............WWWW.WWW...............................",
+                "~~~~~~..+...........WWWW.WWW..........+....................",
                 "~~~~~~~~~..................................................");
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
@@ -59,8 +60,10 @@ public class Application {
         //Add first pokemon - Torchic
         Actor torchic = new Torchic();
         gameMap.at(33, 10).addActor(torchic);
-        am.registerPokemon((PokemonBase) torchic);
-//        System.out.println("print" + (0/5) % 2);
+
+        //Add first pokemon - Torchic
+        Actor mudkip = new Mudkip();
+        gameMap.at(32, 11).addActor(mudkip);
 
         world.run();
 

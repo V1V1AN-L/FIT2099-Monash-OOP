@@ -13,6 +13,7 @@ import game.tools.Status;
 public class CatchAction extends Action {
     private Actor captured;
     private String direction;
+    private AffectionManager am = AffectionManager.getInstance();
 
     public CatchAction(Actor captured, String direction){
         this.captured = captured;
@@ -45,17 +46,18 @@ public class CatchAction extends Action {
         int affectionPoint = am.getAffectionPoint(((PokemonBase) captured));
 
         // FIXME update the ball req
-        if (affectionPoint > 20){
+        if (affectionPoint >= 20){
             // save the pokemon into the GeneralBall
             pokeball.setStoredPokemon(((PokemonBase) captured));
 
             // Add the filledPokeball into inventory
             actor.addItemToInventory(pokeball);
 
+            // add candy
+            map.locationOf(captured).addItem(new Candy());
+
             // delete the captured pokemon from the map
             map.removeActor(captured);
-
-            map.locationOf(captured).addItem(new Candy());
 
             result += " is successful";
             return result;
@@ -69,6 +71,7 @@ public class CatchAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " captures " + captured.toString() + " at " + direction;
+        int apPoint = am.getAffectionPoint(((PokemonBase)captured));
+        return actor + " captures " + captured.toString() + "(" + apPoint + " AP) at " + direction;
     }
 }

@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
 import game.action.CatchAction;
+import game.action.SummonAction;
 import game.pokemon.PokemonBase;
 
 public abstract class GeneralBall extends Item {
@@ -24,7 +25,10 @@ public abstract class GeneralBall extends Item {
 
     public void setStoredPokemon(PokemonBase storedPokemon) {
         this.storedPokemon = storedPokemon;
+        addAction(new SummonAction(this.storedPokemon));
     }
+
+
 
 
 

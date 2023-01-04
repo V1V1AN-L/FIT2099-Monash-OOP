@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
+import game.affection.AffectionManager;
 import game.behaviours.*;
 import game.time.TimePerception;
 import game.weapon.BackupWeapons;
@@ -21,6 +22,7 @@ public abstract class PokemonBase extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     //Using TreeMap because I need the order of the behaviors.
     protected final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
+    private final AffectionManager am = AffectionManager.getInstance();
     protected FavoriteAction favAction;
 
     /**
@@ -41,6 +43,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         behaviours.put(1, new AttackBehaviour());
         behaviours.put(3, new WanderBehaviour());
         registerInstance();
+
+        am.registerPokemon(this);
     }
 
     // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key

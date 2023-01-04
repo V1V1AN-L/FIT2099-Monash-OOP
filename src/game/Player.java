@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class Player extends Actor {
 
 	private final Menu menu = new Menu();
-	public static ArrayList<GeneralBall> pokeballsBag;
+	public static ArrayList<GeneralBall> pokeballsBag = new ArrayList<>();
 
 	/**
 	 * Constructor.
