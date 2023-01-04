@@ -1,5 +1,6 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.positions.Location;
 import game.tools.Element;
 
 import java.util.Random;
@@ -7,59 +8,39 @@ import java.util.Random;
 /**
  * Created by:
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Zecan Liu
  *
  */
 public class Lava extends ConvertibleGrounds {
-//    private List<Exit> availableExits = new ArrayList<Exit>();
-//    private Location location;
-
 
     /**
      * Constructor.
      */
     public Lava() {
-        super('^', Element.FIRE);
-        this.addCapability(element);
+        super('^');
+        this.element = Element.FIRE;
+        this.addCapability(this.element);
         registerInstance();
-
     }
 
-//    @Override
-//    public void tick(Location location) {
-//        super.tick(location);
-//        this.location = location;
-//        availableExits = location.getExits();
-//    }
 
     @Override
     public void dayEffect() {
-        int randomNum = new Random().nextInt(9);
-        if (randomNum == 0){
-            Lava lava = new Lava();
-            expandGround(lava);
+        if (Math.random()<=0.1 && this.location != null){
+            expandGround(new Lava());
         }
     }
 
     @Override
     public void nightEffect() {
-        int randomNum = new Random().nextInt(9);
-        if (randomNum == 0){
+        if (Math.random()<=0.1 && this.location != null){
             destroyGround();
         }
     }
 
-
-//    @Override
-//    public void registerInstance() {
-//        TimePerception.super.registerInstance();
-//    }
-
-//    public List<Exit> getAvailableExits() {
-//        return availableExits;
-//    }
-//
-//    public void setAvailableExits(List<Exit> availableExits) {
-//        this.availableExits = availableExits;
-//    }
+    @Override
+    public void tick(Location location) {
+        super.tick(location);
+        this.location = location;
+    }
 }

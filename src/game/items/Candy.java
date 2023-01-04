@@ -7,4 +7,8 @@ public class Candy extends Item {
     public Candy() {
         super("Candy", '*', true);
     }
+
+    public String toString() {
+        return "Candy";
+    }
 }
