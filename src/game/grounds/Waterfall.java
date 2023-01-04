@@ -47,7 +47,7 @@ public class Waterfall extends Ground implements SpawnGround {
         this.location = location;
         int requiredElementGround = 2;
         if (Math.random()<=0.2 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {
-            this.location.addActor(spawnPokemon());
+            location.addActor(spawnPokemon());
         }
     }
 

@@ -20,7 +20,6 @@ public class Lava extends ConvertibleGrounds {
         super('^');
         this.element = Element.FIRE;
         this.addCapability(this.element);
-        registerInstance();
     }
 
 

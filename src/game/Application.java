@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.affection.AffectionManager;
 import game.grounds.*;
-import game.items.Clock;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
@@ -29,27 +28,25 @@ public class Application {
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
                 new Floor(), new Tree(),
-                new Lava(), new Puddle());
+                new Lava(), new Puddle(),new Crater(), new Waterfall(), new Hay());
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
                 "............+..................................+...^^^^^^^^",
-                ".....................................................^^^^^^",
-                "........................................................^^^",
+                ".............................................C.......^^^^^^",
+                "...........C............................................^^^",
                 "..........................#######........................^^",
-                "..........................#_____#............+............^",
+                "......W...................#_____#............+............^",
                 ".....................+....#_____#..........................",
                 "...+.......~..............###_###..........................",
                 "...~~~~~~~~................................................",
-                "....~~~~~..................................................",
+                "....~~~~~...............W.....................C............",
                 "~~~~~~~....................................................",
-                "~~~~~~..+.............................+....................",
+                "~~~~~~..+.............W...............+....................",
                 "~~~~~~~~~..................................................");
         GameMap gameMap = new GameMap(groundFactory, map);
         world.addGameMap(gameMap);
 
-        Clock clock = new Clock();
-        gameMap.at(58,12).addItem(clock);
 
         // AffectionManager
         AffectionManager am = AffectionManager.getInstance();

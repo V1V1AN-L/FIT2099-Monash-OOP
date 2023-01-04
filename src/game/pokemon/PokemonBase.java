@@ -12,6 +12,7 @@ import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.time.TimePerception;
 import game.weapon.BackupWeapons;
 
 import java.util.TreeMap;
@@ -19,7 +20,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class PokemonBase extends Actor {
+public abstract class PokemonBase extends Actor implements TimePerception {
     //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
     //Using TreeMap because I need the order of the behaviors.
     protected final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
@@ -38,6 +39,7 @@ public abstract class PokemonBase extends Actor {
         // FIXME change the order key to final variable instead of magic number
         behaviours.put(1, new AttackBehaviour());
         behaviours.put(3, new WanderBehaviour());
+        registerInstance();
     }
 
     // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key

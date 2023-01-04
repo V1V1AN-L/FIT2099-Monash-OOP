@@ -29,4 +29,14 @@ public class Treecko extends PokemonBase{
     public void backupWeapon(){
         addItemToInventory(new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90));
     }
+
+    @Override
+    public void dayEffect() {
+        hurt(5);
+    }
+
+    @Override
+    public void nightEffect() {
+        heal(5);
+    }
 }

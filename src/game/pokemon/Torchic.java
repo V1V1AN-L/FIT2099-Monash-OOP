@@ -50,4 +50,15 @@ public class Torchic extends PokemonBase {
     public void backupWeapon(){
         addItemToInventory(new BackupWeapons("Ember", ' ', 30, "sparks", 65));
     }
+
+    @Override
+    public void dayEffect() {
+        heal(20);
+    }
+
+    @Override
+    public void nightEffect() {
+        hurt(15);
+
+    }
 }

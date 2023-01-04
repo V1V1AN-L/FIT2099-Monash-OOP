@@ -36,7 +36,7 @@ public class CatchAction extends Action {
         // FIXME related with the pokeball etc
         // get the pokeball first either pokeball or GreatBall or MasterBall
         // assume always using pokeball
-        GeneralBall pokeball = new Pokeball("PokeBall", 'o', true);
+        GeneralBall pokeball = new Pokeball();
 
 
         // check AP first

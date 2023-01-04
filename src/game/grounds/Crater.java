@@ -32,7 +32,7 @@ public class Crater extends Ground implements SpawnGround {
         super.tick(location);
         this.location = location;
         if (Math.random()<=0.1 && !location.containsAnActor()) {
-            this.location.addActor(spawnPokemon());
+            location.addActor(spawnPokemon());
         }
     }
 }

@@ -45,7 +45,6 @@ public abstract class ConvertibleGrounds extends Ground implements TimePerceptio
             if(!(exit.getDestination().getGround() instanceof NonConvertibleGround)
                     && !(exit.getDestination().getGround().hasCapability(element))){
                 exit.getDestination().setGround(ground);
-
             }
         }
     }

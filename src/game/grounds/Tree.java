@@ -20,7 +20,6 @@ public class Tree extends ConvertibleGrounds implements SpawnGround {
         super('+');
         this.element = Element.GRASS;
         addCapability(this.element);
-        registerInstance();
     }
 
     public int getSurrounding(Location location){
@@ -40,7 +39,7 @@ public class Tree extends ConvertibleGrounds implements SpawnGround {
         this.location = location;
         int requiredElementGround = 1;
         if (Math.random()<=0.15 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {
-            this.location.addActor(spawnPokemon());
+            location.addActor(spawnPokemon());
         }
 
     }

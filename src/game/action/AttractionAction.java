@@ -35,7 +35,7 @@ public abstract class AttractionAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        int ap = am.getAffectionPoint(((PokemonBase) target));
+        int ap = am.getAffectionPoint((PokemonBase) target);
         String apString = Integer.toString(ap);
         return actor + " tries " + favAction.toString() + " with " + target + "(" + apString + " AP)" + " at " + direction;
     }

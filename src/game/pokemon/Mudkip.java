@@ -18,6 +18,7 @@ public class Mudkip extends PokemonBase{
         super("Mudkip", 's', 100);
         this.addCapability(Element.WATER);
         this.favAction = FavoriteAction.CHEST_POUNDING;
+
     }
 
     @Override
@@ -28,5 +29,16 @@ public class Mudkip extends PokemonBase{
     @Override
     public void backupWeapon(){
         addItemToInventory(new BackupWeapons("Water Blast", ' ', 25, "burbles", 80));
+    }
+
+    @Override
+    public void dayEffect() {
+        hurt(15);
+
+    }
+
+    @Override
+    public void nightEffect() {
+        heal(10);
     }
 }

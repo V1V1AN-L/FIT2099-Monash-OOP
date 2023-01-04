@@ -1,5 +1,7 @@
 package game.time;
 
+import edu.monash.fit2099.engine.positions.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +72,16 @@ public class TimePerceptionManager {
                 shift = TimePeriod.NIGHT;
             }
         }
+        turn++;
+
+        if (shift == TimePeriod.DAY) {
+            System.out.println("It's a Day-time (turn" + turn + ')');
+        }else{
+            System.out.println("It's a Night-time (turn" + turn + ')');
+        }
     }
+
+
     public List<TimePerception> getTimePerceptionList() {
         return timePerceptionList;
     }
