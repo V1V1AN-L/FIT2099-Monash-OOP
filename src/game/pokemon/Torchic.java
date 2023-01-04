@@ -7,10 +7,15 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.behaviours.AttackBehaviour;
+import game.behaviours.FollowBehaviour;
 import game.tools.Element;
 import game.action.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.tools.Status;
+import game.weapon.BackupWeapons;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +27,6 @@ import java.util.Map;
  * Modified by: Ian K. Felix
  */
 public class Torchic extends PokemonBase {
-    //FIXME: Change it to a sorted map (is it TreeMap? HashMap? LinkedHashMap?)
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
-
     /**
      * Constructor.
      */
@@ -32,42 +34,20 @@ public class Torchic extends PokemonBase {
         super("Torchic", 'c', 100);
         // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
-        this.behaviours.put(10, new WanderBehaviour());
+        this.addCapability(Status.UNCATCHABLE);
+        this.favAction = FavoriteAction.SINGING;
+        // add followBehaviours once the pokemon AP is higher than a certain point
+        // but behaviors is final attribute .-. think later
+        // or maybe just put it now
     }
 
-    /**
-     * @param otherActor the Actor that might perform an action.
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return list of actions
-     */
     @Override
-    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
-        actions.add(new AttackAction(this, direction));
-        //FIXME: allow other actor to attack this Charmander (incl. Player). Please check requirement! :)
-        return actions;
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(10, "scratch");
     }
 
-    /**
-     * By using behaviour loops, it will decide what will be the next action automatically.
-     *
-     * @see Actor#playTurn(ActionList, Action, GameMap, Display)
-     */
     @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-        return new DoNothingAction();
+    public void backupWeapon(){
+        addItemToInventory(new BackupWeapons("Ember", ' ', 30, "sparks", 65));
     }
-
-    /**
-     * @param isEquipping FIXME: develop a logic to toggle weapon (put a selected weapon to the inventory - used!);
-     */
-    public void toggleWeapon(boolean isEquipping) {
-    }
-
 }

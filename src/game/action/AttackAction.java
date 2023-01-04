@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.tools.ElementsHelper;
+import game.tools.Status;
 
 /**
  * An Action to attack another Actor.
@@ -47,6 +49,10 @@ public class AttackAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Weapon weapon = actor.getWeapon();
+
+        if (target.hasCapability(Status.IMMUNE)){
+            return target + " can't be attacked.";
+        }
 
         if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
             return actor + " misses " + target + ".";
