@@ -14,6 +14,8 @@ import java.util.List;
  *
  */
 public class TimePerceptionManager {
+
+
     /**
      * A list of polymorph instances (any classes that implements TimePerception,
      * such as, a Charmander implements TimePerception, it will be stored in here)
@@ -36,9 +38,13 @@ public class TimePerceptionManager {
      *
      * FIXME: create a singleton instance.
      */
-    public static TimePerceptionManager getInstance() {
-        return null;
+    public static TimePerceptionManager getInstance(){
+        if (instance == null){
+            instance = new TimePerceptionManager();
+        }
+        return instance;
     }
+
 
     /**
      * Private constructor
@@ -55,13 +61,33 @@ public class TimePerceptionManager {
      * if turn//5 = even number, then it should be day time. If it's odd number, then it should be night time.
      */
     public void run() {
-        for (TimePerception each: timePerceptionList){
+        for (TimePerception each: new ArrayList<TimePerception>(this.getTimePerceptionList())){
             if ((turn/5) % 2 == 0){
+                shift = TimePeriod.DAY;
                 each.dayEffect();
             }else{
                 each.nightEffect();
+                shift = TimePeriod.NIGHT;
             }
         }
+    }
+    public List<TimePerception> getTimePerceptionList() {
+        return timePerceptionList;
+    }
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn += turn;
+    }
+
+    public TimePeriod getShift() {
+        return shift;
+    }
+
+    public void setShift(TimePeriod shift) {
+        this.shift = shift;
     }
 
 
@@ -71,6 +97,7 @@ public class TimePerceptionManager {
      * @param objInstance any instance that implements TimePerception
      */
     public void append(TimePerception objInstance) {
+        timePerceptionList.add(objInstance);
     }
 
 
@@ -83,4 +110,5 @@ public class TimePerceptionManager {
      */
     public void cleanUp(TimePerception objInstance) {
     }
+
 }

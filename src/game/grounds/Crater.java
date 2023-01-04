@@ -1,48 +1,38 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class Crater extends SpawningGround{
+public class Crater extends Ground implements SpawnGround {
+    private Element element;
 
+    private Location location;
 
-//    private List<PokemonBase> TorchicList = new ArrayList<PokemonBase>();
     /**
      * Constructor.
      *
-     * @param displayChar character to display for this type of terrain
-     * @param element
      */
-    public Crater(char displayChar, Element element) {
-        super('C', Element.FIRE);
+    public Crater() {
+        super('C');
+        this.element = Element.FIRE;
+        addCapability(this.element);
     }
-
-//    public List<PokemonBase> getTorchicList() {
-//        return TorchicList;
-//    }
-//
-//    public void setTorchicList(List<PokemonBase> torchicList) {
-//        TorchicList = torchicList;
-//    }
-
     @Override
-    public PokemonBase SpawnPokemon(Location location) {
-        this.spawnedPokemon = new Torchic();
-        return this.spawnedPokemon;
+    public PokemonBase spawnPokemon() {
+        return new Torchic();
     }
 
     @Override
     public void tick(Location location) {
         super.tick(location);
-        int randomNum = new Random().nextInt(9);
-        if (randomNum == 0){
-            location.addActor(SpawnPokemon(location));
+        this.location = location;
+        if (Math.random()<=0.1 && !location.containsAnActor()) {
+            this.location.addActor(spawnPokemon());
         }
     }
 }

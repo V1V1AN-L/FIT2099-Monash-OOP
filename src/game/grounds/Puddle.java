@@ -1,5 +1,6 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.positions.Location;
 import game.tools.Element;
 
 import java.util.Random;
@@ -10,23 +11,28 @@ public class Puddle extends ConvertibleGrounds{
      *
      */
     public Puddle() {
-        super('~', Element.WATER);
+        super('~');
+        this.element = Element.WATER;
+        addCapability(this.element);
+    }
+
+    @Override
+    public void tick(Location location) {
+        super.tick(location);
+        this.location = location;
     }
 
     @Override
     public void dayEffect() {
-        int randomNum = new Random().nextInt(9);
-        if (randomNum == 0) {
+        if (Math.random()<=0.1 && this.location != null)  {
             destroyGround();
         }
     }
 
     @Override
     public void nightEffect() {
-        int randomNum = new Random().nextInt(9);
-        if(randomNum == 0){
-            Puddle puddle = new Puddle();
-            expandGround(puddle);
+        if(Math.random()<=0.1 && this.location != null){
+            expandGround(new Puddle());
         }
     }
 }
