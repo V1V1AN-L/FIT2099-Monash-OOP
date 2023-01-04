@@ -1,6 +1,7 @@
 package game.affection;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.Map;
  * Created by:
  *
  * @author Riordan D. Alfredo
- * Modified by: Ian K. Felix
+ * Modified by: Ian K. Felix, Jordan Nathanael
  */
 public class AffectionManager {
 
@@ -22,12 +23,21 @@ public class AffectionManager {
     private static AffectionManager instance;
     /**
      * HINT: is it just for a Torchic?
+     * no, changed it to accept all pokemon: Pokemonbase
      */
-    private final Map<Torchic, Integer> affectionPoints;
+    private final Map<PokemonBase, Integer> affectionPoints;
 
     /**
      * We assume there's only one trainer in this manager.
      * Think about how will you extend it.
+     *
+     * each player will have their own list of pokemon which contains the AP of each pokemon.
+     * Think what if the pokemon hasn't been captured, we still need to store the pokemon affection point
+     * using hashmap maybe
+     * [
+     *  Player1: [PokemonA: 0, PokemonB:10],
+     *  Player2: [PokemonC: 0, PokemonD:100],
+     *  ]
      */
     private Actor trainer;
 
@@ -64,7 +74,8 @@ public class AffectionManager {
      *
      * @param pokemon
      */
-    public void registerPokemon(Torchic pokemon) {
+    public void registerPokemon(PokemonBase pokemon) {
+        affectionPoints.put(pokemon, 0);
     }
 
     /**
@@ -73,7 +84,7 @@ public class AffectionManager {
      * @param pokemon Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(Torchic pokemon) {
+    public int getAffectionPoint(PokemonBase pokemon) {
         return affectionPoints.get(pokemon);
     }
 
@@ -83,8 +94,8 @@ public class AffectionManager {
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
-    private Torchic findPokemon(Actor actor) {
-        for (Torchic pokemon : affectionPoints.keySet()) {
+    private PokemonBase findPokemon(Actor actor) {
+        for (PokemonBase pokemon : affectionPoints.keySet()) {
             if (pokemon.equals(actor)) {
                 return pokemon;
             }
@@ -101,7 +112,15 @@ public class AffectionManager {
      * @return custom message to be printed by Display instance later.
      */
     public String increaseAffection(Actor actor, int point) {
-        return "";
+        PokemonBase pokemon = findPokemon(actor);
+        affectionPoints.put(pokemon, getAffectionPoint(pokemon)+point);
+
+        // if AP is >= 75, add followBehavior for the pokemon
+        if (getAffectionPoint(pokemon) >= 75){
+            pokemon.addFollowBehaviours(trainer);
+        }
+
+        return pokemon.toString() + "'s affection point is increased by " + Integer.toString(point);
     }
 
     /**
@@ -112,7 +131,14 @@ public class AffectionManager {
      * @return custom message to be printed by Display instance later.
      */
     public String decreaseAffection(Actor actor, int point) {
-        return "";
+        PokemonBase pokemon = findPokemon(actor);
+        affectionPoints.put(pokemon, getAffectionPoint(pokemon)-point);
+
+        if (getAffectionPoint(pokemon) < 75){
+            pokemon.deleteFollowBehaviours();
+        }
+
+        return pokemon.toString() + "'s affection point is decreased by " + Integer.toString(point);
     }
 
 }
