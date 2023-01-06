@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
 import game.weapon.SpecialWeapons;
@@ -35,7 +36,7 @@ public class Mudkip extends PokemonBase{
     @Override
     public void dayEffect() {
         hurt(15);
-
+        removeDeadPokemon();
     }
 
     @Override

@@ -25,8 +25,8 @@ public class Waterfall extends SpawningGround {
 
     @Override
     public void tick(Location location) {
-        super.tick(location);
-        this.location = location;
+//        super.tick(location);
+//        this.location = location;
         int requiredElementGround = 2;
         if (Math.random()<=0.2 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {
             location.addActor(spawnPokemon());

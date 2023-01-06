@@ -11,6 +11,7 @@ import game.action.*;
 import game.affection.AffectionManager;
 import game.behaviours.*;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 import game.weapon.BackupWeapons;
 
 import java.util.TreeMap;
@@ -81,6 +82,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        display.println(this.toString() + getHp() +"(AP: "+ AffectionManager.getInstance().getAffectionPoint(this) + ") moves around" );
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -108,4 +111,15 @@ public abstract class PokemonBase extends Actor implements TimePerception {
     }
 
     public abstract void backupWeapon();
+
+    public String getHp(){
+        return printHp();
+    }
+
+    protected void removeDeadPokemon(){
+        if(!isConscious()){
+            TimePerceptionManager.getInstance().cleanUp(this);
+        }
+    }
+
 }

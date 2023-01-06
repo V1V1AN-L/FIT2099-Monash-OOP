@@ -35,17 +35,16 @@ public class Player extends Actor {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
-//		Clock clock = new Clock();
-//		addItemToInventory(clock);
+
 	}
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		TimePerceptionManager.getInstance().run();
+
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-
-		TimePerceptionManager.getInstance().run();
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);

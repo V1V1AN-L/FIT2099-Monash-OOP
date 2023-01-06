@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Random;
 
 public class Tree extends SpawningGround implements ExpandibleGround, TimePerception {
+
+    private Location location;
+
     /**
      * Constructor.
      *
      */
     public Tree() {
-        super('+');
+        super('T');
         this.element = Element.GRASS;
         addCapability(this.element);
         registerInstance();
@@ -26,7 +29,7 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
 
     @Override
     public void tick(Location location) {
-        super.tick(location);
+//        super.tick(location);
         this.location = location;
         int requiredElementGround = 1;
         if (Math.random()<=0.15 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {

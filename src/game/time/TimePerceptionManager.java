@@ -1,6 +1,9 @@
 package game.time;
 
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
+import game.affection.AffectionManager;
+import game.pokemon.PokemonBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class TimePerceptionManager {
     private int turn;
 
     private TimePeriod shift; // DAY or NIGHT
+
+    private Display display = new Display();
 
     /**
      * A singleton instance
@@ -67,18 +72,17 @@ public class TimePerceptionManager {
             if ((turn/5) % 2 == 0){
                 shift = TimePeriod.DAY;
                 each.dayEffect();
-            }else{
+            }else {
                 each.nightEffect();
                 shift = TimePeriod.NIGHT;
             }
         }
-        turn++;
-
         if (shift == TimePeriod.DAY) {
-            System.out.println("It's a Day-time (turn" + turn + ')');
+            display.println("It's a Day-time (turn" + turn + ')');
         }else{
-            System.out.println("It's a Night-time (turn" + turn + ')');
+            display.println("It's a Night-time (turn" + turn + ')');
         }
+        turn++;
     }
 
 
@@ -120,6 +124,7 @@ public class TimePerceptionManager {
      * @param objInstance object instance
      */
     public void cleanUp(TimePerception objInstance) {
+        timePerceptionList.remove(objInstance);
     }
 
 }

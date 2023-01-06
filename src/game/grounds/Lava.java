@@ -3,6 +3,7 @@ package game.grounds;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 
 import java.util.Random;
@@ -41,6 +42,7 @@ public class Lava extends Ground implements DestructibleGround, ExpandibleGround
     public void nightEffect() {
         if (Math.random()<=0.1 && this.location != null){
             destroyGround(this.location);
+            TimePerceptionManager.getInstance().cleanUp(this);
         }
     }
 

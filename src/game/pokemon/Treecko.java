@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
 import game.weapon.SpecialWeapons;
@@ -34,6 +35,7 @@ public class Treecko extends PokemonBase{
     @Override
     public void dayEffect() {
         hurt(5);
+        removeDeadPokemon();
     }
 
     @Override

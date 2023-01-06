@@ -9,4 +9,6 @@ public enum Status {
     HOSTILE, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
     CATCHABLE,
     UNCATCHABLE,
+    NONCONVERTIBLE,
+    TRADEBLE
 }

@@ -13,7 +13,7 @@ public abstract class SpawningGround extends Ground {
 
     protected Element element;
 
-    protected Location location;
+//    protected Location location;
 
     /**
      * Constructor.
@@ -22,6 +22,7 @@ public abstract class SpawningGround extends Ground {
      */
     public SpawningGround(char displayChar) {
         super(displayChar);
+
     }
 
     public abstract PokemonBase spawnPokemon();
@@ -46,13 +47,13 @@ public abstract class SpawningGround extends Ground {
         this.element = element;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+//    public Location getLocation() {
+//        return location;
+//    }
+//
+//    public void setLocation(Location location) {
+//        this.location = location;
+//    }
 
 
 }

@@ -25,10 +25,9 @@ public class Crater extends SpawningGround {
 
     @Override
     public void tick(Location location) {
-        super.tick(location);
-        this.location = location;
-        if (Math.random()<=0.1 && !this.location.containsAnActor()) {
-            this.location.addActor(spawnPokemon());
+//        super.tick(location);
+        if (Math.random()<=0.1 && !location.containsAnActor()) {
+            location.addActor(spawnPokemon());
         }
     }
 }

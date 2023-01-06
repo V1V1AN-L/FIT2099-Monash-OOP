@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.action.AttackAction;
 import game.behaviours.Behaviour;
@@ -60,6 +61,6 @@ public class Torchic extends PokemonBase {
     @Override
     public void nightEffect() {
         hurt(15);
-
+        removeDeadPokemon();
     }
 }
