@@ -32,7 +32,7 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
 //        super.tick(location);
         this.location = location;
         int requiredElementGround = 1;
-        if (Math.random()<=0.15 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {
+        if (Math.random()<=0.15 && getSurrounding(location) >= requiredElementGround && !location.containsAnActor()) {
             location.addActor(spawnPokemon());
         }
 
@@ -40,7 +40,7 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
 
     @Override
     public void dayEffect() {
-        if (Math.random()<=0.95 && this.location != null) {
+        if (Math.random()<=0.05 && this.location != null) {
            location.addItem(new Candy());
         }
     }
