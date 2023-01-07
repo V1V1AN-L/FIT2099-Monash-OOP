@@ -6,32 +6,41 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.items.GeneralBall;
 import game.pokemon.PokemonBase;
 
+/**
+ * An action to summon PokemonBase
+ * Created by: Jordan Nathanael
+ *
+ * @author jordannathanael
+ */
 public class SummonAction extends Action {
     /**
      * The actor that want to be summoned
      */
-    private Actor summoned;
-    private Location summonLoc;
-
-    public SummonAction(Actor summoned){
-        this.summoned = summoned;
-    }
+    private GeneralBall ball;
 
     /**
+     * Constructor.
      *
-     * @param actor The actor performing the action.
-     * @param map The map the actor is on.
-     * @return
+     * @param ball The ball that contains a pokemon
      */
+    public SummonAction(GeneralBall ball){
+        this.ball = ball;
+    }
+
     @Override
     public String execute(Actor actor, GameMap map) {
+        PokemonBase summoned = this.ball.getStoredPokemon();
         String result = actor + " summoned " + summoned.toString();
+
         // check surrounding to get the position to summon the pokemon
         for (Exit exit : map.locationOf(actor).getExits()){
-            summonLoc = exit.getDestination();
+            Location summonLoc = exit.getDestination();
+
             if (summonLoc.canActorEnter(actor)){
+                this.ball.setStoredPokemonNull();
                 map.addActor(summoned, summonLoc);
                 result += " is successful.";
                 return result;
@@ -43,6 +52,6 @@ public class SummonAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " summons " + summoned;
+        return actor + " summons " + this.ball.getStoredPokemon();
     }
 }

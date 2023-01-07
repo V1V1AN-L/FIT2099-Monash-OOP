@@ -13,10 +13,10 @@ import game.tools.Status;
 
 /**
  * An Action to attack another Actor.
- * Created by:
+ * Created by: Riordan D. Alfredo
  *
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Jordan Nathanael
  */
 public class AttackAction extends Action {
 
@@ -39,12 +39,20 @@ public class AttackAction extends Action {
      * Constructor.
      *
      * @param target the Actor to attack
+     * @param direction the direction of incoming attack
      */
     public AttackAction(Actor target, String direction) {
         this.target = target;
         this.direction = direction;
     }
 
+    /**
+     * Execute the attack Action: search weapon, decrease the opponent hp, remove opponent if it is unconscious
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
 

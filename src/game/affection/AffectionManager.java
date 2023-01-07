@@ -2,7 +2,7 @@ package game.affection;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.pokemon.PokemonBase;
-import game.pokemon.Torchic;
+import game.tools.Status;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,34 +10,29 @@ import java.util.Map;
 /**
  * Affection Manager
  * <p>
- * Created by:
+ * Created by: Riordan D. Alfredo
  *
  * @author Riordan D. Alfredo
  * Modified by: Ian K. Felix, Jordan Nathanael
  */
 public class AffectionManager {
+    /**
+     * Fixed value when create PokemonBase is instantiated
+     */
+    public static final int DEFAULT_AFFECTION_POINT = 0;
 
     /**
      * Singleton instance (the one and only for a whole game).
      */
     private static AffectionManager instance;
+
     /**
-     * HINT: is it just for a Torchic?
-     * no, changed it to accept all pokemon: Pokemonbase
+     * The Container to contain the PokemonBase and its own affection Point
      */
     private final Map<PokemonBase, Integer> affectionPoints;
 
     /**
-     * We assume there's only one trainer in this manager.
-     * Think about how will you extend it.
-     *
-     * each player will have their own list of pokemon which contains the AP of each pokemon.
-     * Think what if the pokemon hasn't been captured, we still need to store the pokemon affection point
-     * using hashmap maybe
-     * [
-     *  Player1: [PokemonA: 0, PokemonB:10],
-     *  Player2: [PokemonC: 0, PokemonD:100],
-     *  ]
+     * The Player inside the game.
      */
     private Actor trainer;
 
@@ -75,7 +70,7 @@ public class AffectionManager {
      * @param pokemon
      */
     public void registerPokemon(PokemonBase pokemon) {
-        affectionPoints.put(pokemon, 0);
+        affectionPoints.put(pokemon, AffectionManager.DEFAULT_AFFECTION_POINT);
     }
 
     /**
@@ -94,7 +89,7 @@ public class AffectionManager {
      * @param actor general actor instance
      * @return the Pokemon instance.
      */
-    private PokemonBase findPokemon(Actor actor) {
+    public PokemonBase findPokemon(Actor actor) {
         for (PokemonBase pokemon : affectionPoints.keySet()) {
             if (pokemon.equals(actor)) {
                 return pokemon;
@@ -113,14 +108,20 @@ public class AffectionManager {
      */
     public String increaseAffection(Actor actor, int point) {
         PokemonBase pokemon = findPokemon(actor);
+
         affectionPoints.put(pokemon, getAffectionPoint(pokemon)+point);
 
+        // if AP exceed the Maximum value, assign it as max
+        if (getAffectionPoint(pokemon) > AffectionLevelPoint.MAXIMUM.getValue()){
+            setStaticAffection(pokemon, AffectionLevelPoint.MAXIMUM.getValue());
+        }
+
         // if AP is >= 75, add followBehavior for the pokemon
-        if (getAffectionPoint(pokemon) >= 75){
+        if (getAffectionPoint(pokemon) >= AffectionLevelPoint.FOLLOWING.getValue()){
             pokemon.addFollowBehaviours(trainer);
         }
 
-        return pokemon.toString() + "'s affection point is increased by " + Integer.toString(point);
+        return pokemon + "'s affection point is increased by " + Integer.toString(point);
     }
 
     /**
@@ -134,11 +135,26 @@ public class AffectionManager {
         PokemonBase pokemon = findPokemon(actor);
         affectionPoints.put(pokemon, getAffectionPoint(pokemon)-point);
 
-        if (getAffectionPoint(pokemon) < 75){
+        if (getAffectionPoint(pokemon) < AffectionLevelPoint.FOLLOWING.getValue()){
             pokemon.deleteFollowBehaviours();
         }
 
+        if (getAffectionPoint(pokemon) <= AffectionLevelPoint.DISLIKE.getValue()){
+            pokemon.addCapability(Status.RUINED_RELATIONSHIP);
+        }
+
         return pokemon.toString() + "'s affection point is decreased by " + Integer.toString(point);
+    }
+
+    /**
+     * Used when we capture a pokemon by Masterball, set the affection point directly to 100
+     *
+     * @param actor the target PokemonBase that the affection point will be changed
+     * @param point set its affection point as similar as the point
+     */
+    public void setStaticAffection(Actor actor, int point){
+        PokemonBase pokemon = findPokemon(actor);
+        affectionPoints.put(pokemon, point);
     }
 
 }

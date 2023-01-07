@@ -12,13 +12,14 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
  * closer to a target Actor.
  * @see edu.monash.fit2099.demo.mars.Application
  *
- * Created by:
+ * Created by: Riordan D. Alfredo
  * @author Riordan D. Alfredo
- * Modified by:
- *
+ * Modified by: -
  */
 public class FollowBehaviour implements Behaviour {
-
+	/**
+	 * The actor that is to be followed
+	 */
 	private final Actor target;
 
 	/**

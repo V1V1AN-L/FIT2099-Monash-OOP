@@ -1,31 +1,16 @@
 package game.pokemon;
 
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.FollowBehaviour;
 import game.tools.Element;
-import game.action.AttackAction;
-import game.behaviours.Behaviour;
-import game.behaviours.WanderBehaviour;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
-import game.weapon.SpecialWeapons;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Created by:
+ * Created by: Riordan D. Alfredo
  *
  * @author Riordan D. Alfredo
- * Modified by: Ian K. Felix
+ * Modified by: Jordan Nathanael, Zecan (Vivian) Liu
  */
 public class Torchic extends PokemonBase {
     /**
@@ -33,13 +18,9 @@ public class Torchic extends PokemonBase {
      */
     public Torchic() {
         super("Torchic", 'c', 100);
-        // HINT: add more relevant behaviours here
         this.addCapability(Element.FIRE);
         this.addCapability(Status.UNCATCHABLE);
         this.favAction = FavoriteAction.SINGING;
-        // add followBehaviours once the pokemon AP is higher than a certain point
-        // but behaviors is final attribute .-. think later
-        // or maybe just put it now
     }
 
     @Override
@@ -48,8 +29,8 @@ public class Torchic extends PokemonBase {
     }
 
     @Override
-    public void backupWeapon(){
-        new SpecialWeapons(this, "Ember", ' ', 30, "sparks", 65);
+    protected BackupWeapons backupWeapon(){
+        return new BackupWeapons("Ember", ' ', 30, "sparks", 65);
     }
 
     @Override

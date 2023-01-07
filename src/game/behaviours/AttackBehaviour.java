@@ -12,15 +12,13 @@ import game.tools.ElementsHelper;
 import game.tools.Status;
 
 /**
- * Created by:
- * @author Riordan D. Alfredo
- * Modified by:
+ * Actor behavior to attack others whenever is possible
  *
+ * Created by: Riordan D. Alfredo
+ * @author Riordan D. Alfredo
+ * Modified by: Jordan Nathanael
  */
 public class AttackBehaviour implements Behaviour {
-    /**
-     *  HINT: develop a logic to check surrounding, check elements, and return an action to attack that opponent.
-     */
     @Override
     public Action getAction(Actor actor, GameMap map) {
         // check surrounding
