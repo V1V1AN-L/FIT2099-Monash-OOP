@@ -10,10 +10,9 @@ import java.util.List;
  * A utility class to decide if an instance (Actor, Item, or Ground)
  * has similar elements to the passed list of elements.
  *
- * Created by:
+ * Created by: Riordan D. Alfredo
  * @author Riordan D. Alfredo
- * Modified by:
- *
+ * Modified by:-
  */
 public class ElementsHelper {
 

@@ -9,8 +9,16 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * An Action to attack another Actor.
+ * Created by: Riordan D. Alfredo
+ *
+ * @author Riordan D. Alfredo
+ */
 public class WanderBehaviour implements Behaviour {
-	
+	/**
+	 * Random value to choose the exit
+	 */
 	private final Random random = new Random();
 
 	/**
