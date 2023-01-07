@@ -25,7 +25,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
     protected final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
     private final AffectionManager am = AffectionManager.getInstance();
     protected FavoriteAction favAction;
-
+    // This is a reference list collecting all available Pokemons by their display characteristics (without repetition)
+    private static final List<Character> pokemonRefList = new ArrayList<>();
     /**
      * Constructor.
      *
@@ -46,8 +47,21 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         registerInstance();
 
         am.registerPokemon(this);
+
+        //Adding the display character into the ref list if there is not one there already
+        if (!pokemonRefList.contains(displayChar)){
+            pokemonRefList.add(displayChar);
+        }
+
     }
 
+    /**
+     * Getter
+     * @return pokemonRefList
+     */
+    public static List<Character> getPokemonRefList() {
+        return pokemonRefList;
+    }
     // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key
     // the actor is the trainer
     public void addFollowBehaviours(Actor actor){
