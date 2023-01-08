@@ -11,9 +11,12 @@ import game.affection.AffectionManager;
 import game.behaviours.*;
 import game.items.Pokeball;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.Map;
 
@@ -61,9 +64,17 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         behaviours.put(BehaviorPriority.WANDERING.getValue(), new WanderBehaviour());
         registerInstance();
 
-        am.registerPokemon(this);
+        AffectionManager.getInstance().registerPokemon(this);
 
-        //Adding the display character into the ref list if there is not one there already
+
+    /**
+     * Add follow behavior to the pokemon once the AP is met the requirements
+     *
+     * @param actor the actor that want to be added followBehavior
+     */
+
+
+    //Adding the display character into the ref list if there is not one there already
         if (!pokemonRefList.contains(displayChar)){
             pokemonRefList.add(displayChar);
         }
@@ -142,7 +153,15 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         return this.favAction;
     }
 
-    public abstract void backupWeapon();
+    /**
+     * Create backupWeapons based on the concrete class needs
+     * This method will be overridden by the concrete class.
+     *
+     * @return
+     */
+    protected abstract BackupWeapons backupWeapon();
+
+
 
     public String getHp(){
         return printHp();

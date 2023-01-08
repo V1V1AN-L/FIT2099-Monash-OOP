@@ -15,5 +15,6 @@ public enum Status {
     CATCHABLE,
     UNCATCHABLE,
     NONCONVERTIBLE,
-    TRADEBLE
+    TRADEBLE,
+    RUINED_RELATIONSHIP, // relationship can't be fixed (related to AffectionPoint)
 }
