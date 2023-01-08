@@ -5,10 +5,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 /**
- * Created by:
+ * Created by: Riordan D. Alfredo
  * @author Riordan D. Alfredo
- * Modified by:
- *
+ * Modified by: -
  */
 public interface Behaviour {
 	

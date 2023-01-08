@@ -6,11 +6,16 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.affection.AffectionManager;
 import game.items.GeneralBall;
+import game.items.Greatball;
+import game.items.Masterball;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class representing the Player.
@@ -23,7 +28,6 @@ import java.util.ArrayList;
 public class Player extends Actor {
 
 	private final Menu menu = new Menu();
-	public static ArrayList<GeneralBall> pokeballsBag = new ArrayList<>();
 
 	/**
 	 * Constructor.
@@ -36,6 +40,10 @@ public class Player extends Actor {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
 
+		AffectionManager.getInstance().registerTrainer(this);
+
+		addItemToInventory(new Masterball());
+		addItemToInventory(new Greatball());
 	}
 
 	@Override
@@ -53,13 +61,5 @@ public class Player extends Actor {
 	@Override
 	public char getDisplayChar() {
 		return super.getDisplayChar();
-	}
-
-	public ArrayList<GeneralBall> getPokeballsBag() {
-		return pokeballsBag;
-	}
-
-	public void setPokeballsBag(GeneralBall pokeball) {
-		this.pokeballsBag.add(pokeball);
 	}
 }

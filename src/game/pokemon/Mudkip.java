@@ -1,26 +1,27 @@
 package game.pokemon;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
+import game.tools.Status;
 import game.weapon.BackupWeapons;
-import game.weapon.SpecialWeapons;
 
+/**
+ * Concrete class of PokemonBase Mudkip
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ * Modified by: Zecan (Vivian) Liu
+ */
 public class Mudkip extends PokemonBase{
     /**
      * Constructor.
-     *
-     *
      */
     public Mudkip() {
         super("Mudkip", 's', 100);
         this.addCapability(Element.WATER);
+        this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.CHEST_POUNDING;
-
     }
 
     @Override
@@ -29,8 +30,8 @@ public class Mudkip extends PokemonBase{
     }
 
     @Override
-    public void backupWeapon(){
-        new SpecialWeapons(this, "Water Blast", ' ', 25, "burbles", 80);
+    protected BackupWeapons backupWeapon(){
+        return new BackupWeapons("Water Blast", ' ', 25, "burbles", 80);
     }
 
     @Override

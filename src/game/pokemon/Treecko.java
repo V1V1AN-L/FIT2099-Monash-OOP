@@ -1,24 +1,26 @@
 package game.pokemon;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
+import game.tools.Status;
 import game.weapon.BackupWeapons;
-import game.weapon.SpecialWeapons;
 
+/**
+ * Concrete class of PokemonBase Treecko
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ * Modified by: Zecan (Vivian) Liu
+ */
 public class Treecko extends PokemonBase{
     /**
      * Constructor.
-     *
      */
     public Treecko() {
         super("Treecko", 'b', 100);
         this.addCapability(Element.GRASS);
+        this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.DANCING;
     }
 
@@ -28,8 +30,8 @@ public class Treecko extends PokemonBase{
     }
 
     @Override
-    public void backupWeapon(){
-        new SpecialWeapons(this, "Blade Cutter", ' ', 20, "whips", 90);
+    protected BackupWeapons backupWeapon(){
+        return new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90);
     }
 
     @Override

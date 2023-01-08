@@ -4,74 +4,108 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.affection.AffectionManager;
-import game.items.Candy;
-import game.items.GeneralBall;
-import game.items.Pokeball;
+import game.items.*;
 import game.pokemon.PokemonBase;
-import game.tools.Status;
 
+/**
+ * An abstract action to catch another PokemonBase
+ * Created by: Jordan Nathanael
+ *
+ * @author jordannathanael
+ */
 public class CatchAction extends Action {
-    private Actor captured;
-    private String direction;
-    private AffectionManager am = AffectionManager.getInstance();
+    /**
+     * Fixed value to decrease the affection point if catch action si failed
+     */
+    public static final int UNSUCCESSFUL_CATCHING = 10;
 
-    public CatchAction(Actor captured, String direction){
+    /**
+     * the actor that is to be catched
+     */
+    private Actor captured;
+
+    /**
+     * the direction of incoming catch
+     */
+    private String direction;
+
+    /**
+     * the target pokemon will be stored inside this ball
+     */
+    private GeneralBall ball;
+
+    /**
+     * Constructor.
+     *
+     * @param captured actpr that will be captured
+     * @param direction the direction of incoming catch
+     * @param ball the target pokemon will be stored inside this ball
+     */
+    public CatchAction(Actor captured, String direction, GeneralBall ball){
         this.captured = captured;
         this.direction = direction;
+        this.ball = ball;
     }
 
     /**
+     *Catch the action execution
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return
+     * @return message whether catchAction is success or fail
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        String result = actor + " captured " + captured.toString();
-        boolean capturable = false;
-
-        if (captured.hasCapability(Status.UNCATCHABLE)){
-            return result + " is failed because the pokemon can't be catch by any chance.";
-        }
-
-        // FIXME related with the pokeball etc
-        // get the pokeball first either pokeball or GreatBall or MasterBall
-        // assume always using pokeball
-        GeneralBall pokeball = new Pokeball();
-
-
         // check AP first
-        AffectionManager am = AffectionManager.getInstance();
-        int affectionPoint = am.getAffectionPoint(((PokemonBase) captured));
-
-        // FIXME update the ball req
-        if (affectionPoint >= 20){
-            // save the pokemon into the GeneralBall
-            pokeball.setStoredPokemon(((PokemonBase) captured));
-
-            // Add the filledPokeball into inventory
-            actor.addItemToInventory(pokeball);
-
-            // add candy
-            map.locationOf(captured).addItem(new Candy());
-
-            // delete the captured pokemon from the map
-            map.removeActor(captured);
-
-            result += " is successful";
-            return result;
+        PokemonBase pokemon = AffectionManager.getInstance().findPokemon(captured);
+        int affectionPoint = AffectionManager.getInstance().getAffectionPoint(pokemon);
+        try {
+            if (this.ball.checkAffectionPointReq(pokemon, affectionPoint)) {
+                return capturing(actor, map);
+            }
+        } catch(Exception e) {
+            return e.getMessage();
         }
         // if capturingAction is failed, decrease AP by 10
-        am.decreaseAffection(captured, 10);
+        AffectionManager.getInstance().decreaseAffection(captured, CatchAction.UNSUCCESSFUL_CATCHING);
 
-        result += " is failed";
+        String result = "Capture " + captured + " is failed";
+        return result;
+    }
+
+    /**
+     * Refactoring method to capture the pokemon:
+     *  Remove the ball from inventory
+     *  set the pokemon inside the ball
+     *  Return it back to the inventory
+     *
+     * @param actor actor who captures the pokemon
+     * @param map the map the actor is on.
+     * @return message whether capturing is success or fail
+     */
+    private String capturing(Actor actor, GameMap map){
+        // remove it first to avoid having duplicate item
+        actor.removeItemFromInventory(ball);
+
+        // save the pokemon into the GeneralBall
+        ball.setStoredPokemon(captured);
+
+        // Add back the filledPokeball into inventory
+        actor.addItemToInventory(ball);
+
+        // add candy
+        map.locationOf(captured).addItem(new Candy());
+
+        // delete the captured pokemon from the map
+        map.removeActor(captured);
+
+        String result = "Capture " + captured + " is successful using " + ball;
         return result;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        int apPoint = am.getAffectionPoint(((PokemonBase)captured));
-        return actor + " captures " + captured.toString() + "(" + apPoint + " AP) at " + direction;
+        PokemonBase pokemon = AffectionManager.getInstance().findPokemon(captured);
+        return actor + " captures " + captured.toString() + "(" + AffectionManager.getInstance().getAffectionPoint(pokemon) + " AP) at " + direction + " using " + ball;
     }
 }
