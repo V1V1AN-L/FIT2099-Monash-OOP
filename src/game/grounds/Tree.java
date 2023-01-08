@@ -7,9 +7,7 @@ import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Treecko;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
 
 /**
  * The class instance that represents a Tree ground

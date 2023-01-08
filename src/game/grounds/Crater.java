@@ -1,12 +1,10 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 
-import java.util.Random;
 
 /**
  * The ground instance representing a crater.

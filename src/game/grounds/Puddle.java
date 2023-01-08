@@ -2,12 +2,10 @@ package game.grounds;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.pokemon.PokemonBase;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
 
-import java.util.Random;
 
 /**
  * The class instance that represents a Lava ground

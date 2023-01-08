@@ -6,7 +6,6 @@ import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
 
-import java.util.Random;
 
 /**
  * The class instance that represents a Lava ground
