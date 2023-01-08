@@ -9,10 +9,19 @@ Team members:
 
 Link to contribution logs spreadsheet: [https://docs.google.com/spreadsheets/d/1QeySXoTWwXk9gglpJQzY4sfR8xn8tGG2epjmaYE85BM/edit?usp=sharing]
 
-## Design Rationale
+Design Docs for A1 is under docs.DesignDocs.A1 Design Docs Directory which contains REQ 1&3&5 UMLs and design rationale (Author: Zecan Liu).
+
+We were in different groups during A1. 
+
+## Design Rationale - Assignment 2 
 
 ### REQ 1
 ![alt text](./assets/UMLDiagram_REQ1.png)
+Based on A1 feedback, I have deleted the unnecessary relationships between abstract **SpawningGround** class and **Exit** class. Now **SpawningGround** class has a dependency relationship with **Location** class as **Waterfall** and **Tree** need to check surrounding locations in order to spawn Pokemons. 
+
+Also I have corrected the relationship between **Crater** & **Waterfall** & **Tree** and Pokemon classes. Instead of having association relationship with **PokemonBase**, the actual spawning ground class is now having the dependency relationship with actual spawned Pokemon class. 
+
+
 
 ### REQ 2
 ![alt text](./assets/UMLDiagram_REQ2.png)
@@ -30,7 +39,9 @@ SpecialWeapon inherits from WeaponItem abstract class which also inherits from I
 ### REQ 3
 ![alt text](./assets/UMLDiagram_REQ3.png)
 
-NOTE: please add this statement into your Design Rationale @Vivian
+Based on A1 feedback I have corrected the multiplicity between **PokemonBase** and **Generalball** class.
+
+This design is more comprehensive than A1 design. 
 
 Each GeneralBall will have dependency with CatchAction and SummonAction because we will use GeneralBall whenever there are pokemons near the Player to catch it. However, because of the limitation of code of the engine, this CatchAction can't be used in the first turn. 
 
@@ -53,6 +64,20 @@ AffectionManager have a dependency towards AffectionLevelPoint because it will m
 
 ### REQ 5
 ![alt text](./assets/UMLDiagram_REQ5.png)
+Compared to A1, this design is more comprehensive for ground classes in order to implement the logics of time. 
+
+There are three different grounds and Pokemons will experience the pass of time. The logics for pokemons are relatively simple. 
+
+**PokemonBase** class implement **TimePerception** interface and in each Pokemon's constructor, it will run the registerInstance method which added the object into timePerceptionList.
+
+As for ground, I have created two new interfaces which contain default methods to implement the 'expand' and 'destroy' of grounds. This design follows the **Interface Segregation Principle** as **Tree** class does not need to destroy, therefore, a single Interface does not satisfy this requirement.
+
+Moreover, the default methods inside these interfaces follows the DRY principle as the 'destroy' and 'expand' logics for different grounds are quite similar.
+
+Similarly, these grounds classes also implement the **TimePerception** interface and run the registerInstance method in constructors.
+
+Floor and Wall classes can't be coverted to another ground, therefore, I created an Enum status 'NONCONVERTIBLE' which used to distinguish these two grounds. 
+
 
 ### REQ 6
 ![alt text](./assets/UMLDiagram_REQ6.png)

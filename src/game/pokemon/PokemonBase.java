@@ -62,6 +62,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         behaviours.put(BehaviorPriority.TOGGLING.getValue(), new ToggleWeaponBehavior(this));
         behaviours.put(BehaviorPriority.ATTACKING.getValue(), new AttackBehaviour());
         behaviours.put(BehaviorPriority.WANDERING.getValue(), new WanderBehaviour());
+
+        // register in timePerceiptionList
         registerInstance();
 
         AffectionManager.getInstance().registerPokemon(this);
