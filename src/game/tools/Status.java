@@ -14,5 +14,6 @@ public enum Status {
     HOSTILE, // use this status to be considered hostile towards enemy (e.g., to be attacked by enemy)
     CATCHABLE,
     UNCATCHABLE,
-    RUINED_RELATIONSHIP, // relationship can't be fixed (related to AffectionPoint)
+    NONCONVERTIBLE,
+    TRADEBLE
 }

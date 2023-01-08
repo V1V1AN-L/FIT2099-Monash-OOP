@@ -1,19 +1,20 @@
 package game.time;
 
 /**
+ * This is the interface realising method associated with the progressing of game time (number of turns)
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- *
+ * Zecan Liu
  */
 public interface TimePerception {
     /**
-     * TODO: override this method, and execute this method inside the relevant manager.
+     * The default day effect which need to be implemented specifically by an instance
      */
     void dayEffect();
 
     /**
-     * TODO: override this method, and execute this method inside the relevant manager.
+     * The default night effect which need to be implemented specifically by an instance
      */
     void nightEffect();
 

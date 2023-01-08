@@ -6,12 +6,18 @@ import game.tools.Element;
 
 import java.util.Locale;
 
+/**
+ *  A class that represents Hay.
+ *  Created by:
+ *  @author Zecan Liu
+ */
 public class Hay extends Ground {
 
     private Location location;
     /**
      * Constructor.
-     *
+     * Inherit from Ground.
+     * Set the display character to ','
      */
     public Hay() {
         super(',');

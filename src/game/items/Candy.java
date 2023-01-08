@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
+import game.tools.Status;
 
 /**
  * Candy can be used to be traded as exchange value
@@ -14,5 +15,6 @@ public class Candy extends Item {
      */
     public Candy() {
         super("Candy", '*', true);
+        addCapability(Status.TRADEBLE);
     }
 }

@@ -11,30 +11,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The class instance that represents a Tree ground
+ * Capable of expand itself - implements ExpandibleGround.
+ * Created by:
+ * @author Zecan Liu
+ *
+ */
 public class Tree extends SpawningGround implements ExpandibleGround, TimePerception {
+
+    private Location location;
+
     /**
      * Constructor.
-     *
+     * Inherit the spawning ground as Tree has the capability of spawning Pokemon
      */
     public Tree() {
-        super('+');
+        super('T');
         this.element = Element.GRASS;
         addCapability(this.element);
+        //Register into the time-managing list
         registerInstance();
     }
 
-
+    /**
+     * The tick method that is operated by the time manager.
+     * This allows the ground to update its location if necessary and perform the check and spawning Pokemon
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
-        super.tick(location);
         this.location = location;
         int requiredElementGround = 1;
-        if (Math.random()<=0.15 && getSurrounding(location) == requiredElementGround && !location.containsAnActor()) {
+        if (Math.random()<=0.15 && getSurrounding(location) >= requiredElementGround && !location.containsAnActor()) {
             location.addActor(spawnPokemon());
         }
-
     }
 
+    /**
+     * The method allowing Tree ground to realise its day effect - dropping candy
+     */
     @Override
     public void dayEffect() {
         if (Math.random()<=0.05 && this.location != null) {
@@ -42,6 +58,10 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
         }
     }
 
+    /**
+     * The method allowing Tree ground to implement its night effect for expansion
+     * The newly expanded ground from a tree could be either another Tree or Hay
+     */
     @Override
     public void nightEffect() {
         if(Math.random()<=0.1 && this.location != null){
@@ -53,6 +73,10 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
         }
     }
 
+    /**
+     * Spawning a new pokemon
+     * @return Treecko - a new pokemon instance
+     */
     @Override
     public PokemonBase spawnPokemon() {
         return new Treecko();

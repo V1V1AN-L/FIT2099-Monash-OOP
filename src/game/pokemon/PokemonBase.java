@@ -35,7 +35,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      * @see game.pokemon.FavoriteAction
      */
     protected FavoriteAction favAction;
-
+    // This is a reference list collecting all available Pokemons by their display characteristics (without repetition)
+    private static final List<Character> pokemonRefList = new ArrayList<>();
     /**
      * SpecialWeapons that can be used by the pokemonBase if the condition is met
      */
@@ -60,14 +61,24 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         behaviours.put(BehaviorPriority.WANDERING.getValue(), new WanderBehaviour());
         registerInstance();
 
-        AffectionManager.getInstance().registerPokemon(this);
+        am.registerPokemon(this);
+
+        //Adding the display character into the ref list if there is not one there already
+        if (!pokemonRefList.contains(displayChar)){
+            pokemonRefList.add(displayChar);
+        }
+
     }
 
     /**
-     * Add follow behavior to the pokemon once the AP is met the requirements
-     *
-     * @param actor the actor that want to be added followBehavior
+     * Getter
+     * @return pokemonRefList
      */
+    public static List<Character> getPokemonRefList() {
+        return pokemonRefList;
+    }
+    // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key
+    // the actor is the trainer
     public void addFollowBehaviours(Actor actor){
         behaviours.put(BehaviorPriority.FOLLOWING.getValue(), new FollowBehaviour(actor));
     }
@@ -98,6 +109,8 @@ public abstract class PokemonBase extends Actor implements TimePerception {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        display.println(this.toString() + getHp() +"(AP: "+ AffectionManager.getInstance().getAffectionPoint(this) + ") moves around" );
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
@@ -129,11 +142,16 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         return this.favAction;
     }
 
-    /**
-     * Create backupWeapons based on the concrete class needs
-     * This method will be overridden by the concrete class.
-     *
-     * @return
-     */
-    protected abstract BackupWeapons backupWeapon();
+    public abstract void backupWeapon();
+
+    public String getHp(){
+        return printHp();
+    }
+
+    protected void removeDeadPokemon(){
+        if(!isConscious()){
+            TimePerceptionManager.getInstance().cleanUp(this);
+        }
+    }
+
 }

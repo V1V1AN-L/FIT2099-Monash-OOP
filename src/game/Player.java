@@ -48,11 +48,11 @@ public class Player extends Actor {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		TimePerceptionManager.getInstance().run();
+
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-
-		TimePerceptionManager.getInstance().run();
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);

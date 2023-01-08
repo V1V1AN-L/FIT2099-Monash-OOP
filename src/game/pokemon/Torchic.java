@@ -41,6 +41,6 @@ public class Torchic extends PokemonBase {
     @Override
     public void nightEffect() {
         hurt(15);
-
+        removeDeadPokemon();
     }
 }
