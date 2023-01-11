@@ -76,7 +76,7 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
      * @return Treecko - a new pokemon instance
      */
     @Override
-    public PokemonBase spawnPokemon() {
+    protected PokemonBase spawnPokemon() {
         return new Treecko();
     }
 

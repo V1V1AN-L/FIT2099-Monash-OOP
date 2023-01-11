@@ -14,9 +14,6 @@ import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.Map;
 
@@ -39,7 +36,6 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      */
     protected FavoriteAction favAction;
     // This is a reference list collecting all available Pokemons by their display characteristics (without repetition)
-    private static final List<Character> pokemonRefList = new ArrayList<>();
     /**
      * SpecialWeapons that can be used by the pokemonBase if the condition is met
      */
@@ -68,6 +64,7 @@ public abstract class PokemonBase extends Actor implements TimePerception {
 
         AffectionManager.getInstance().registerPokemon(this);
 
+    }
 
     /**
      * Add follow behavior to the pokemon once the AP is met the requirements
@@ -75,21 +72,6 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      * @param actor the actor that want to be added followBehavior
      */
 
-
-    //Adding the display character into the ref list if there is not one there already
-        if (!pokemonRefList.contains(displayChar)){
-            pokemonRefList.add(displayChar);
-        }
-
-    }
-
-    /**
-     * Getter
-     * @return pokemonRefList
-     */
-    public static List<Character> getPokemonRefList() {
-        return pokemonRefList;
-    }
     // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key
     // the actor is the trainer
     public void addFollowBehaviours(Actor actor){
