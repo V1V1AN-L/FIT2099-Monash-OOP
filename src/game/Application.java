@@ -3,6 +3,7 @@ package game;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
@@ -56,27 +57,10 @@ public class Application {
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
-        world.addPlayer(ash, gameMap.at(24, 6));
+        world.addPlayer(ash, gameMap.at(32, 10));
         am.registerTrainer(ash);
 
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
-        ash.addItemToInventory(new Candy());
+        IntStream.range(0, 20).forEach(i -> ash.addItemToInventory(new Candy()));
 
         //Add first pokemon - Torchic
         Actor torchic = new Torchic();

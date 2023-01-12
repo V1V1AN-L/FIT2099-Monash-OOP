@@ -16,7 +16,7 @@ public abstract class BuyAction extends Action {
         int totalCandies = 0;
         List<Item> inventory = actor.getInventory();
         for(int i = 0; i < inventory.size(); i++){
-            if(inventory.get(i) instanceof Candy){
+            if(inventory.get(i).getClass().equals(Candy.class)){
                 totalCandies++;
             }
         }
@@ -26,10 +26,10 @@ public abstract class BuyAction extends Action {
     protected void removeCandiesFromInventory(Actor actor, int amount) {
 
         List<Item> inventory = actor.getInventory();
-        List<Candy> toRemove = new ArrayList<>();
+        List<Item> toRemove = new ArrayList<>();
         for (Item item : inventory) {
-            if (item instanceof Candy) {
-                toRemove.add((Candy) item);
+            if (item.getClass().equals(Candy.class)) {
+                toRemove.add(item);
                 amount--;
             }
             if (amount <= 0) {
