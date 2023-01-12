@@ -7,9 +7,14 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
+/**
+ *  ProfessorOak , singleton class that interacts with the Player and is part of the EndGameAction
+ * Created by: Aashlesha Gaur
+ * @author Aashlesha Gaur
+ */
 
 public class ProfessorOak extends Actor {
-    //protected final Map<Integer,Action> profActions = new TreeMap<>();
+
 
     private static final char DEFAULT_DISPLAY_CHAR = '$';
     private static final String DEFAULT_NAME = "Professor Oak";
@@ -19,7 +24,7 @@ public class ProfessorOak extends Actor {
     private ProfessorOak() {
         super(DEFAULT_NAME,DEFAULT_DISPLAY_CHAR, 0);
     }
-
+//Singleton
     public static ProfessorOak getInstance(){
         if(professorOak == null){
             professorOak = new ProfessorOak();

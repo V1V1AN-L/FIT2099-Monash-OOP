@@ -17,12 +17,17 @@ import game.pokemon.Torchic;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ *  ShopKeeper , singleton class that interacts with the Player and is part of the BuyGreatBallAction, BuyMasterBallAction and BuyPokeBallAction.
+ * Created by: Aashlesha Gaur
+ * @author Aashlesha Gaur
+ */
 public class ShopKeeper extends Actor {
-    //protected final List<Item> inventory = new ArrayList<>();
+    
 
     private static final char DEFAULT_DISPLAY_CHAR = '%';
     private static final String DEFAULT_NAME = "Shopkeeper";
+    private static ShopKeeper shopKeeper;
 
     @Override
     public void addItemToInventory(Item item ) {
@@ -32,6 +37,15 @@ public class ShopKeeper extends Actor {
     public ShopKeeper() {
         super(DEFAULT_NAME,DEFAULT_DISPLAY_CHAR, 0);
     }
+
+    //Singleton
+    public static ShopKeeper getInstance(){
+        if(shopKeeper == null){
+            shopKeeper = new ShopKeeper();
+        }
+        return shopKeeper;
+    }
+
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
