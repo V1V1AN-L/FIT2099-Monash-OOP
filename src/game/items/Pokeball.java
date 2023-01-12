@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.affection.AffectionLevelPoint;
+import game.pokemon.Torchic;
 
 /**
  * Pokeball can be used to be capture pokemon
@@ -16,6 +17,7 @@ public class Pokeball extends GeneralBall{
      */
     public Pokeball() {
         super("Pokeball", 'o', true);
+        this.storedPokemon = new Torchic();
     }
 
     @Override
