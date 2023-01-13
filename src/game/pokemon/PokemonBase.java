@@ -151,8 +151,9 @@ public abstract class PokemonBase extends Actor implements TimePerception {
         return printHp();
     }
 
-    protected void removeDeadPokemon(){
-        if(!isConscious()){
+    public void removeDeadPokemon(){
+        if(this.isConscious() == false){
+            System.out.println("this pokemon is dead");
             TimePerceptionManager.getInstance().cleanUp(this);
         }
     }

@@ -17,6 +17,5 @@ public enum Status {
     NONCONVERTIBLE,
     TRADEBLE,
     RUINED_RELATIONSHIP, // relationship can't be fixed (related to AffectionPoint)
-
     ENTERABLE
 }

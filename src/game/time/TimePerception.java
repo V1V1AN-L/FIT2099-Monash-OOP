@@ -18,6 +18,26 @@ public interface TimePerception {
      */
     void nightEffect();
 
+    default void dawnEffect(){
+
+    }
+
+    default void duskEffect(){
+
+    }
+
+    default void midnightEffect(){
+
+    }
+
+    default void solarEclipse(){
+
+    }
+
+    default void newMoon(){
+
+    }
+
     /**
      * a default interface method that register current instance to the Singleton manager.
      * It allows corresponding class uses to be affected by global reset

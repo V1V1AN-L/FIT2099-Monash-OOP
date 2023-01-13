@@ -49,7 +49,7 @@ public class Application {
         List<String> pokeCenter = Arrays.asList(
                 "##################",
                 "#________________#",
-                "#______..%.._____#",
+                "#______....._____#",
                 "#________________#",
                 "#________________#",
                 "#######_=_########");
@@ -57,8 +57,8 @@ public class Application {
         GameMap gameMap = new GameMap(groundFactory, map);
         GameMap pokeCenterMap = new GameMap(groundFactory, pokeCenter);
 
-        world.addGameMap(gameMap);
         world.addGameMap(pokeCenterMap);
+        world.addGameMap(gameMap);
 
         // AffectionManager
         AffectionManager am = AffectionManager.getInstance();

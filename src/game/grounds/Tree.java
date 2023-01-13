@@ -1,12 +1,15 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Candy;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Treecko;
 
+import java.util.ArrayList;
 
 
 /**
@@ -16,7 +19,7 @@ import game.pokemon.Treecko;
  * @author Zecan Liu
  *
  */
-public class Tree extends SpawningGround implements ExpandibleGround, TimePerception {
+public class Tree extends SpawningGround implements ExpandibleGround, TimePerception, DestructibleGround {
 
     private Location location;
 
@@ -68,6 +71,23 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
             }else{
                 expandGround(this.location, new Tree(), Element.GRASS);
             }
+        }
+    }
+
+    @Override
+    public void midnightEffect() {
+        if(this.location!= null && this.location.getItems()!= null){
+            for(Item each: new ArrayList<>(this.location.getItems())){
+                this.location.removeItem(each);
+            }
+        }
+    }
+
+    @Override
+    public void duskEffect() {
+        if (Math.random()<=0.1 && this.location != null)  {
+            destroyGround(this.location);
+            TimePerceptionManager.getInstance().cleanUp(this);
         }
     }
 
