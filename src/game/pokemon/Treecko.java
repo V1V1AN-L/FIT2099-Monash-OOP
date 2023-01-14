@@ -1,6 +1,7 @@
 package game.pokemon;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.tools.Status;
@@ -13,7 +14,7 @@ import game.weapon.BackupWeapons;
  * @author jordannathanael
  * Modified by: Zecan (Vivian) Liu
  */
-public class Treecko extends PokemonBase{
+public class Treecko extends EvolvedPokemonBase  implements TimePerception {
     /**
      * Constructor.
      */
@@ -22,6 +23,9 @@ public class Treecko extends PokemonBase{
         this.addCapability(Element.GRASS);
         this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.DANCING;
+
+        // register in timePerceiptionList
+        registerInstance();
     }
 
     @Override
@@ -31,7 +35,12 @@ public class Treecko extends PokemonBase{
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90);
+        return new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90, Element.GRASS, false);
+    }
+
+    @Override
+    public PokemonBase evolve() {
+        return null;
     }
 
     @Override
@@ -43,5 +52,11 @@ public class Treecko extends PokemonBase{
     @Override
     public void nightEffect() {
         heal(5);
+    }
+
+    private void removeDeadPokemon(){
+        if(!isConscious()){
+            TimePerceptionManager.getInstance().cleanUp(this);
+        }
     }
 }

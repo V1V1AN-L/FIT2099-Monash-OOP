@@ -24,7 +24,7 @@ public class Masterball extends GeneralBall  {
     public boolean checkAffectionPointReq(Actor storedPokemon, int affectionPoint) throws Exception
     {
         // set AffectionPoint into 100 instantly
-        AffectionManager.getInstance().setStaticAffection(storedPokemon, AffectionLevelPoint.MAXIMUM.getValue());
+        AffectionManager.getInstance().modifyAffection(storedPokemon, AffectionLevelPoint.MAXIMUM.getValue());
 
         // remove capabilities of RUINED_RELATIONSHIP
         if (AffectionManager.getInstance().findPokemon(storedPokemon).hasCapability(Status.RUINED_RELATIONSHIP)){
