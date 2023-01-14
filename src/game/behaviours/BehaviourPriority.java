@@ -6,7 +6,12 @@ package game.behaviours;
  * Created by: Jordan Nathanael
  * @author jordannathanael
  */
-public enum BehaviorPriority {
+public enum BehaviourPriority {
+    /**
+     * Evolve the pokemon whenever it is possible
+     */
+    EVOLVING(0),
+
     /**
      * Everytime pokemon changes its location, check the condition to toggle the weapon
      */
@@ -37,7 +42,7 @@ public enum BehaviorPriority {
      *
      * @param value the key priority value
      */
-    BehaviorPriority(int value){
+    BehaviourPriority(int value){
         this.value = value;
     }
 
