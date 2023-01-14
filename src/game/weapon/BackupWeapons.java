@@ -1,10 +1,15 @@
 package game.weapon;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.action.AttackAction;
 import game.affection.AffectionManager;
+import game.pokemon.Blaziken;
 import game.pokemon.PokemonBase;
+import game.pokemon.UniqueWeaponSkill;
+import game.tools.Element;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +25,26 @@ import java.util.Map;
  * @see AttackAction uses getWeapon() in the execute() method.
  */
 public class BackupWeapons extends WeaponItem{
-    // Use this class to store the backupWeapons
-    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate){
+    private boolean specialEffect;
+
+    public UniqueWeaponSkill uniqueWeaponSkill = Blaziken::weaponEffect;
+
+    /**
+     * Constructor
+     *
+     * @param name of the weapon
+     * @param displayChar
+     * @param damage
+     * @param verb
+     * @param hitRate
+     */
+    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate, Element element, boolean specialEffect){
         super(name, displayChar, damage, verb, hitRate);
+        this.specialEffect = specialEffect;
+        this.addCapability(element);
+    }
+
+    public boolean hasSpecialEffect(){
+        return specialEffect;
     }
 }

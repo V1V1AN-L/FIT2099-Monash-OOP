@@ -111,12 +111,17 @@ public abstract class PokemonBase extends Actor{
      *
      * @param isEquipping boolean expression whether the condition is met or not
      */
-    public void toggleWeapon(boolean isEquipping){
+    public void toggleWeapon(boolean isEquipping, Actor actor, GameMap map){
         Random random = new Random();
         if (isEquipping){
+            BackupWeapons weapon = backupWeapons.get(random.nextInt(backupWeapons.size()));
             // -1 because nextInt is inclusive which what we want is exclusive
-            addItemToInventory(backupWeapons.get(random.nextInt(backupWeapons.size())));
-            System.out.println(backupWeapons.get(random.nextInt(backupWeapons.size())));
+            addItemToInventory(weapon);
+
+            if (weapon.hasSpecialEffect()){
+                weapon.uniqueWeaponSkill.weaponEffect(actor, map);
+            }
+
         } else if (!isEquipping && getInventory().contains(getWeapon())) {
             int indexOfBackupWeapon = getInventory().indexOf(getWeapon());
             removeItemFromInventory(getInventory().get(indexOfBackupWeapon));
