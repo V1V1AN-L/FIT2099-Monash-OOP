@@ -45,12 +45,10 @@ public class Blaziken extends PokemonBase implements UniqueWeaponSkill {
     protected BackupWeapons backupWeapon(){
         BackupWeapons weapon = new BackupWeapons("Fire Spin", ' ', 80, "tornadoes", 90, Element.FIRE, true);
         weapon.setUniqueWeaponSkill(this::weaponEffect);
-        weapon.setDuration(2);
         return weapon;
     }
 
     public void weaponEffect(Actor actor, GameMap map) {
-        // FIXME, just 2 turns
         // check surrounding
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location targetLoc = exit.getDestination();

@@ -19,8 +19,6 @@ public class BackupWeapons extends WeaponItem{
 
     public UniqueWeaponSkill uniqueWeaponSkill;
 
-    private int duration;
-
     /**
      * Constructor
      *
@@ -44,11 +42,4 @@ public class BackupWeapons extends WeaponItem{
         uniqueWeaponSkill = skill;
     }
 
-    public void setDuration(int duration){
-        this.duration = duration;
-    }
-
-    public int getDuration(){
-        return duration;
-    }
 }
