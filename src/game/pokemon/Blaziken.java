@@ -6,9 +6,10 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.grounds.Fire;
+import game.items.Fire;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
+import game.weapon.UniqueWeaponSkill;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,9 @@ import java.util.ArrayList;
  *
  * @author jordannathanael
  */
-public class Blaziken extends PokemonBase{
+public class Blaziken extends PokemonBase implements UniqueWeaponSkill {
+    private final int FIRE_SPIN_DURATION = 2;
+
     /**
      * Constructor.
      */
@@ -40,18 +43,20 @@ public class Blaziken extends PokemonBase{
 
     @Override
     protected BackupWeapons backupWeapon(){
-        BackupWeapons weapon = new BackupWeapons("Fire Spin", ' ', 80, "sparks", 90, Element.FIRE, true);
+        BackupWeapons weapon = new BackupWeapons("Fire Spin", ' ', 80, "tornadoes", 90, Element.FIRE, true);
+        weapon.setUniqueWeaponSkill(this::weaponEffect);
+        weapon.setDuration(2);
         return weapon;
     }
 
-    public static void weaponEffect(Actor actor, GameMap map) {
+    public void weaponEffect(Actor actor, GameMap map) {
+        // FIXME, just 2 turns
         // check surrounding
         for (Exit exit : map.locationOf(actor).getExits()) {
             Location targetLoc = exit.getDestination();
 
-            targetLoc.setGround(new Fire());
+            targetLoc.addItem(new Fire(FIRE_SPIN_DURATION));
         }
     }
-
 
 }

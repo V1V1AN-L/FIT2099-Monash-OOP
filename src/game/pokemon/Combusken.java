@@ -40,6 +40,7 @@ public class Combusken extends EvolvedPokemonBase {
 
     @Override
     public PokemonBase evolve() {
-        return new Blaziken(this.backupWeapons);
+        this.backupWeapons.clear();
+        return new Blaziken(this.backupWeapons) ;
     }
 }

@@ -1,19 +1,9 @@
 package game.weapon;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.action.AttackAction;
-import game.affection.AffectionManager;
-import game.pokemon.Blaziken;
-import game.pokemon.PokemonBase;
-import game.pokemon.UniqueWeaponSkill;
 import game.tools.Element;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Special weapon that will be stored as an attribute for each pokemon
@@ -27,12 +17,14 @@ import java.util.Map;
 public class BackupWeapons extends WeaponItem{
     private boolean specialEffect;
 
-    public UniqueWeaponSkill uniqueWeaponSkill = Blaziken::weaponEffect;
+    public UniqueWeaponSkill uniqueWeaponSkill;
+
+    private int duration;
 
     /**
      * Constructor
      *
-     * @param name of the weapon
+     * @param name        of the weapon
      * @param displayChar
      * @param damage
      * @param verb
@@ -46,5 +38,17 @@ public class BackupWeapons extends WeaponItem{
 
     public boolean hasSpecialEffect(){
         return specialEffect;
+    }
+
+    public void setUniqueWeaponSkill(UniqueWeaponSkill skill){
+        uniqueWeaponSkill = skill;
+    }
+
+    public void setDuration(int duration){
+        this.duration = duration;
+    }
+
+    public int getDuration(){
+        return duration;
     }
 }
