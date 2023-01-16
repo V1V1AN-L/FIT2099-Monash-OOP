@@ -52,6 +52,7 @@ public abstract class PokemonBase extends Actor{
         backupWeapons.add(backupWeapon());
 
         this.addCapability(Status.HOSTILE);
+        this.addCapability(Status.CATCHABLE);
 
         behaviours.put(BehaviourPriority.TOGGLING.getValue(), new ToggleWeaponBehavior(this));
         behaviours.put(BehaviourPriority.ATTACKING.getValue(), new AttackBehaviour());

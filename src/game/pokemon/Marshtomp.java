@@ -13,15 +13,14 @@ import java.util.ArrayList;
  *
  * @author jordannathanael
  */
-public class Combusken extends EvolvedPokemonBase {
+public class Marshtomp extends EvolvedPokemonBase {
     /**
      * Constructor.
      */
-    public Combusken(ArrayList<BackupWeapons> oldBackupWeapons) {
-        super("Combusken", 'K', 150);
-        this.addCapability(Element.FIRE);
-        this.addCapability(Element.FIGHTING);
-        this.favAction = FavoriteAction.SINGING;
+    public Marshtomp(ArrayList<BackupWeapons> oldBackupWeapons) {
+        super("Marshtomp", 'M', 150);
+        this.addCapability(Element.WATER);
+        this.favAction = FavoriteAction.CHEST_POUNDING;
 
         for (BackupWeapons backupWeapon : oldBackupWeapons){
             this.backupWeapons.add(backupWeapon);
@@ -30,16 +29,17 @@ public class Combusken extends EvolvedPokemonBase {
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(10, "scratch");
+        return new IntrinsicWeapon(10, "tackle");
     }
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Blaze", ' ', 50, "flares", 80, Element.FIRE, false);
+        return new BackupWeapons("Water Gun", ' ', 40, "splashes", 95, Element.WATER, false);
     }
 
     @Override
     public PokemonBase evolve() {
-        return new Blaziken(this.backupWeapons) ;
+        this.backupWeapons.clear();
+        return new Swampert(this.backupWeapons) ;
     }
 }

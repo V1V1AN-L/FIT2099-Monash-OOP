@@ -27,7 +27,12 @@ public enum Element {
     /**
      * Fighting element
      */
-    FIGHTING("Fighting");
+    FIGHTING("Fighting"),
+
+    /**
+     * Ground element
+     */
+    GROUND("Ground");
 
     /**
      * The label of the element

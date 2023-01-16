@@ -1,4 +1,4 @@
-package game.items;
+package game.items.WeaponEffect;
 
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.Location;
 public abstract class WeaponEffectItem extends Item {
     protected int duration;
 
-    WeaponEffectItem(String name, char displayChar, int duration){
+    protected WeaponEffectItem(String name, char displayChar, int duration){
         super(name, displayChar, false);
         this.duration = duration;
     }

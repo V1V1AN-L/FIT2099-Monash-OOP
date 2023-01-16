@@ -21,7 +21,6 @@ public class Mudkip extends EvolvedPokemonBase  implements TimePerception {
     public Mudkip() {
         super("Mudkip", 's', 100);
         this.addCapability(Element.WATER);
-        this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.CHEST_POUNDING;
 
         // register in timePerceiptionList
@@ -40,7 +39,7 @@ public class Mudkip extends EvolvedPokemonBase  implements TimePerception {
 
     @Override
     public PokemonBase evolve() {
-        return null;
+        return new Marshtomp(this.backupWeapons);
     }
 
     @Override

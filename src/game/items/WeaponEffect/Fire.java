@@ -1,12 +1,11 @@
-package game.items;
+package game.items.WeaponEffect;
 
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.tools.Element;
 import game.tools.ElementsHelper;
 
 public class Fire extends WeaponEffectItem {
-    private static final int FIRE_DAMAGE = 10;
+    private static final int DAMAGE = 10;
 
     public Fire(int duration) {
         super("Fire", 'v', duration);
@@ -19,8 +18,8 @@ public class Fire extends WeaponEffectItem {
 
         if (location.getActor() != null) {
             if (!ElementsHelper.hasAnySimilarElements(location.getActor(), this.findCapabilitiesByType(Element.class))) {
-                location.getActor().hurt(FIRE_DAMAGE);
-                System.out.println(location.getActor() + " get hurts by " + this + ", -" + FIRE_DAMAGE + " HP");
+                location.getActor().hurt(DAMAGE);
+                System.out.println(location.getActor() + " get hurts by " + this + ", -" + DAMAGE + " HP");
             }
         }
 

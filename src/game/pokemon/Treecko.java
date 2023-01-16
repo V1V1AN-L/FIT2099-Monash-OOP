@@ -21,7 +21,6 @@ public class Treecko extends EvolvedPokemonBase  implements TimePerception {
     public Treecko() {
         super("Treecko", 'b', 100);
         this.addCapability(Element.GRASS);
-        this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.DANCING;
 
         // register in timePerceiptionList
@@ -40,7 +39,7 @@ public class Treecko extends EvolvedPokemonBase  implements TimePerception {
 
     @Override
     public PokemonBase evolve() {
-        return null;
+        return new Grovyle(this.backupWeapons);
     }
 
     @Override
