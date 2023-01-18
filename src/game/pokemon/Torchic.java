@@ -43,4 +43,11 @@ public class Torchic extends PokemonBase {
         hurt(15);
         removeDeadPokemon();
     }
+
+    @Override
+    public void newMoon() {
+        System.out.println("New Moon! All Torchics will be dead after this turn!");
+        hurt(100);
+        removeDeadPokemon();
+    }
 }

@@ -33,7 +33,7 @@ public abstract class SpawningGround extends Ground {
     /**
      * The abstract method that requires all child classes to implement/realise spawning Pokemon
      */
-    public abstract PokemonBase spawnPokemon();
+    protected abstract PokemonBase spawnPokemon();
 
     /**
      * The method allowing the spawning ground to count the same-element ground in its surrounding

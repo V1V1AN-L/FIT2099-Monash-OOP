@@ -34,9 +34,11 @@ public class Floor extends Ground {
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
-		List <Character> pokeRefList =  PokemonBase.getPokemonRefList();
-		return !pokeRefList.contains(actor.getDisplayChar());
-
+		if (actor.hasCapability(Status.ENTERABLE)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	/**

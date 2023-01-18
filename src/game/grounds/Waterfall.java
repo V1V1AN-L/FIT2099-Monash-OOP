@@ -46,7 +46,7 @@ public class Waterfall extends SpawningGround {
      * @return Mukip -  the new Pokemon instacne.
      */
     @Override
-    public PokemonBase spawnPokemon() {
+    protected PokemonBase spawnPokemon() {
         return new Mudkip();
     }
 }

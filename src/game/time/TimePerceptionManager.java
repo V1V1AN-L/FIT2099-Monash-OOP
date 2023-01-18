@@ -6,7 +6,9 @@ import game.affection.AffectionManager;
 import game.pokemon.PokemonBase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A global Singleton manager that gives time perception  on the affected instances.
@@ -24,7 +26,7 @@ public class TimePerceptionManager {
      * A list of polymorph instances (any classes that implements TimePerception,
      * such as, a Charmander implements TimePerception, it will be stored in here)
      */
-    private final List<TimePerception> timePerceptionList;
+    private List<TimePerception> timePerceptionList;
 
     /**
      * A counter recording the current turn of the game. This will be used to calculated the
@@ -41,6 +43,8 @@ public class TimePerceptionManager {
      * For printing
      */
     private Display display = new Display();
+
+    private Map<TimePeriod, String> timePeriodString = new HashMap();
 
     /**
      * A singleton instance
@@ -66,6 +70,13 @@ public class TimePerceptionManager {
     private TimePerceptionManager() {
         timePerceptionList = new ArrayList<>();
         turn = 0;
+        timePeriodString.put(TimePeriod.DAWN,"Dawn");
+        timePeriodString.put(TimePeriod.DAY,"Day");
+        timePeriodString.put(TimePeriod.DUSK,"Dusk");
+        timePeriodString.put(TimePeriod.NIGHT,"Night");
+        timePeriodString.put(TimePeriod.MIDNIGHT,"Midnight");
+        timePeriodString.put(TimePeriod.SOLARECLIPSE,"Solar eclipse");
+        timePeriodString.put(TimePeriod.NEWMOON,"New moon");
     }
 
     /**
@@ -76,19 +87,38 @@ public class TimePerceptionManager {
      */
     public void run() {
         for (TimePerception each: new ArrayList<TimePerception>(this.getTimePerceptionList())){
-            if ((turn/5) % 2 == 0){
+            if (turn%7 == 0 ){
+                shift = TimePeriod.DAWN;
+                each.dawnEffect();
+
+            } else if (turn%7 == 1) {
                 shift = TimePeriod.DAY;
                 each.dayEffect();
-            }else {
-                each.nightEffect();
+
+            } else if (turn%7 == 2) {
+                shift = TimePeriod.DUSK;
+                each.duskEffect();
+
+            } else if (turn%7 == 3) {
                 shift = TimePeriod.NIGHT;
+                each.nightEffect();
+
+            }else if (turn%7 == 4) {
+                shift = TimePeriod.MIDNIGHT;
+                each.midnightEffect();
+
+            }
+            else if (turn%7 == 5) {
+                shift = TimePeriod.SOLARECLIPSE;
+                each.solarEclipse();
+
+            }
+            else {
+                shift = TimePeriod.NEWMOON;
+                each.newMoon();
             }
         }
-        if (shift == TimePeriod.DAY) {
-            display.println("It's a Day-time (turn" + turn + ')');
-        }else{
-            display.println("It's a Night-time (turn" + turn + ')');
-        }
+        display.println("It's a "+ timePeriodString.get(shift)+"-time (turn" + turn + ')');
         turn++;
     }
 

@@ -44,4 +44,11 @@ public class Mudkip extends PokemonBase{
     public void nightEffect() {
         heal(10);
     }
+
+    @Override
+    public void solarEclipse() {
+        System.out.println("Solar Eclipse! All Mudkips will dead after this turn!");
+        hurt(100);
+        removeDeadPokemon();
+    }
 }

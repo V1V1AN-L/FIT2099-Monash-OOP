@@ -44,4 +44,22 @@ public class Treecko extends PokemonBase{
     public void nightEffect() {
         heal(5);
     }
+
+    @Override
+    public void dawnEffect() {
+        hurt(30);
+        removeDeadPokemon();
+    }
+
+    @Override
+    public void duskEffect() {
+        hurt(30);
+        removeDeadPokemon();
+    }
+
+    @Override
+    public void midnightEffect() {
+        hurt(40);
+        removeDeadPokemon();
+    }
 }
