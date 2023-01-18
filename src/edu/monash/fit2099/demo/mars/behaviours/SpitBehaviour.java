@@ -43,6 +43,11 @@ public class SpitBehaviour extends Action implements Behaviour {
 	}
 
 	@Override
+	public int getPriority() {
+		return 0;
+	}
+
+	@Override
 	public String menuDescription(Actor actor) {
 		return "";
 	}

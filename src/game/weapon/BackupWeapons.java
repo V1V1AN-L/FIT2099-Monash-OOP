@@ -3,12 +3,7 @@ package game.weapon;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.action.AttackAction;
-import game.affection.AffectionManager;
-import game.pokemon.PokemonBase;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import game.tools.Element;
 
 /**
  * Special weapon that will be stored as an attribute for each pokemon
@@ -20,8 +15,17 @@ import java.util.Map;
  * @see AttackAction uses getWeapon() in the execute() method.
  */
 public class BackupWeapons extends WeaponItem{
-    // Use this class to store the backupWeapons
-    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate){
+    /**
+     * Constructor
+     *
+     * @param name        of the weapon
+     * @param displayChar
+     * @param damage
+     * @param verb
+     * @param hitRate
+     */
+    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate, Element element){
         super(name, displayChar, damage, verb, hitRate);
+        this.addCapability(element);
     }
 }

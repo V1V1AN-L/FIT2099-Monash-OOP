@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * Modified by: -
  */
 public interface Behaviour {
-	
 	/**
 	 * A factory for creating actions. Chaining these together can result in an actor performing more complex tasks.
 	 *
@@ -33,4 +32,6 @@ public interface Behaviour {
 	 * @return an Action that actor can perform, or null if actor can't do this.
 	 */
 	Action getAction(Actor actor, GameMap map);
+
+	int getPriority();
 }

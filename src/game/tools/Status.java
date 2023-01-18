@@ -18,4 +18,6 @@ public enum Status {
     TRADEBLE,
     RUINED_RELATIONSHIP, // relationship can't be fixed (related to AffectionPoint)
     ENTERABLE
+    MOVEMENT_RESTRICTED, // can't wander around
+    EVOLUTION_RESTRICTED,
 }

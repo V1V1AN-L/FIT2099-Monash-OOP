@@ -19,6 +19,8 @@ import game.tools.Status;
  * Modified by: Jordan Nathanael
  */
 public class AttackBehaviour implements Behaviour {
+    private static final int ATTACK_BEHAVIOUR_PRIORITY = BehaviourPriority.ATTACKING.getValue();
+
     @Override
     public Action getAction(Actor actor, GameMap map) {
         // check surrounding
@@ -26,7 +28,6 @@ public class AttackBehaviour implements Behaviour {
             Location targetLoc = exit.getDestination();
             if (targetLoc.containsAnActor()){
                 Actor targetActor = targetLoc.getActor();
-                actor.allowableActions(targetActor, targetLoc.toString(), map);
 
                 // if the target is not IMMUNE attack it.
                 if (! targetActor.hasCapability(Status.IMMUNE)){
@@ -40,5 +41,10 @@ public class AttackBehaviour implements Behaviour {
             }
         }
         return null; // go to next behaviour
+    }
+
+    @Override
+    public int getPriority(){
+        return ATTACK_BEHAVIOUR_PRIORITY;
     }
 }

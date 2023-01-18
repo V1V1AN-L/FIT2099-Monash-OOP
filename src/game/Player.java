@@ -3,10 +3,8 @@ package game;
 import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.action.*;
 import game.affection.AffectionManager;
 import game.items.Candy;
 import game.items.Greatball;
@@ -15,7 +13,9 @@ import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class representing the Player.

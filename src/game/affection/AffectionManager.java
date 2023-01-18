@@ -1,6 +1,8 @@
 package game.affection;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import game.behaviours.BehaviourPriority;
+import game.behaviours.FollowBehaviour;
 import game.pokemon.PokemonBase;
 import game.tools.Status;
 
@@ -73,13 +75,18 @@ public class AffectionManager {
         affectionPoints.put(pokemon, AffectionManager.DEFAULT_AFFECTION_POINT);
     }
 
+    public void unregisterPokemon(PokemonBase pokemon){
+        affectionPoints.remove(pokemon);
+    }
+
     /**
      * Get the affection point by using the pokemon instance as the key.
      *
-     * @param pokemon Pokemon instance
+     * @param actor Pokemon instance
      * @return integer of affection point.
      */
-    public int getAffectionPoint(PokemonBase pokemon) {
+    public int getAffectionPoint(Actor actor) {
+        PokemonBase pokemon = findPokemon(actor);
         return affectionPoints.get(pokemon);
     }
 
@@ -113,12 +120,12 @@ public class AffectionManager {
 
         // if AP exceed the Maximum value, assign it as max
         if (getAffectionPoint(pokemon) > AffectionLevelPoint.MAXIMUM.getValue()){
-            setStaticAffection(pokemon, AffectionLevelPoint.MAXIMUM.getValue());
+            modifyAffection(pokemon, AffectionLevelPoint.MAXIMUM.getValue());
         }
 
         // if AP is >= 75, add followBehavior for the pokemon
         if (getAffectionPoint(pokemon) >= AffectionLevelPoint.FOLLOWING.getValue()){
-            pokemon.addFollowBehaviours(trainer);
+            pokemon.addBehaviours(new FollowBehaviour(trainer));
         }
 
         return pokemon + "'s affection point is increased by " + Integer.toString(point);
@@ -136,14 +143,14 @@ public class AffectionManager {
         affectionPoints.put(pokemon, getAffectionPoint(pokemon)-point);
 
         if (getAffectionPoint(pokemon) < AffectionLevelPoint.FOLLOWING.getValue()){
-            pokemon.deleteFollowBehaviours();
+            pokemon.deleteBehaviours(BehaviourPriority.FOLLOWING);
         }
 
         if (getAffectionPoint(pokemon) <= AffectionLevelPoint.DISLIKE.getValue()){
             pokemon.addCapability(Status.RUINED_RELATIONSHIP);
         }
 
-        return pokemon.toString() + "'s affection point is decreased by " + Integer.toString(point);
+        return pokemon.toString() + "'s affection point is decreased by " + point;
     }
 
     /**
@@ -152,9 +159,8 @@ public class AffectionManager {
      * @param actor the target PokemonBase that the affection point will be changed
      * @param point set its affection point as similar as the point
      */
-    public void setStaticAffection(Actor actor, int point){
+    public void modifyAffection(Actor actor, int point){
         PokemonBase pokemon = findPokemon(actor);
         affectionPoints.put(pokemon, point);
     }
-
 }

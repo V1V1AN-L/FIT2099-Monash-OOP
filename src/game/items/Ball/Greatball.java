@@ -1,7 +1,8 @@
-package game.items;
+package game.items.Ball;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.affection.AffectionLevelPoint;
+import game.items.Ball.GeneralBall;
 
 /**
  * Greatball can be used to be capture pokemon
@@ -10,7 +11,7 @@ import game.affection.AffectionLevelPoint;
  * @author zliu0207
  * Modified by: Jordan Nathanael
  */
-public class Greatball extends GeneralBall{
+public class Greatball extends GeneralBall {
 
     /***
      * Constructor.

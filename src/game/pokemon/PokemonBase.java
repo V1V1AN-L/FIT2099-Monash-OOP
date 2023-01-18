@@ -9,13 +9,12 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
 import game.affection.AffectionManager;
 import game.behaviours.*;
-import game.items.Pokeball;
-import game.time.TimePerception;
+import game.items.Ball.Pokeball;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
-import java.util.TreeMap;
-import java.util.Map;
+
+import java.util.*;
 
 /**
  * Abstract PokemonBase class
@@ -24,7 +23,9 @@ import java.util.Map;
  * @author jordannathanael
  * Modified by: Zecan (Vivian) Liu
  */
-public abstract class PokemonBase extends Actor implements TimePerception {
+public abstract class PokemonBase extends Actor{
+    private final int existTurn = TimePerceptionManager.getInstance().getTurn();
+
     /**
      * List of behaviors that PokemonBase will do (the key that is the smallest is the first priority
      */
@@ -35,11 +36,11 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      * @see game.pokemon.FavoriteAction
      */
     protected FavoriteAction favAction;
-    // This is a reference list collecting all available Pokemons by their display characteristics (without repetition)
+
     /**
      * SpecialWeapons that can be used by the pokemonBase if the condition is met
      */
-    private BackupWeapons backupWeapon;
+    protected ArrayList<BackupWeapons> backupWeapons = new ArrayList<>() ;
 
 
     /**
@@ -51,38 +52,32 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      */
     public PokemonBase(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        backupWeapon = backupWeapon();
+        backupWeapons.add(backupWeapon());
 
-        addCapability(Status.HOSTILE);
+        this.addCapability(Status.HOSTILE);
+        this.addCapability(Status.CATCHABLE);
 
-        behaviours.put(BehaviorPriority.TOGGLING.getValue(), new ToggleWeaponBehavior(this));
-        behaviours.put(BehaviorPriority.ATTACKING.getValue(), new AttackBehaviour());
-        behaviours.put(BehaviorPriority.WANDERING.getValue(), new WanderBehaviour());
-
-        // register in timePerceiptionList
-        registerInstance();
+        behaviours.put(BehaviourPriority.TOGGLING.getValue(), new ToggleWeaponBehavior(this));
+        behaviours.put(BehaviourPriority.ATTACKING.getValue(), new AttackBehaviour());
+        behaviours.put(BehaviourPriority.WANDERING.getValue(), new WanderBehaviour());
 
         AffectionManager.getInstance().registerPokemon(this);
-
     }
 
     /**
      * Add follow behavior to the pokemon once the AP is met the requirements
      *
-     * @param actor the actor that want to be added followBehavior
+     * @param behaviour that want to be added
      */
-
-    // there is a key needed, but we know that the only behavior left is followBehavior, maybe I can use ENUM for the key
-    // the actor is the trainer
-    public void addFollowBehaviours(Actor actor){
-        behaviours.put(BehaviorPriority.FOLLOWING.getValue(), new FollowBehaviour(actor));
+    public void addBehaviours(Behaviour behaviour){
+        behaviours.put(behaviour.getPriority(), behaviour);
     }
 
     /**
      * Delete follow behavior to the pokemon once the AP isn't met the requirements anymore
      */
-    public void deleteFollowBehaviours(){
-        behaviours.remove(BehaviorPriority.FOLLOWING.getValue());
+    public void deleteBehaviours(BehaviourPriority whichBehavior){
+        behaviours.remove(whichBehavior.getValue());
     }
 
     @Override
@@ -104,7 +99,7 @@ public abstract class PokemonBase extends Actor implements TimePerception {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        display.println(this.toString() + getHp() +"(AP: "+ AffectionManager.getInstance().getAffectionPoint(this) + ") moves around" );
+        display.println(this + getHp() +"(AP: "+ AffectionManager.getInstance().getAffectionPoint(this) + ") moves around" );
 
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
@@ -120,11 +115,17 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      *
      * @param isEquipping boolean expression whether the condition is met or not
      */
-    public void toggleWeapon(boolean isEquipping){
+    public void toggleWeapon(boolean isEquipping, Actor actor, GameMap map){
+        Random random = new Random();
         if (isEquipping){
-            addItemToInventory(backupWeapon);
+            BackupWeapons weapon = backupWeapons.get(random.nextInt(backupWeapons.size()));
+
+            // -1 because nextInt is inclusive which what we want is exclusive
+            addItemToInventory(weapon);
+
         } else if (!isEquipping && getInventory().contains(getWeapon())) {
-            removeItemFromInventory(backupWeapon);
+            int indexOfBackupWeapon = getInventory().indexOf(getWeapon());
+            removeItemFromInventory(getInventory().get(indexOfBackupWeapon));
         }
     };
 
@@ -145,17 +146,12 @@ public abstract class PokemonBase extends Actor implements TimePerception {
      */
     protected abstract BackupWeapons backupWeapon();
 
-
-
     public String getHp(){
         return printHp();
     }
 
-    public void removeDeadPokemon(){
-        if(this.isConscious() == false){
-            System.out.println("this pokemon is dead");
-            TimePerceptionManager.getInstance().cleanUp(this);
-        }
+    public int getExistTurn(){
+        return existTurn;
     }
 
 }

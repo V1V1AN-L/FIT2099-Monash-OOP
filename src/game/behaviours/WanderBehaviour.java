@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.tools.Status;
 
 /**
  * An Action to attack another Actor.
@@ -16,6 +18,8 @@ import edu.monash.fit2099.engine.positions.Location;
  * @author Riordan D. Alfredo
  */
 public class WanderBehaviour implements Behaviour {
+	public static final int WANDER_BEHAVIOUR_PRIORITY = BehaviourPriority.WANDERING.getValue();
+
 	/**
 	 * Random value to choose the exit
 	 */
@@ -31,6 +35,10 @@ public class WanderBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		if (actor.hasCapability(Status.MOVEMENT_RESTRICTED)){
+			return new DoNothingAction();
+		}
+
 		ArrayList<Action> actions = new ArrayList<>();
 		
 		for (Exit exit : map.locationOf(actor).getExits()) {
@@ -46,5 +54,10 @@ public class WanderBehaviour implements Behaviour {
 		else {
 			return null; // go to next behaviour
 		}
+	}
+
+	@Override
+	public int getPriority(){
+		return WANDER_BEHAVIOUR_PRIORITY;
 	}
 }
