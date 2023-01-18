@@ -84,6 +84,9 @@ public class Application {
         Actor shopkeeper = new ShopKeeper();
         gameMap.at(25,6).addActor(shopkeeper);
 
+        gameMap.at(29,6).setGround(new Door(pokeCenterMap.at(8,5)));
+        pokeCenterMap.at(8,5).setGround(new Door(gameMap.at(29,6)));
+
         world.run();
 
     }
