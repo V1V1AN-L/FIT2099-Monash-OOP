@@ -26,20 +26,6 @@ public class Floor extends Ground {
 	}
 
 	/**
-	 * Check method to see if an actor instance could entre the floor
-	 * @param actor the Actor instance to check
-	 * @return boolean - true or false.
-	 *
-	 * Only return true is the actor is not a Pokemon (only player allowed)
-	 */
-	@Override
-	public boolean canActorEnter(Actor actor) {
-		List <Character> pokeRefList =  PokemonBase.getPokemonRefList();
-		return !pokeRefList.contains(actor.getDisplayChar());
-
-	}
-
-	/**
 	 * Set/add capability method
 	 * @param capability the Capability to add
 	 */

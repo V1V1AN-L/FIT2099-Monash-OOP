@@ -123,11 +123,6 @@ public abstract class PokemonBase extends Actor{
             // -1 because nextInt is inclusive which what we want is exclusive
             addItemToInventory(weapon);
 
-            if (weapon.hasSpecialEffect()){
-                weapon.uniqueWeaponSkill.weaponEffect(actor, map);
-
-            }
-
         } else if (!isEquipping && getInventory().contains(getWeapon())) {
             int indexOfBackupWeapon = getInventory().indexOf(getWeapon());
             removeItemFromInventory(getInventory().get(indexOfBackupWeapon));

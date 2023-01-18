@@ -7,9 +7,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.affection.AffectionManager;
-import game.items.GeneralBall;
-import game.items.Greatball;
-import game.items.Masterball;
+import game.items.Ball.GeneralBall;
+import game.items.Ball.Greatball;
+import game.items.Ball.Masterball;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 
