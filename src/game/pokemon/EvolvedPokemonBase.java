@@ -8,6 +8,7 @@ import game.affection.AffectionLevelPoint;
 import game.affection.AffectionManager;
 import game.behaviours.BehaviourPriority;
 import game.behaviours.EvolveBehaviour;
+import game.tools.Status;
 import game.weapon.BackupWeapons;
 
 import java.util.ArrayList;
@@ -28,14 +29,16 @@ public abstract class EvolvedPokemonBase extends PokemonBase{
      */
     public EvolvedPokemonBase(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        behaviours.put(BehaviourPriority.EVOLVING.getValue(), new EvolveBehaviour(this));
+        if (!this.hasCapability(Status.EVOLUTION_RESTRICTED)){
+            behaviours.put(BehaviourPriority.EVOLVING.getValue(), new EvolveBehaviour(this));
+        }
     }
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
 
-        if (AffectionManager.getInstance().getAffectionPoint(this) == AffectionLevelPoint.MAXIMUM.getValue()){
+        if (AffectionManager.getInstance().getAffectionPoint(this) == AffectionLevelPoint.MAXIMUM.getValue() && !this.hasCapability(Status.EVOLUTION_RESTRICTED)){
             actions.add(new EvolveAction(this, direction));
         }
 

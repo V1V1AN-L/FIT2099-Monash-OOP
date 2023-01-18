@@ -33,7 +33,7 @@ public class Torchic extends EvolvedPokemonBase implements TimePerception {
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Ember", ' ', 30, "sparks", 65, Element.FIRE, false);
+        return new BackupWeapons("Ember", ' ', 30, "sparks", 65, Element.FIRE);
     }
 
     @Override

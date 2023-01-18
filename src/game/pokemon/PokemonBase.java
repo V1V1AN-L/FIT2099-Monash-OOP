@@ -9,7 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
 import game.affection.AffectionManager;
 import game.behaviours.*;
-import game.items.Pokeball;
+import game.items.Ball.Pokeball;
+import game.time.TimePerceptionManager;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
 
@@ -23,6 +24,8 @@ import java.util.*;
  * Modified by: Zecan (Vivian) Liu
  */
 public abstract class PokemonBase extends Actor{
+    private final int existTurn = TimePerceptionManager.getInstance().getTurn();
+
     /**
      * List of behaviors that PokemonBase will do (the key that is the smallest is the first priority
      */
@@ -150,6 +153,10 @@ public abstract class PokemonBase extends Actor{
 
     public String getHp(){
         return printHp();
+    }
+
+    public int getExistTurn(){
+        return existTurn;
     }
 
 }

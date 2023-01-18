@@ -34,7 +34,7 @@ public class Mudkip extends EvolvedPokemonBase  implements TimePerception {
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Water Blast", ' ', 25, "burbles", 80, Element.WATER, false);
+        return new BackupWeapons("Water Blast", ' ', 25, "burbles", 80, Element.WATER);
     }
 
     @Override

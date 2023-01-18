@@ -15,10 +15,6 @@ import game.tools.Element;
  * @see AttackAction uses getWeapon() in the execute() method.
  */
 public class BackupWeapons extends WeaponItem{
-    private boolean specialEffect;
-
-    public UniqueWeaponSkill uniqueWeaponSkill;
-
     /**
      * Constructor
      *
@@ -28,18 +24,8 @@ public class BackupWeapons extends WeaponItem{
      * @param verb
      * @param hitRate
      */
-    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate, Element element, boolean specialEffect){
+    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate, Element element){
         super(name, displayChar, damage, verb, hitRate);
-        this.specialEffect = specialEffect;
         this.addCapability(element);
     }
-
-    public boolean hasSpecialEffect(){
-        return specialEffect;
-    }
-
-    public void setUniqueWeaponSkill(UniqueWeaponSkill skill){
-        uniqueWeaponSkill = skill;
-    }
-
 }

@@ -4,6 +4,7 @@ package game.pokemon;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
+import game.weapon.Thunder;
 
 import java.util.ArrayList;
 
@@ -13,14 +14,14 @@ import java.util.ArrayList;
  *
  * @author jordannathanael
  */
-public class Combusken extends EvolvedPokemonBase {
+public class Raichu extends PokemonBase{
+
     /**
      * Constructor.
      */
-    public Combusken(ArrayList<BackupWeapons> oldBackupWeapons) {
-        super("Combusken", 'K', 150);
-        this.addCapability(Element.FIRE);
-        this.addCapability(Element.FIGHTING);
+    public Raichu(ArrayList<BackupWeapons> oldBackupWeapons) {
+        super("Raichu", 'I', 250);
+        this.addCapability(Element.ELECTRIC);
         this.favAction = FavoriteAction.SINGING;
 
         for (BackupWeapons backupWeapon : oldBackupWeapons){
@@ -30,16 +31,11 @@ public class Combusken extends EvolvedPokemonBase {
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(10, "scratch");
+        return new IntrinsicWeapon(12, "double-scratch");
     }
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Blaze", ' ', 50, "flares", 80, Element.FIRE);
-    }
-
-    @Override
-    public PokemonBase evolve() {
-        return new Blaziken(this.backupWeapons) ;
+        return new Thunder();
     }
 }

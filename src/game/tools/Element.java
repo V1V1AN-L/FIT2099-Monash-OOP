@@ -32,7 +32,12 @@ public enum Element {
     /**
      * Ground element
      */
-    GROUND("Ground");
+    GROUND("Ground"),
+
+    /**
+     * Electric element
+     */
+    ELECTRIC("Electric");
 
     /**
      * The label of the element

@@ -1,8 +1,9 @@
-package game.items;
+package game.items.Ball;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.affection.AffectionLevelPoint;
 import game.affection.AffectionManager;
+import game.items.Ball.GeneralBall;
 import game.tools.Status;
 
 /**
@@ -12,7 +13,7 @@ import game.tools.Status;
  * @author zliu0207
  * Modified by: Jordan Nathanael
  */
-public class Masterball extends GeneralBall  {
+public class Masterball extends GeneralBall {
     /***
      * Constructor.
      */

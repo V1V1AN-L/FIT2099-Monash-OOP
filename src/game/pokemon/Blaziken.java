@@ -10,6 +10,7 @@ import game.items.WeaponEffect.Barren;
 import game.items.WeaponEffect.Fire;
 import game.tools.Element;
 import game.weapon.BackupWeapons;
+import game.weapon.FireSpin;
 import game.weapon.UniqueWeaponSkill;
 
 import java.util.ArrayList;
@@ -20,8 +21,7 @@ import java.util.ArrayList;
  *
  * @author jordannathanael
  */
-public class Blaziken extends PokemonBase implements UniqueWeaponSkill {
-    private final int FIRE_SPIN_DURATION = 2;
+public class Blaziken extends PokemonBase {
 
     /**
      * Constructor.
@@ -44,21 +44,6 @@ public class Blaziken extends PokemonBase implements UniqueWeaponSkill {
 
     @Override
     protected BackupWeapons backupWeapon(){
-        BackupWeapons weapon = new BackupWeapons("Fire Spin", ' ', 80, "tornadoes", 90, Element.FIRE, true);
-        weapon.setUniqueWeaponSkill(this::weaponEffect);
-        return weapon;
+        return new FireSpin();
     }
-
-    public void weaponEffect(Actor actor, GameMap map) {
-        // check surrounding
-        for (Exit exit : map.locationOf(actor).getExits()) {
-            if (exit.getDestination().getGround().canActorEnter(exit.getDestination().getActor())){
-                Location targetLoc = exit.getDestination();
-
-                targetLoc.addItem(new Fire(FIRE_SPIN_DURATION));
-            }
-
-        }
-    }
-
 }

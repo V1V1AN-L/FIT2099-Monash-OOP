@@ -4,11 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.action.EvolveAction;
-import game.affection.AffectionManager;
 import game.pokemon.EvolvedPokemonBase;
-import game.pokemon.PokemonBase;
 import game.time.TimePerceptionManager;
 
 /**
@@ -37,18 +34,17 @@ public class EvolveBehaviour implements Behaviour {
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        // FIXME this turn is overall turn, not turn specific to each pokemon lives
-        if (TimePerceptionManager.getInstance().getTurn() % EVOLVE_TURN == EVOLVE_TURN-1){
+        if ((TimePerceptionManager.getInstance().getTurn() - pokemon.getExistTurn()) == EVOLVE_TURN){
             //stay live for 5 turn
             // no one near the pokemon
-            Location nearbyActor = map.locationOf(actor);
+            Actor nearbyActor = null;
             for (Exit exit : map.locationOf(actor).getExits()) {
-                nearbyActor = exit.getDestination();
+                nearbyActor = exit.getDestination().getActor();
             }
 
             // only itself, do evolution
-            if (nearbyActor.getActor() == actor) {
-                new EvolveAction(pokemon, "here").execute(pokemon, map);
+            if (nearbyActor == null) {
+                return new EvolveAction(pokemon, "here");
             }
         }
 

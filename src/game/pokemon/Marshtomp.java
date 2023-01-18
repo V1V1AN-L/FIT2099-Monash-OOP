@@ -34,7 +34,7 @@ public class Marshtomp extends EvolvedPokemonBase {
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Water Gun", ' ', 40, "splashes", 95, Element.WATER, false);
+        return new BackupWeapons("Water Gun", ' ', 40, "splashes", 95, Element.WATER);
     }
 
     @Override

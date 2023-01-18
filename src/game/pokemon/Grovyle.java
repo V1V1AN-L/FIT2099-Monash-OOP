@@ -34,7 +34,7 @@ public class Grovyle extends EvolvedPokemonBase {
 
     @Override
     protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Leaf Storm", ' ', 75, "whips", 65, Element.GRASS, false);
+        return new BackupWeapons("Leaf Storm", ' ', 75, "whips", 65, Element.GRASS);
     }
 
     @Override
