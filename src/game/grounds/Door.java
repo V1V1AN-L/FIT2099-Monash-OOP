@@ -9,15 +9,12 @@ import game.action.TeleportAction;
 import game.tools.Status;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Door extends Ground {
 
-    private static Set<Location> doorLocationSet = new HashSet<>();
 
-    private Location location;
+    private List<Location> doorLocationList = new ArrayList<>();
 
     private Location anotherDoor;
 
@@ -25,49 +22,33 @@ public class Door extends Ground {
      * Constructor.
      *
      */
-    public Door() {
+    public Door(Location anotherDoor) {
         super('=');
         this.addCapability(Status.NONCONVERTIBLE);
-    }
-
-    public Location getAnotherDoor(){
-        for (Location doorLocation: doorLocationSet){
-            if (doorLocation != this.location){
-                anotherDoor =  doorLocation;
-            }
-        }
-        return anotherDoor;
-    }
-
-    @Override
-    public void tick(Location location) {
-        this.location = location;
-        doorLocationSet.add(location);
+        this.anotherDoor = anotherDoor;
     }
 
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
-        if(this.location.containsAnActor()&& this.location.getActor().hasCapability(Status.ENTERABLE)){
-            if(this.location.y()==5){
+        if(location.containsAnActor()&& location.getActor().hasCapability(Status.ENTERABLE)){
+            if(location.y()==5){
                 direction = "Pallet Town";
             }else{
                 direction = "Pokermon Center";
             }
-            return new ActionList(new TeleportAction(getAnotherDoor(),direction));
+            return new ActionList(new TeleportAction(anotherDoor,direction));
         }else{
             return new ActionList();
         }
     }
 
-    public Set<Location> getDoorLocationSet() {
-        return doorLocationSet;
-    }
-
-    public void setDoorLocationSet(Set<Location> doorLocationSet) {
-        this.doorLocationSet = doorLocationSet;
-    }
-
     public void setAnotherDoor(Location anotherDoor) {
         this.anotherDoor = anotherDoor;
+    }
+    public List<Location> getDoorLocationList() {
+        return doorLocationList;
+    }
+    public Location getAnotherDoor() {
+        return anotherDoor;
     }
 }

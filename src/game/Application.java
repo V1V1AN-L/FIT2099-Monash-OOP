@@ -29,7 +29,7 @@ public class Application {
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
                 new Floor(), new Tree(),
-                new Lava(), new Puddle(),new Crater(), new Waterfall(), new Hay(),new Door());
+                new Lava(), new Puddle(),new Crater(), new Waterfall(), new Hay());
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
@@ -38,7 +38,7 @@ public class Application {
                 "........................................................^^^",
                 ".........................................................^^",
                 "............................###..............T,...........^",
-                "..................,T........#=#............................",
+                "..................,T........#.#............................",
                 "...T.......~...............................................",
                 "...~~~~~~~~................................................",
                 "....~~~~~.....................................C............",
@@ -52,7 +52,7 @@ public class Application {
                 "#______....._____#",
                 "#________________#",
                 "#________________#",
-                "#######_=_########");
+                "#######_._########");
 
         GameMap gameMap = new GameMap(groundFactory, map);
         GameMap pokeCenterMap = new GameMap(groundFactory, pokeCenter);
@@ -72,6 +72,8 @@ public class Application {
         Actor torchic = new Torchic();
         gameMap.at(33, 10).addActor(torchic);
 
+        gameMap.at(29,6).setGround(new Door(pokeCenterMap.at(8,5)));
+        pokeCenterMap.at(8,5).setGround(new Door(gameMap.at(29,6)));
 
         world.run();
 
