@@ -7,6 +7,9 @@ Team members:
 
 31893902 Jordan Nathanael jnat0012@student.monash.edu
 
+33243271 Aashlesha Gaur agau0008@student.monash.edu
+
+
 Link to contribution logs spreadsheet: [https://docs.google.com/spreadsheets/d/1QeySXoTWwXk9gglpJQzY4sfR8xn8tGG2epjmaYE85BM/edit?usp=sharing]
 
 Design Docs for A1 is under docs.DesignDocs.A1 Design Docs Directory which contains REQ 1&3&5 UMLs and design rationale (Author: Zecan Liu).
@@ -80,4 +83,8 @@ Floor and Wall classes can't be coverted to another ground, therefore, I created
 
 
 ### REQ 6
-![alt text](./assets/UMLDiagram_REQ6.png)
+![alt text](docs/DesignDocs/UML_REQ6_AashleshaGaur.png)
+- Compared to A1, I have made a few modifications to make the implementation less complex.
+- Before, I had decided to include a 'ShopHelper' that would interact with the player's inventory. However, while implementing this code I realised this was not actually necessary because the ShopKeeper has an unlimited inventory which means I would not need the ShopHelper class to manage different inventories.
+- ShopKeeper and ProfessorOak are both now singleton classes because it is practical for them to only have one instance of themselves because there can only be one ShopKeeper and ProfessorOak.
+- The BuyAction class has been modified to be an abstract class because there can be multiple buy actions and the BuyAction class itself is not specfic. The BuyAction class does not need any objects created from it which is why it is made to be abstract.

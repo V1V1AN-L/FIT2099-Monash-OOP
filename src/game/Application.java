@@ -1,17 +1,21 @@
 package game;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
+import game.actors.ProfessorOak;
+import game.actors.ShopKeeper;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.affection.AffectionManager;
 import game.grounds.*;
-import game.pokemon.Mudkip;
-import game.pokemon.PokemonBase;
+import game.items.Candy;
 import game.pokemon.Torchic;
 
 /**
@@ -68,12 +72,17 @@ public class Application {
         world.addPlayer(ash, gameMap.at(32, 10));
         am.registerTrainer(ash);
 
+        IntStream.range(0, 20).forEach(i -> ash.addItemToInventory(new Candy()));
+
         //Add first pokemon - Torchic
         Actor torchic = new Torchic();
         gameMap.at(33, 10).addActor(torchic);
 
-        gameMap.at(29,6).setGround(new Door(pokeCenterMap.at(8,5)));
-        pokeCenterMap.at(8,5).setGround(new Door(gameMap.at(29,6)));
+        Actor professorOak = ProfessorOak.getInstance();
+        gameMap.at(25,7).addActor(professorOak);
+
+        Actor shopkeeper = new ShopKeeper();
+        gameMap.at(25,6).addActor(shopkeeper);
 
         world.run();
 
