@@ -16,10 +16,10 @@ public class Surf extends BackupWeapons{
     @Override
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
-        for (Exit exit : currentLocation.getExits()) {
-            for (Exit exit2 : exit.getDestination().getExits()){
-                if (exit2.getDestination().getGround().canActorEnter(exit2.getDestination().getActor())){
-                    Location targetLoc = exit2.getDestination();
+        for (Exit inner : currentLocation.getExits()) {
+            for (Exit outer : inner.getDestination().getExits()){
+                if (outer.getDestination().getGround().canActorEnter(outer.getDestination().getActor())){
+                    Location targetLoc = outer.getDestination();
 
                     targetLoc.addItem(new Flood(SURF_DURATION));
                 }
