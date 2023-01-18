@@ -52,7 +52,6 @@ public class Torchic extends EvolvedPokemonBase implements TimePerception {
         return new Combusken(backupWeapons);
     }
 
-    //FIXME can I change this instead of duplicating this function over and over again
     private void removeDeadPokemon(){
         if(!isConscious()){
             TimePerceptionManager.getInstance().cleanUp(this);

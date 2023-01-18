@@ -19,7 +19,7 @@ public class Shock extends WeaponEffectItem {
 
         if (location.getActor() != null && location.getGround().canActorEnter(location.getActor())) {
             // will get hurt and can't move
-            if (!ElementsHelper.hasAnySimilarElements(location.getActor(), this.findCapabilitiesByType(Element.class))) {
+            if (! location.getActor().hasCapability(Status.IMMUNE)){
                 location.getActor().hurt(DAMAGE);
                 location.getActor().addCapability(Status.MOVEMENT_RESTRICTED);
                 System.out.println(location.getActor() + " get hurt by " + this + ", -" + DAMAGE + " HP");
@@ -31,6 +31,8 @@ public class Shock extends WeaponEffectItem {
     @Override
     protected void cleanUp(Location loc) {
         super.cleanUp(loc);
-        loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+        if (loc.getActor().hasCapability(Status.MOVEMENT_RESTRICTED)){
+            loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+        }
     }
 }
