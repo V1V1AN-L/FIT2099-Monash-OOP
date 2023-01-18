@@ -37,7 +37,7 @@ public class Application {
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
-                "............T,.................................T,..^^^^^^^^",
+                ".C..........T,.................................T,..^^^^^^^^",
                 ".....................................................^^^^^^",
                 "........................................................^^^",
                 ".........................................................^^",
@@ -69,14 +69,13 @@ public class Application {
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
-        world.addPlayer(ash, gameMap.at(32, 10));
+        world.addPlayer(ash, gameMap.at(0, 0));
         am.registerTrainer(ash);
-
-        IntStream.range(0, 20).forEach(i -> ash.addItemToInventory(new Candy()));
 
         //Add first pokemon - Torchic
         Actor torchic = new Torchic();
-        gameMap.at(33, 10).addActor(torchic);
+        gameMap.at(1, 1).addActor(torchic);
+        AffectionManager.getInstance().modifyAffection(torchic, 100);
 
         Actor professorOak = ProfessorOak.getInstance();
         gameMap.at(25,7).addActor(professorOak);

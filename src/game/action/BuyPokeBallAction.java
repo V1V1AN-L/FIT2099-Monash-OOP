@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Player;
 import game.items.Candy;
-import game.items.Pokeball;
+import game.items.ball.Pokeball;
 
 public class BuyPokeBallAction extends BuyAction {
 

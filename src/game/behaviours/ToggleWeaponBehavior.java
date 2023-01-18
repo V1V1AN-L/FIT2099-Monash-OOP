@@ -36,7 +36,7 @@ public class ToggleWeaponBehavior implements Behaviour {
         // check the actor ground that it is standing on.
         boolean conditionMet = ElementsHelper.hasAnySimilarElements(map.locationOf(actor).getGround(), actor.findCapabilitiesByType(Element.class));
 
-        pokemon.toggleWeapon(conditionMet, actor, map);
+        pokemon.toggleWeapon(conditionMet);
 
         return null; // go to next behavior
     }

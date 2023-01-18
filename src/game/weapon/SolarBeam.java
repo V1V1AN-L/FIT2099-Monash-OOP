@@ -3,7 +3,7 @@ package game.weapon;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.items.WeaponEffect.Barren;
+import game.items.weaponeffect.Barren;
 import game.tools.Element;
 
 public class SolarBeam extends BackupWeapons{

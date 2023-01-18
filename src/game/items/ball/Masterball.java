@@ -1,9 +1,8 @@
-package game.items.Ball;
+package game.items.ball;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import game.affection.AffectionLevelPoint;
 import game.affection.AffectionManager;
-import game.items.Ball.GeneralBall;
 import game.tools.Status;
 
 /**

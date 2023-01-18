@@ -1,4 +1,4 @@
-package game.items.WeaponEffect;
+package game.items.weaponeffect;
 
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;

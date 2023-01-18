@@ -7,8 +7,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.affection.AffectionManager;
 import game.items.Candy;
-import game.items.Greatball;
-import game.items.Masterball;
+import game.items.ball.Greatball;
+import game.items.ball.Masterball;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
@@ -53,16 +53,6 @@ public class Player extends Actor {
 
 		// TimePerceptionManager runs here
 		TimePerceptionManager.getInstance().run();
-
-		for (int y : map.getYRange()) {
-			for (int x : map.getXRange()) {
-				if((map.at(x, y).getActor() != null) && map.at(x, y).getActor().isConscious() == false){
-					map.removeActor(map.at(x, y).getActor());
-				}
-			}
-		}
-
-
 
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)

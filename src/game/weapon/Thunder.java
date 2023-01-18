@@ -3,7 +3,7 @@ package game.weapon;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
-import game.items.WeaponEffect.Shock;
+import game.items.weaponeffect.Shock;
 import game.tools.Element;
 
 import java.util.Random;

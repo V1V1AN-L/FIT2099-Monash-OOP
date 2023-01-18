@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.action.*;
 import game.affection.AffectionManager;
 import game.behaviours.*;
-import game.items.Ball.Pokeball;
+import game.items.ball.Pokeball;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 import game.weapon.BackupWeapons;
@@ -106,6 +106,11 @@ public abstract class PokemonBase extends Actor{
             if (action != null)
                 return action;
         }
+
+        if (! isConscious()){
+            map.removeActor(this);
+        }
+
         return new DoNothingAction();
     }
 
@@ -115,7 +120,7 @@ public abstract class PokemonBase extends Actor{
      *
      * @param isEquipping boolean expression whether the condition is met or not
      */
-    public void toggleWeapon(boolean isEquipping, Actor actor, GameMap map){
+    public void toggleWeapon(boolean isEquipping){
         Random random = new Random();
         if (isEquipping){
             BackupWeapons weapon = backupWeapons.get(random.nextInt(backupWeapons.size()));

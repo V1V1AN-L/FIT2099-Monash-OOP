@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.affection.AffectionManager;
 import game.items.*;
-import game.items.Ball.GeneralBall;
+import game.items.ball.GeneralBall;
 import game.pokemon.PokemonBase;
 
 /**

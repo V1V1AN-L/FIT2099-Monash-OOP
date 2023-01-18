@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Door extends Ground {
-
-
-    private List<Location> doorLocationList = new ArrayList<>();
-
     private Location anotherDoor;
 
     /**
@@ -44,9 +40,6 @@ public class Door extends Ground {
 
     public void setAnotherDoor(Location anotherDoor) {
         this.anotherDoor = anotherDoor;
-    }
-    public List<Location> getDoorLocationList() {
-        return doorLocationList;
     }
     public Location getAnotherDoor() {
         return anotherDoor;
