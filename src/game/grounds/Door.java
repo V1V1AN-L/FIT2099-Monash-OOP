@@ -15,15 +15,23 @@ public class Door extends Ground {
     private Location anotherDoor;
 
     /**
-     * Constructor.
      *
+     * @param anotherDoor
      */
+
     public Door(Location anotherDoor) {
         super('=');
         this.addCapability(Status.NONCONVERTIBLE);
         this.anotherDoor = anotherDoor;
     }
 
+    /**
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         if(location.containsAnActor()&& location.getActor().hasCapability(Status.ENTERABLE)){
@@ -38,9 +46,19 @@ public class Door extends Ground {
         }
     }
 
+    /**
+     *
+     * @param anotherDoor
+     */
+
     public void setAnotherDoor(Location anotherDoor) {
         this.anotherDoor = anotherDoor;
     }
+
+    /**
+     *
+     * @return anotherDoor
+     */
     public Location getAnotherDoor() {
         return anotherDoor;
     }

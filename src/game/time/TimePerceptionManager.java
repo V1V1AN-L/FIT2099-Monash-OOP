@@ -70,13 +70,8 @@ public class TimePerceptionManager {
     private TimePerceptionManager() {
         timePerceptionList = new ArrayList<>();
         turn = 0;
-        timePeriodString.put(TimePeriod.DAWN,"Dawn");
         timePeriodString.put(TimePeriod.DAY,"Day");
-        timePeriodString.put(TimePeriod.DUSK,"Dusk");
         timePeriodString.put(TimePeriod.NIGHT,"Night");
-        timePeriodString.put(TimePeriod.MIDNIGHT,"Midnight");
-        timePeriodString.put(TimePeriod.SOLARECLIPSE,"Solar eclipse");
-        timePeriodString.put(TimePeriod.NEWMOON,"New moon");
     }
 
     /**
@@ -87,35 +82,13 @@ public class TimePerceptionManager {
      */
     public void run() {
         for (TimePerception each: new ArrayList<TimePerception>(this.getTimePerceptionList())){
-            if (turn%7 == 0 ){
-                shift = TimePeriod.DAWN;
-                each.dawnEffect();
-
-            } else if (turn%7 == 1) {
+            if ((turn/5) %2 == 0 ){
                 shift = TimePeriod.DAY;
                 each.dayEffect();
 
-            } else if (turn%7 == 2) {
-                shift = TimePeriod.DUSK;
-                each.duskEffect();
-
-            } else if (turn%7 == 3) {
+            } else {
                 shift = TimePeriod.NIGHT;
                 each.nightEffect();
-
-            }else if (turn%7 == 4) {
-                shift = TimePeriod.MIDNIGHT;
-                each.midnightEffect();
-
-            }
-            else if (turn%7 == 5) {
-                shift = TimePeriod.SOLARECLIPSE;
-                each.solarEclipse();
-
-            }
-            else {
-                shift = TimePeriod.NEWMOON;
-                each.newMoon();
             }
         }
         display.println("It's a "+ timePeriodString.get(shift)+"-time (turn" + turn + ')');

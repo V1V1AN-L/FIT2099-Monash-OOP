@@ -74,22 +74,6 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
         }
     }
 
-    @Override
-    public void midnightEffect() {
-        if(this.location!= null && this.location.getItems()!= null){
-            for(Item each: new ArrayList<>(this.location.getItems())){
-                this.location.removeItem(each);
-            }
-        }
-    }
-
-    @Override
-    public void duskEffect() {
-        if (Math.random()<=0.1 && this.location != null)  {
-            destroyGround(this.location);
-            TimePerceptionManager.getInstance().cleanUp(this);
-        }
-    }
 
     /**
      * Spawning a new pokemon

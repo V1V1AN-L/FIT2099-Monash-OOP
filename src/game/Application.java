@@ -69,7 +69,7 @@ public class Application {
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
-        world.addPlayer(ash, gameMap.at(0, 0));
+        world.addPlayer(ash, gameMap.at(26, 8));
         am.registerTrainer(ash);
 
         //Add first pokemon - Torchic
@@ -81,7 +81,7 @@ public class Application {
         gameMap.at(25,7).addActor(professorOak);
 
         Actor shopkeeper = new ShopKeeper();
-        gameMap.at(25,6).addActor(shopkeeper);
+        pokeCenterMap.at(9,2).addActor(shopkeeper);
 
         gameMap.at(29,6).setGround(new Door(pokeCenterMap.at(8,5)));
         pokeCenterMap.at(8,5).setGround(new Door(gameMap.at(29,6)));

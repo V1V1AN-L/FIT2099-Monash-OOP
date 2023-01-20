@@ -5,12 +5,7 @@ package game.time;
  * Two instances as day and night.
  */
 public enum TimePeriod {
-    DAWN,
     DAY,
-    DUSK,
     NIGHT,
-    MIDNIGHT,
 
-    SOLARECLIPSE,
-    NEWMOON
 }
