@@ -165,7 +165,7 @@ Pokelocator aids Ash, the Player to teleport to a certain Pokemon and continue t
 ![alt text](docs/DesignDocs/Fit2099ASS3.drawioAashlesha.png)
 ---
 
-
+### Sequence Diagram
 
 ![alt text](assets/Assignment%203/Sequence%20diagram.png)
 
