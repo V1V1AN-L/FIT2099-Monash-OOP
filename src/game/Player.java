@@ -7,6 +7,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.affection.AffectionManager;
 import game.items.Candy;
+<<<<<<< HEAD
+
+=======
+>>>>>>> e6adad38f2056399c05c5d6fcacc0402ec45e172
 import game.items.PokeLocator;
 import game.items.ball.Greatball;
 import game.items.ball.Masterball;
@@ -26,7 +30,7 @@ import java.util.Set;
  * Created by:
  * @author Riordan D. Alfredo
  * Modified by:
- * Zecan Liu & Jordan Nathanael
+ * Zecan Liu & Jordan Nathanael & Aashlesha Gaur
  *
  */
 public class Player extends Actor {
@@ -49,7 +53,13 @@ public class Player extends Actor {
 
 		addItemToInventory(new Masterball());
 		addItemToInventory(new Greatball());
+<<<<<<< HEAD
+
 		addItemToInventory(new PokeLocator());
+
+=======
+		addItemToInventory(new PokeLocator());
+>>>>>>> e6adad38f2056399c05c5d6fcacc0402ec45e172
 		addItemToInventory(new ThunderStone());
 		addItemToInventory(new WaterStone());
 	}
