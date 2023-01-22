@@ -11,6 +11,7 @@ import game.affection.AffectionManager;
 import game.items.Candy;
 import game.items.Greatball;
 import game.items.Masterball;
+import game.items.PokeLocator;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 
@@ -44,6 +45,7 @@ public class Player extends Actor {
 
 		addItemToInventory(new Masterball());
 		addItemToInventory(new Greatball());
+		addItemToInventory(new PokeLocator());
 	}
 
 	@Override

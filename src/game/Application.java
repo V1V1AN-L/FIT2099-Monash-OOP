@@ -1,12 +1,10 @@
 package game;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import game.actors.ProfessorOak;
 import game.actors.ShopKeeper;
 import edu.monash.fit2099.engine.displays.Display;
