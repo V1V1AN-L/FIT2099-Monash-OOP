@@ -12,12 +12,12 @@ import edu.monash.fit2099.engine.positions.*;
  * @author agau0008
  */
 
-public class IntantTransmissionAction extends Action {
+public class InstantTransmissionAction extends Action {
 
     private final Actor target;
     private final String targetName;
 
-    public IntantTransmissionAction(Actor target){
+    public InstantTransmissionAction(Actor target){
         super();
         this.target = target;
         this.targetName = target.getClass().getSimpleName();
