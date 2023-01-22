@@ -15,8 +15,8 @@ import game.time.TimePerceptionManager;
  * @author jordannathanael
  */
 public class EvolveBehaviour implements Behaviour {
-    public static final int EVOLVE_BEHAVIOUR_PRIORITY = BehaviourPriority.TOGGLING.getValue();
-    public static final int EVOLVE_TURN = 5;
+    private static final int EVOLVE_BEHAVIOUR_PRIORITY = BehaviourPriority.TOGGLING.getValue();
+    private static final int EVOLVE_TURN = 5;
 
     /**
      * The pokemon that will evolve
