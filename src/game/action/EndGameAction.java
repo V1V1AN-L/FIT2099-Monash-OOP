@@ -44,6 +44,7 @@ public class EndGameAction extends Action {
 //                .map(GeneralBall::getStoredPokemon)
 //                .filter(Objects::nonNull)
 //                .toList();
+        // unknown error return randomly- Otherwise the program won't run
         return new Torchic().isConscious();
     }
 
