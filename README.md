@@ -113,8 +113,33 @@ There is also a new concrete class that inherits from SpawningGround that will s
 
 
 
-### REQ 4 (Creative Mode)
-![alt text](./assets/UMLDiagram_REQ4_A3.png)
+
+
+# Requirement 4  (Creative Mode)
+
+**Title**:
+Pokelocator aids Ash, the Player to teleport to a certain Pokemon and continue the game.
+
+**Description**:
+- The Pokelocator is added to the inventory, and has actions which allow it to instantly transport to either Mudkip, Treecko or Torchic
+- InstantTransmissionAction, check where the current location of Ash is and which Pokemon Ash wants to go to, if that particular pokemon is present on the map (determined if their char is present or not). If the specified pokemon is there it will move Ash to the closest adjacent position. 
+- However, if the pokemon is not present a message will be displayed stating '(specified pokemon ) is not on the map yet!'.
+- If the pokemon exists but there is no location vacant (i.e, pokemon is surrounded by other actors or pokemon) then Ash will not be able to go next to it.
+
+**Explanation why it adheres to SOLID principles** (WHY):
+- InstantTransmissionAction class extends Action and adheres to the Single Responsibilty Principle (SRP) as it's only purpose is move the Player to the pokemon.
+- InstantTransmissionAction class aligns with DRY principle because we did not create new classes on that action for each Pokemon.
+- Open close principle was not violated because we did not have to modify the parent class Action and Item while adding InstantTransmissionAction and PokeLocator respectively.
+
+| Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------- |-------------------------------------------------------------------------------------------------------------------------------|
+| Must use at least two (2) classes from the engine package                                                               | _Use two classes from engine package<br/> InstantTransmissionAction class extends Action and PokeLocator class extends Item._ |
+| Must use/re-use at least one(1) existing feature (either from assignment 2 and/or fixed requirements from assignment 3) |                                                                                                                               |
+| Must use existing or create new abstractions (e.g., abstract or interface, apart from the engine code)                  |                                                                                                                               |
+| Must use existing or create new capabilities                                                                            | Using add action method and addItemtoInventory method                                                                         |
+
+![alt text](docs/DesignDocs/Fit2099ASS3.drawioAashlesha.png)
+---
 
 ## Design Rationale - Assignment 2 
 

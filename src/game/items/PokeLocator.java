@@ -6,7 +6,14 @@ import game.pokemon.Mudkip;
 import game.pokemon.Torchic;
 import game.pokemon.Treecko;
 
-public class PokeLocator extends Item {
+/**
+ * PokeLocator is an item/device that the Player uses.
+ * Created by: Aashlesha Gaur
+ *
+ * @author agau0008
+ */
+
+public  class PokeLocator extends Item {
 
     public PokeLocator() {
         super("PokeLocator", '!' ,false);
