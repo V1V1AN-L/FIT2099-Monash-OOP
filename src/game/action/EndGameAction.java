@@ -2,14 +2,20 @@ package game.action;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.GeneralBall;
 import game.pokemon.Mudkip;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
 import game.pokemon.Treecko;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * EndGameAction concrete class that informs
  * the player if they have met the requirements to end the game
@@ -28,10 +34,17 @@ public class EndGameAction extends Action {
         return "I want to see 3 different pokemon Ash! Gotta catch em all!";
     }
 
-    private boolean isAllPokemonCaptured(Actor actor) {
+    private  boolean isAllPokemonCaptured(Actor actor) {
         //Checks if Actor (Player, Ash) has captured all three pokemons of diffeent element type
         List<PokemonBase> allPokemons = List.of(new Torchic(), new Mudkip(),new Treecko());
-        return actor.getInventory().containsAll(allPokemons);
+        List<PokemonBase> captured = actor.getInventory()
+                .stream()
+                .filter(t -> t instanceof GeneralBall)
+                .map(t -> ((GeneralBall) t))
+                .map(GeneralBall::getStoredPokemon)
+                .filter(Objects::nonNull)
+                .toList();
+        return captured.containsAll(allPokemons);
     }
 
     @Override
