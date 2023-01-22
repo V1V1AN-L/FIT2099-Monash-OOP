@@ -12,11 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Door extends Ground {
+    /**
+     * this attribute is the location of the teleport destination location
+     */
     private Location anotherDoor;
 
     /**
-     *
      * @param anotherDoor
+     * Door can't be expanded by other grounds.
      */
 
     public Door(Location anotherDoor) {
@@ -30,7 +33,7 @@ public class Door extends Ground {
      * @param actor the Actor acting
      * @param location the current Location
      * @param direction the direction of the Ground from the Actor
-     * @return
+     * @return empty ActionList or Teleport Action
      */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {

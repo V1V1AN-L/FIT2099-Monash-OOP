@@ -19,7 +19,9 @@ We were in different groups during A1.
 ## Design Rationale - Assignment 3
 
 ### REQ 1
-![alt text](./assets/UMLDiagram_REQ1_A3.png)
+![alt text](assets/Assignment%203/UMLDiagram_REQ1_A3.png)
+
+The classes in blue are from A2. New classes created for this assignment are in white background.
 
 This diagram represents an Evolution feature especially for Torchic's evolution line.
 
@@ -36,7 +38,29 @@ There is also a new Behavior named EvolveBehavior because this concrete class is
 Besides that, there is also a new Action named EvolveAction that inherits from Action abstract class which aligns the Open-Closed Principle and SRP.
 
 ### REQ 2
-![alt text](./assets/UMLDiagram_REQ2_A3.png)
+![alt text](assets/Assignment%203/UMLDiagram_REQ2_A3.png)
+
+The classes shown in yellow are the new classes for this assignment.
+
+Door class extends the  abstract Ground class. 
+
+It applies the Single Responsibility Principle as the Door class is another type of ground which can be used to teleport a player.  
+However, the action of teleporting a player is happened in another class. 
+
+I have created TeleportAction class which extends the MoveActorAction class. 
+The reason why to create this extra class is because MoveActorAction is a class inside engine package which does not allowed to modify.
+However, the description for this action in the console needs to different from the MoveActorAction. So the menuDescription method was override in this class.
+TeleportAction object was instantiated inside the Door class when a player is stepping on the Door location. 
+Again, this follows the SRP principle as the teleport action was separated from the Door class.  
+Door class has association relationship with Location class as in the constructor of Door class, one door should know the other door's location in order to teleport. 
+
+Alternatively, I created a HashSet before which stored the locations of the two door objects. 
+This approach has been abandoned because it only worked if there are exactly two door objects on the maps. 
+If there are three door objects on the map, then it won't know which location should teleport the player. 
+
+However, the current approach is not perfect. 
+Although it eliminates the drawback of previous approach, it requires to manually create the door class object and manually type in the coordinate of the door location in the Application file. 
+From the design prospective, it follows the design principles as it decrease the dependency between classes.
 
 ### REQ 3 (Creative Mode)
 **Title**:
@@ -98,7 +122,7 @@ _Evolution with a particular Item and Extra Pokemon Evolution with their own wea
 ---
 
 #### UML DIAGRAM
-![alt text](./assets/UMLDiagram_REQ3_A3.png)
+![alt text](assets/Assignment%203/UMLDiagram_REQ3_A3.png)
 The diagram represents an object-oriented system for a feature where evolution can be done if the player has a specific item to help the pokemon to evolve.
 
 The new pokemons that have a restriction for the evolution process are Pikachu and Eevee. I created RestrictedEvolvedPokemonBase abstract class that inherits from EvolvedPokemonBase because to avoid repetitions (DRY) and to align with Single-Responsibility Principle where RestrictedEvolvedPokemonBase has a similarity where that need an attribute to save the name of the item for the evolution.
@@ -116,10 +140,15 @@ There is also a new concrete class that inherits from SpawningGround that will s
 ### REQ 4 (Creative Mode)
 ![alt text](./assets/UMLDiagram_REQ4_A3.png)
 
+
+
+![alt text](assets/Assignment%203/Sequence%20diagram.png)
+
+
 ## Design Rationale - Assignment 2 
 
 ### REQ 1
-![alt text](./assets/UMLDiagram_REQ1.png)
+![alt text](assets/Assignment%202/UMLDiagram_REQ1.png)
 Based on A1 feedback, I have deleted the unnecessary relationships between abstract **SpawningGround** class and **Exit** class. Now **SpawningGround** class has a dependency relationship with **Location** class as **Waterfall** and **Tree** need to check surrounding locations in order to spawn Pokemons. 
 
 Also I have corrected the relationship between **Crater** & **Waterfall** & **Tree** and Pokemon classes. Instead of having association relationship with **PokemonBase**, the actual spawning ground class is now having the dependency relationship with actual spawned Pokemon class. 
@@ -127,7 +156,7 @@ Also I have corrected the relationship between **Crater** & **Waterfall** & **Tr
 
 
 ### REQ 2
-![alt text](./assets/UMLDiagram_REQ2.png)
+![alt text](assets/Assignment%202/UMLDiagram_REQ2.png)
 
 The diagram represents an object-oriented system for part of the pokemon game that focuses only for Pokemon criteria only. This diagram has three concrete classes that represent pokemon that exist inside the game.
 
@@ -140,7 +169,7 @@ One of the behaviors that inherits this interface is AttackBehavior class. Each 
 SpecialWeapon inherits from WeaponItem abstract class which also inherits from Item abstract class. This way of design ensures the robustness of polymorphism which aligns with the Liskov Substitution Principle.
 
 ### REQ 3
-![alt text](./assets/UMLDiagram_REQ3.png)
+![alt text](assets/Assignment%202/UMLDiagram_REQ3.png)
 
 Based on A1 feedback I have corrected the multiplicity between **PokemonBase** and **Generalball** class.
 
@@ -151,7 +180,7 @@ Each GeneralBall will have dependency with CatchAction and SummonAction because 
 Another alternative to do this is by using design pattern so later the catchAction will not be hindered like this.
 
 ### REQ 4
-![alt text](./assets/UMLDiagram_REQ4.png)
+![alt text](assets/Assignment%202/UMLDiagram_REQ4.png)
 
 The diagram represents an object-oriented system for interactions within the game. This diagram focuses on game.action and game.affection package.
 
@@ -166,7 +195,7 @@ AffectionManager applies a singleton design pattern because it will make things 
 AffectionManager have a dependency towards AffectionLevelPoint because it will manage the pokemon whether it is categorised into which Affection Level Point.
 
 ### REQ 5
-![alt text](./assets/UMLDiagram_REQ5.png)
+![alt text](assets/Assignment%202/UMLDiagram_REQ5.png)
 Compared to A1, this design is more comprehensive for ground classes in order to implement the logics of time. 
 
 There are three different grounds and Pokemons will experience the pass of time. The logics for pokemons are relatively simple. 
