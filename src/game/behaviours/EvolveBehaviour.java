@@ -21,7 +21,7 @@ public class EvolveBehaviour implements Behaviour {
     /**
      * The pokemon that will evolve
      */
-    EvolvedPokemonBase pokemon;
+    private EvolvedPokemonBase pokemon;
 
     /**
      * Constructor.
