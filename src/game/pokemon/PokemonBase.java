@@ -12,7 +12,7 @@ import game.behaviours.*;
 import game.items.ball.Pokeball;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 import java.util.*;
 
@@ -40,7 +40,7 @@ public abstract class PokemonBase extends Actor{
     /**
      * SpecialWeapons that can be used by the pokemonBase if the condition is met
      */
-    protected ArrayList<BackupWeapons> backupWeapons = new ArrayList<>() ;
+    protected ArrayList<BackupWeapon> backupWeapons = new ArrayList<>() ;
 
 
     /**
@@ -123,7 +123,7 @@ public abstract class PokemonBase extends Actor{
     public void toggleWeapon(boolean isEquipping){
         Random random = new Random();
         if (isEquipping){
-            BackupWeapons weapon = backupWeapons.get(random.nextInt(backupWeapons.size()));
+            BackupWeapon weapon = backupWeapons.get(random.nextInt(backupWeapons.size()));
 
             // -1 because nextInt is inclusive which what we want is exclusive
             addItemToInventory(weapon);
@@ -149,7 +149,7 @@ public abstract class PokemonBase extends Actor{
      *
      * @return
      */
-    protected abstract BackupWeapons backupWeapon();
+    protected abstract BackupWeapon backupWeapon();
 
     public String getHp(){
         return printHp();

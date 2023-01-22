@@ -5,9 +5,23 @@ import game.tools.Element;
 import game.tools.ElementsHelper;
 import game.tools.Status;
 
+/**
+ * Concrete class of Barren Effect
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
 public class Barren extends WeaponEffectItem {
+    /**
+     * Damage per turn
+     */
     private static final int DAMAGE = 2;
 
+    /**
+     * Constructor
+     *
+     * @param duration of this WeaponEffect
+     */
     public Barren(int duration) {
         super("Barren", '\'', duration);
         this.addCapability(Element.GRASS);
@@ -31,7 +45,7 @@ public class Barren extends WeaponEffectItem {
             if (ElementsHelper.hasAnySimilarElements(location.getActor(), this.findCapabilitiesByType(Element.class))){
                 if (! location.getActor().hasCapability(Status.IMMUNE)) {
                     location.getActor().heal(DAMAGE);
-                    System.out.println(location.getActor() + " get heal by" + this + ", +" + DAMAGE + " HP");
+                    System.out.println(location.getActor() + " get heal by " + this + ", +" + DAMAGE + " HP");
                 }
             }
         }

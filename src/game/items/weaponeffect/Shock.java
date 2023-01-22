@@ -5,9 +5,23 @@ import game.tools.Element;
 import game.tools.ElementsHelper;
 import game.tools.Status;
 
+/**
+ * Concrete class of Shock Effect
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
 public class Shock extends WeaponEffectItem {
+    /**
+     * Damage per turn
+     */
     private static final int DAMAGE = 15;
 
+    /**
+     * Constructor.
+     *
+     * @param duration of this weaponEffect
+     */
     public Shock(int duration) {
         super("Shock", '!', duration);
         this.addCapability(Element.ELECTRIC);
@@ -31,8 +45,10 @@ public class Shock extends WeaponEffectItem {
     @Override
     protected void cleanUp(Location loc) {
         super.cleanUp(loc);
-        if (loc.getActor().hasCapability(Status.MOVEMENT_RESTRICTED)){
-            loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+        if (loc.containsAnActor()) {
+            if (loc.getActor().hasCapability(Status.MOVEMENT_RESTRICTED)) {
+                loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+            }
         }
     }
 }

@@ -37,7 +37,12 @@ public enum Element {
     /**
      * Electric element
      */
-    ELECTRIC("Electric");
+    ELECTRIC("Electric"),
+
+    /**
+     * Normal element
+     */
+    NORMAL("Normal");
 
     /**
      * The label of the element

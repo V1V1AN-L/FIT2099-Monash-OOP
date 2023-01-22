@@ -8,31 +8,26 @@ import game.weapon.Surf;
 import java.util.ArrayList;
 
 /**
- * Concrete class of Swampert - An evolution after Marshtomp
- * Created by: Jordan Nathanael
+ * Concrete class of PokemonBase Vaporeon - An Evolution after Eevee
  *
+ * Created by: Jordan Nathanael
  * @author jordannathanael
  */
-public class Swampert extends PokemonBase {
+public class Vaporeon extends PokemonBase {
     /**
      * Constructor.
      *
      * @param oldBackupWeapons the previous weapons from the previous pokemon (before evolution)
      */
-    public Swampert(ArrayList<BackupWeapon> oldBackupWeapons) {
-        super("Swampert", 'N', 250);
+    public Vaporeon(ArrayList<BackupWeapon> oldBackupWeapons) {
+        super("Vaporeon", 'V', 250);
         this.addCapability(Element.WATER);
-        this.addCapability(Element.GROUND);
-        this.favAction = FavoriteAction.SINGING;
-
-        for (BackupWeapon backupWeapon : oldBackupWeapons){
-            this.backupWeapons.add(backupWeapon);
-        }
+        this.favAction = FavoriteAction.CHEST_POUNDING;
     }
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(10, "tackle");
+        return new IntrinsicWeapon(12, "body slams");
     }
 
     @Override

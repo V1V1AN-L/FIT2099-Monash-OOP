@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 /**
  * Created by: Riordan D. Alfredo
@@ -32,8 +32,8 @@ public class Torchic extends EvolvedPokemonBase implements TimePerception {
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Ember", ' ', 30, "sparks", 65, Element.FIRE);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Ember", ' ', 30, "sparks", 65, Element.FIRE);
     }
 
     @Override

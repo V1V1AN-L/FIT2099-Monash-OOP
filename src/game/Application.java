@@ -16,6 +16,8 @@ import edu.monash.fit2099.engine.positions.World;
 import game.affection.AffectionManager;
 import game.grounds.*;
 import game.items.Candy;
+import game.pokemon.Eevee;
+import game.pokemon.Pikachu;
 import game.pokemon.Torchic;
 
 /**
@@ -32,14 +34,14 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
-                new Floor(), new Tree(),
+                new Floor(), new Tree(), new ElectricField(),
                 new Lava(), new Puddle(),new Crater(), new Waterfall(), new Hay());
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
                 ".C..........T,.................................T,..^^^^^^^^",
                 ".....................................................^^^^^^",
-                "........................................................^^^",
+                "................................E.......................^^^",
                 ".........................................................^^",
                 "............................###..............T,...........^",
                 "..................,T........#.#............................",
@@ -72,9 +74,18 @@ public class Application {
         world.addPlayer(ash, gameMap.at(26, 8));
         am.registerTrainer(ash);
 
-        //Add first pokemon - Torchic
+        Actor eevee = new Eevee();
+        gameMap.at(25, 9).addActor(eevee);
+        AffectionManager.getInstance().modifyAffection(eevee, 100);
+
+        //Add first pokemon - Pikachu
+        Actor pikachu = new Pikachu();
+        gameMap.at(26, 9).addActor(pikachu);
+        AffectionManager.getInstance().modifyAffection(pikachu, 100);
+
+        //Add torchic
         Actor torchic = new Torchic();
-        gameMap.at(1, 1).addActor(torchic);
+        gameMap.at(26, 7).addActor(torchic);
         AffectionManager.getInstance().modifyAffection(torchic, 100);
 
         Actor professorOak = ProfessorOak.getInstance();

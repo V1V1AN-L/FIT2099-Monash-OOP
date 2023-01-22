@@ -1,9 +1,9 @@
 package game.pokemon;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.items.stone.ThunderStone;
 import game.tools.Element;
-import game.tools.Status;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 /**
  * Concrete class of PokemonBase Pikachu
@@ -11,12 +11,12 @@ import game.weapon.BackupWeapons;
  * Created by: Jordan Nathanael
  * @author jordannathanael
  */
-public class Pikachu extends EvolvedPokemonBase {
+public class Pikachu extends RestrictedEvolvedPokemonBase {
     /**
      * Constructor.
      */
     public Pikachu() {
-        super("Pikachu", 'p', 100);
+        super("Pikachu", 'p', 100, ThunderStone.NAME);
         this.addCapability(Element.ELECTRIC);
         this.favAction = FavoriteAction.DANCING;
     }
@@ -27,13 +27,12 @@ public class Pikachu extends EvolvedPokemonBase {
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Thunder Strike", ' ', 30, "strikes", 75, Element.ELECTRIC);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Thunder Strike", ' ', 30, "strikes", 75, Element.ELECTRIC);
     }
 
     @Override
     public PokemonBase evolve() {
         return new Raichu(this.backupWeapons);
     }
-
 }
