@@ -6,7 +6,7 @@ package game.tools;
  * Created by: Riordan D. Alfredo
  *
  * @author Riordan D. Alfredo
- * Modified by:
+ * Modified by: Jordan Nathanael
  */
 public enum Element {
     /**
@@ -22,7 +22,27 @@ public enum Element {
     /**
      * Grass element
      */
-    GRASS("Grass");
+    GRASS("Grass"),
+
+    /**
+     * Fighting element
+     */
+    FIGHTING("Fighting"),
+
+    /**
+     * Ground element
+     */
+    GROUND("Ground"),
+
+    /**
+     * Electric element
+     */
+    ELECTRIC("Electric"),
+
+    /**
+     * Normal element
+     */
+    NORMAL("Normal");
 
     /**
      * The label of the element

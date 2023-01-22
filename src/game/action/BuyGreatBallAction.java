@@ -2,7 +2,7 @@ package game.action;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.Masterball;
+import game.items.ball.Masterball;
 
 public class BuyGreatBallAction extends BuyAction{
 

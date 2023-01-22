@@ -14,6 +14,8 @@ import edu.monash.fit2099.engine.positions.World;
 import game.affection.AffectionManager;
 import game.grounds.*;
 import game.items.Candy;
+import game.pokemon.Eevee;
+import game.pokemon.Pikachu;
 import game.pokemon.Torchic;
 
 /**
@@ -30,24 +32,36 @@ public class Application {
         World world = new World(new Display());
 
         FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(),
-                new Floor(), new Tree(),
+                new Floor(), new Tree(), new ElectricField(),
                 new Lava(), new Puddle(),new Crater(), new Waterfall(), new Hay());
 
         List<String> map = Arrays.asList(
                 ".............................................^^^^^^^^^^^^^^",
-                "...........,T,................................,T,..^^^^^^^^",
+                ".C..........T,.................................T,..^^^^^^^^",
                 ".....................................................^^^^^^",
-                "........................................................^^^",
-                "..........................#######........................^^",
-                "..........................#_____#...........,T............^",
-                "..........................#_____#..........................",
-                "...........~..............###_###..........................",
+                "................................E.......................^^^",
+                ".........................................................^^",
+                "............................###..............T,...........^",
+                "..................,T........#.#............................",
+                "...T.......~...............................................",
                 "...~~~~~~~~................................................",
                 "....~~~~~.....................................C............",
                 "~~~W~~~....................................................",
-                "~~~~~~.,T,.................................................",
+                "~~~~~~..T..............................T...................",
                 "~~~~~~~~~..................................................");
+
+        List<String> pokeCenter = Arrays.asList(
+                "##################",
+                "#________________#",
+                "#______....._____#",
+                "#________________#",
+                "#________________#",
+                "#######_._########");
+
         GameMap gameMap = new GameMap(groundFactory, map);
+        GameMap pokeCenterMap = new GameMap(groundFactory, pokeCenter);
+
+        world.addGameMap(pokeCenterMap);
         world.addGameMap(gameMap);
 
         // AffectionManager
@@ -55,20 +69,31 @@ public class Application {
 
         //Add player - Ash
         Player ash = new Player("Ash", '@', 1);
-        world.addPlayer(ash, gameMap.at(32, 10));
+        world.addPlayer(ash, gameMap.at(26, 8));
         am.registerTrainer(ash);
 
-        IntStream.range(0, 20).forEach(i -> ash.addItemToInventory(new Candy()));
+        Actor eevee = new Eevee();
+        gameMap.at(25, 9).addActor(eevee);
+        AffectionManager.getInstance().modifyAffection(eevee, 100);
 
-        //Add first pokemon - Torchic
+        //Add first pokemon - Pikachu
+        Actor pikachu = new Pikachu();
+        gameMap.at(26, 9).addActor(pikachu);
+        AffectionManager.getInstance().modifyAffection(pikachu, 100);
+
+        //Add torchic
         Actor torchic = new Torchic();
-        gameMap.at(33, 10).addActor(torchic);
+        gameMap.at(26, 7).addActor(torchic);
+        AffectionManager.getInstance().modifyAffection(torchic, 100);
 
         Actor professorOak = ProfessorOak.getInstance();
         gameMap.at(25,7).addActor(professorOak);
 
         Actor shopkeeper = new ShopKeeper();
-        gameMap.at(25,6).addActor(shopkeeper);
+        pokeCenterMap.at(9,2).addActor(shopkeeper);
+
+        gameMap.at(29,6).setGround(new Door(pokeCenterMap.at(8,5)));
+        pokeCenterMap.at(8,5).setGround(new Door(gameMap.at(29,6)));
 
         world.run();
 

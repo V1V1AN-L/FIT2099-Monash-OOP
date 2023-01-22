@@ -15,6 +15,8 @@ import game.tools.ElementsHelper;
  * @author jordannathanael
  */
 public class ToggleWeaponBehavior implements Behaviour {
+    public static final int TOGGLE_BEHAVIOUR_PRIORITY = BehaviourPriority.TOGGLING.getValue();
+
     /**
      * The pokemon that will toggle the weapon
      */
@@ -37,5 +39,10 @@ public class ToggleWeaponBehavior implements Behaviour {
         pokemon.toggleWeapon(conditionMet);
 
         return null; // go to next behavior
+    }
+
+    @Override
+    public int getPriority(){
+        return TOGGLE_BEHAVIOUR_PRIORITY;
     }
 }

@@ -18,6 +18,7 @@ public interface TimePerception {
      */
     void nightEffect();
 
+
     /**
      * a default interface method that register current instance to the Singleton manager.
      * It allows corresponding class uses to be affected by global reset

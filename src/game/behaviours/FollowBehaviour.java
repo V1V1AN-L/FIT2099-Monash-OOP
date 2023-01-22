@@ -17,6 +17,8 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
  * Modified by: -
  */
 public class FollowBehaviour implements Behaviour {
+	public static final int FOLLOW_BEHAVIOUR_PRIORITY = BehaviourPriority.FOLLOWING.getValue();
+
 	/**
 	 * The actor that is to be followed
 	 */
@@ -51,6 +53,11 @@ public class FollowBehaviour implements Behaviour {
 		}
 
 		return null;
+	}
+
+	@Override
+	public int getPriority(){
+		return FOLLOW_BEHAVIOUR_PRIORITY;
 	}
 
 	/**

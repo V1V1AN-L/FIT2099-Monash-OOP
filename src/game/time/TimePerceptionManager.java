@@ -6,7 +6,9 @@ import game.affection.AffectionManager;
 import game.pokemon.PokemonBase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A global Singleton manager that gives time perception  on the affected instances.
@@ -24,7 +26,7 @@ public class TimePerceptionManager {
      * A list of polymorph instances (any classes that implements TimePerception,
      * such as, a Charmander implements TimePerception, it will be stored in here)
      */
-    private final List<TimePerception> timePerceptionList;
+    private List<TimePerception> timePerceptionList;
 
     /**
      * A counter recording the current turn of the game. This will be used to calculated the
@@ -41,6 +43,8 @@ public class TimePerceptionManager {
      * For printing
      */
     private Display display = new Display();
+
+    private Map<TimePeriod, String> timePeriodString = new HashMap();
 
     /**
      * A singleton instance
@@ -66,6 +70,8 @@ public class TimePerceptionManager {
     private TimePerceptionManager() {
         timePerceptionList = new ArrayList<>();
         turn = 0;
+        timePeriodString.put(TimePeriod.DAY,"Day");
+        timePeriodString.put(TimePeriod.NIGHT,"Night");
     }
 
     /**
@@ -76,19 +82,16 @@ public class TimePerceptionManager {
      */
     public void run() {
         for (TimePerception each: new ArrayList<TimePerception>(this.getTimePerceptionList())){
-            if ((turn/5) % 2 == 0){
+            if ((turn/5) %2 == 0 ){
                 shift = TimePeriod.DAY;
                 each.dayEffect();
-            }else {
-                each.nightEffect();
+
+            } else {
                 shift = TimePeriod.NIGHT;
+                each.nightEffect();
             }
         }
-        if (shift == TimePeriod.DAY) {
-            display.println("It's a Day-time (turn" + turn + ')');
-        }else{
-            display.println("It's a Night-time (turn" + turn + ')');
-        }
+        display.println("It's a "+ timePeriodString.get(shift)+"-time (turn" + turn + ')');
         turn++;
     }
 

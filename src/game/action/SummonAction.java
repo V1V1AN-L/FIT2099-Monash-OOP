@@ -2,11 +2,10 @@ package game.action;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.items.GeneralBall;
+import game.items.ball.GeneralBall;
 import game.pokemon.PokemonBase;
 
 /**

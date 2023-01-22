@@ -1,12 +1,15 @@
 package game.grounds;
 
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.items.Candy;
 import game.time.TimePerception;
+import game.time.TimePerceptionManager;
 import game.tools.Element;
 import game.pokemon.PokemonBase;
 import game.pokemon.Treecko;
 
+import java.util.ArrayList;
 
 
 /**
@@ -16,7 +19,7 @@ import game.pokemon.Treecko;
  * @author Zecan Liu
  *
  */
-public class Tree extends SpawningGround implements ExpandibleGround, TimePerception {
+public class Tree extends SpawningGround implements ExpandibleGround, TimePerception, DestructibleGround {
 
     private Location location;
 
@@ -71,12 +74,13 @@ public class Tree extends SpawningGround implements ExpandibleGround, TimePercep
         }
     }
 
+
     /**
      * Spawning a new pokemon
      * @return Treecko - a new pokemon instance
      */
     @Override
-    public PokemonBase spawnPokemon() {
+    protected PokemonBase spawnPokemon() {
         return new Treecko();
     }
 

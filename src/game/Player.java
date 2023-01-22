@@ -3,19 +3,27 @@ package game;
 import edu.monash.fit2099.engine.actions.*;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
-import game.action.*;
 import game.affection.AffectionManager;
 import game.items.Candy;
+<<<<<<< HEAD
 import game.items.Greatball;
 import game.items.Masterball;
 import game.items.PokeLocator;
+=======
+import game.items.ball.Greatball;
+import game.items.ball.Masterball;
+import game.items.stone.ThunderStone;
+import game.items.stone.WaterStone;
+import game.time.TimePerception;
+>>>>>>> 8175533648c35925ce7cc2fa018c22ca5b406c7d
 import game.time.TimePerceptionManager;
 import game.tools.Status;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class representing the Player.
@@ -40,12 +48,18 @@ public class Player extends Actor {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.IMMUNE);
+		this.addCapability(Status.ENTERABLE);
 
 		AffectionManager.getInstance().registerTrainer(this);
 
 		addItemToInventory(new Masterball());
 		addItemToInventory(new Greatball());
+<<<<<<< HEAD
 		addItemToInventory(new PokeLocator());
+=======
+		addItemToInventory(new ThunderStone());
+		addItemToInventory(new WaterStone());
+>>>>>>> 8175533648c35925ce7cc2fa018c22ca5b406c7d
 	}
 
 	@Override

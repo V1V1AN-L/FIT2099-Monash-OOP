@@ -30,7 +30,7 @@ public class Crater extends SpawningGround {
      * @return Torchic - Spawned Pokemon
      */
     @Override
-    public PokemonBase spawnPokemon() {
+    protected PokemonBase spawnPokemon() {
         return new Torchic();
     }
 

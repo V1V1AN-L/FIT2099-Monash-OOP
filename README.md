@@ -16,6 +16,106 @@ Design Docs for A1 is under docs.DesignDocs.A1 Design Docs Directory which conta
 
 We were in different groups during A1. 
 
+## Design Rationale - Assignment 3
+
+### REQ 1
+![alt text](./assets/UMLDiagram_REQ1_A3.png)
+
+This diagram represents an Evolution feature especially for Torchic's evolution line.
+
+There is a new abstract class named EvolvedPokemonBase that need to be applied by every pokemon that can evolve into another pokemon. This aligns with Open-Closed Principle and also avoids the repetition in the code.
+
+As we can see from Blaziken, it has dependency toward the FireSpin because we create that weapon. FireSpin also has dependency toward Fire inside game.items.weaponeffect package because FireSpin will create a Fire nearby the Blaziken which this is the reason we have dependency between WeaponEffectItem and Location. 
+
+I created an abstract class named WeaponEffectItem that is inherited by Fire because this weaponEffect can't replace the ground and we can easily remove and add inside the gameMap, which logically easy to be done if we inherits this WeaponEffectItem toward Item abstract class. This also aligns with Open-Closed Principle because abstract class WeaponEffectItem can be easily extended like what we did in REQ3 (Creative Mode)
+
+Torchic has dependency toward Combusken as well as Combusken has dependency toward Blaziken because everytime they evolve, they will create a return a new Pokemon.
+
+There is also a new Behavior named EvolveBehavior because this concrete class is a result of Open-Closed Principle that has been applied in the Behavior so we can easily extend the behavior. This behavior also aligns with Single-Responsibility Principle. Because if we do the evolution mechanism inside the Pokemon, it will violate the SRP.
+
+Besides that, there is also a new Action named EvolveAction that inherits from Action abstract class which aligns the Open-Closed Principle and SRP.
+
+### REQ 2
+![alt text](./assets/UMLDiagram_REQ2_A3.png)
+
+### REQ 3 (Creative Mode)
+**Title**:
+_Evolution with a particular Item and Extra Pokemon Evolution with their own weapon effect._
+
+**Description**:
+* Add Mudkip evolution which are:
+  * Marshtomp
+      * have new backupWeapon which is Water Gun
+  * Swampert
+    * have new backupWeapon which is Surf
+      * Surf will affect 24 tiles (forming a square) near its location and those area becomes ‘flood’s
+      * It has duration of 3 and every actor that within the area effect will get hurt by 3 each turn
+      * Besides getting hurt, the actor also can’t move for that duration.
+
+* Add Treecko evolution which are:
+    * Grovyle
+        * have new backupWeapon which is Leaf Storm
+    * Sceptile
+        * have new backupWeapon which is SolarBeam
+          * Solarbeam will affect 24 tiles near actor location and those area becomes ‘barren’s
+          * has duration of 5 turn
+          * every actor which stand of the effect will be hurt by 2 if they don’t have any similar element
+          * If they are having a same element, they will be healed by 2
+* Add new pokemon, Pikachu and its evolution which is Raichu
+    * Pikachu
+        * have new backupWeapon which is Body Slam
+        * Need ThunderStone to evolve (Evolution can be done with Player help only)
+    * Raichu
+        * have new backupWeapon which is Thunder
+          * Thunder will affect the 0-8 tiles near the actor locations
+          * has duration of 2 turns
+          * Every actor that is shocked will be paralyzed for 2 turns and hurted 15 for each turn.
+* Add new pokemon, Eevee and its one of the evolution which is Vaporeon
+    * Eevee
+        * Have new backupWeapon which is Swift
+        * Need WaterStone to evolve into Vaporeon (Mechasnism is same with Pikachu)
+    * Vaporeon
+        * have a new backupWeapon which is Surf (Same like Swampert's backupWeapon)
+* Add new abstract class named Stone
+    * ThunderStone , is used to help Pikachu to evolve into Raichu
+    * WaterStone, is used to help Eevee to evolve into Vaporeon
+* Add new ground that have electric element for Pikachu and Raichu environment named ElectricField.
+    * ElectricField is a SpawningGround, that will spawn Pikachu_
+
+**Explanation why it adheres to SOLID principles** (WHY):
+
+- Abstract class Stone aligns with Open-Closed Principle so that we can add more EvolutionItem.
+- Abstract class WeaponEffectItem also aligns with Open-Closed Principle.
+- Abstract class RestrictedEvolvedPokemonBased aligns with DRY principle so that we don't have to repeat the similarity among concrete classes that inherits this abstract class.
+
+| Requirements                                                                                                            | Features (HOW) / Your Approach / Answer                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Must use at least two (2) classes from the engine package                                                               | _Actor, is inherited from PokemonBase. Location, to modify the location that is affected by the weaponEffect. Item, is inherited by Stone abstract class. Ground, is inherited from SpawningGround_                                                              |
+| Must use/re-use at least one(1) existing feature (either from assignment 2 and/or fixed requirements from assignment 3) | _We use evolution feature from REQ1 Assignment 3_                                                                                                                                                                                                                |
+| Must use existing or create new abstractions (e.g., abstract or interface, apart from the engine code)                  | _We use existing abstraction from REQ1 (EvolvedPokemonBase) and also create a new one named RestrictedEvolvedPokemonBase_                                                                                                                                        |
+| Must use existing or create new capabilities                                                                            | _We used some existing capabilities of Element such as Element.WATER, GRASS; However, we created a new capabilities of Element and Status such as Status.EVOLUTION_RESTRICTED, Status.MOVEMENT_RESTRICTED, Element.GROUND, Element.NORMAL, and Element.ELECTRIC_ |
+
+---
+
+#### UML DIAGRAM
+![alt text](./assets/UMLDiagram_REQ3_A3.png)
+The diagram represents an object-oriented system for a feature where evolution can be done if the player has a specific item to help the pokemon to evolve.
+
+The new pokemons that have a restriction for the evolution process are Pikachu and Eevee. I created RestrictedEvolvedPokemonBase abstract class that inherits from EvolvedPokemonBase because to avoid repetitions (DRY) and to align with Single-Responsibility Principle where RestrictedEvolvedPokemonBase has a similarity where that need an attribute to save the name of the item for the evolution.
+
+Certain Pokemon will have their unique BackupWeapon with their own unique weapon effect. Due to similarity for each WeaponEffect, there is abstract class WeaponEffectItem that will be inherited by Shock, Flood, and Barren. Those three WeaponEffect concrete class has dependency with Thunder, Surf, and SolarBeam respectively because those weapon will create those WeaponEffect on GameMap. This design also aligns with Open-Closed principle because it will be easy to be extended.
+
+Related BackupWeapon's feedback from Assignment 2, there is another alternative that can be done instead of applying the current design where each PokemonBase will have an association with BackupWeapon as an ArrayList, we can still have an association with BackupWeapon but not as ArrayList, so that the BackupWeapon will store all the weapon for the pokemon. However, with the latter option, we will have issue with access modifier, so that's why I still keep the first approach to be implemented in this Assignment 3.
+
+There is also a new abstract class named Stone that inherits Item that will be used to help RestrictedEvolvedPokemonBase to evolve. This aligns with the Open-Closed principle because we can add more stone based on the situation for the game. Everytime Player helps the evolution, EvolveAction will remove that related stone from the Player inventory, that's why we have dependency between EvolveAction and Item.
+
+There is also a new concrete class that inherits from SpawningGround that will spawn Pikachu named ElectricField. This can be easily created because the original design has already meet the Open-Closed principle.
+
+
+
+### REQ 4 (Creative Mode)
+![alt text](./assets/UMLDiagram_REQ4_A3.png)
+
 ## Design Rationale - Assignment 2 
 
 ### REQ 1

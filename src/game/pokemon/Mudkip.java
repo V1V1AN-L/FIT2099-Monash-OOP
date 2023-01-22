@@ -1,10 +1,10 @@
 package game.pokemon;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
-import game.tools.Status;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 /**
  * Concrete class of PokemonBase Mudkip
@@ -13,15 +13,17 @@ import game.weapon.BackupWeapons;
  * @author jordannathanael
  * Modified by: Zecan (Vivian) Liu
  */
-public class Mudkip extends PokemonBase{
+public class Mudkip extends EvolvedPokemonBase  implements TimePerception {
     /**
      * Constructor.
      */
     public Mudkip() {
         super("Mudkip", 's', 100);
         this.addCapability(Element.WATER);
-        this.addCapability(Status.CATCHABLE);
         this.favAction = FavoriteAction.CHEST_POUNDING;
+
+        // register in timePerceiptionList
+        registerInstance();
     }
 
     @Override
@@ -30,8 +32,13 @@ public class Mudkip extends PokemonBase{
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Water Blast", ' ', 25, "burbles", 80);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Water Blast", ' ', 25, "burbles", 80, Element.WATER);
+    }
+
+    @Override
+    public PokemonBase evolve() {
+        return new Marshtomp(this.backupWeapons);
     }
 
     @Override
@@ -43,5 +50,11 @@ public class Mudkip extends PokemonBase{
     @Override
     public void nightEffect() {
         heal(10);
+    }
+
+    private void removeDeadPokemon(){
+        if(!isConscious()){
+            TimePerceptionManager.getInstance().cleanUp(this);
+        }
     }
 }
