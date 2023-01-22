@@ -18,7 +18,7 @@ import game.tools.Status;
  * @author Riordan D. Alfredo
  */
 public class WanderBehaviour implements Behaviour {
-	public static final int WANDER_BEHAVIOUR_PRIORITY = BehaviourPriority.WANDERING.getValue();
+	private static final int WANDER_BEHAVIOUR_PRIORITY = BehaviourPriority.WANDERING.getValue();
 
 	/**
 	 * Random value to choose the exit
