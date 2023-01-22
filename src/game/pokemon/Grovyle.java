@@ -3,12 +3,12 @@ package game.pokemon;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.tools.Element;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 import java.util.ArrayList;
 
 /**
- *
+ * Concrete class of Grovyle - An evolution after Treecko
  * Created by: Jordan Nathanael
  *
  * @author jordannathanael
@@ -16,13 +16,15 @@ import java.util.ArrayList;
 public class Grovyle extends EvolvedPokemonBase {
     /**
      * Constructor.
+     *
+     * @param oldBackupWeapons the previous weapons from the previous pokemon (before evolution)
      */
-    public Grovyle(ArrayList<BackupWeapons> oldBackupWeapons) {
+    public Grovyle(ArrayList<BackupWeapon> oldBackupWeapons) {
         super("Grovyle", 'G', 150);
         this.addCapability(Element.WATER);
         this.favAction = FavoriteAction.CHEST_POUNDING;
 
-        for (BackupWeapons backupWeapon : oldBackupWeapons){
+        for (BackupWeapon backupWeapon : oldBackupWeapons){
             this.backupWeapons.add(backupWeapon);
         }
     }
@@ -33,13 +35,13 @@ public class Grovyle extends EvolvedPokemonBase {
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Leaf Storm", ' ', 75, "whips", 65, Element.GRASS);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Leaf Storm", ' ', 75, "whips", 65, Element.GRASS);
     }
 
     @Override
     public PokemonBase evolve() {
         this.backupWeapons.clear();
-        return new Swampert(this.backupWeapons) ;
+        return new Sceptile(this.backupWeapons) ;
     }
 }

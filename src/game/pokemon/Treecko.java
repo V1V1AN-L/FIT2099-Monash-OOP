@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 /**
  * Concrete class of PokemonBase Treecko
@@ -32,8 +32,8 @@ public class Treecko extends EvolvedPokemonBase  implements TimePerception {
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Blade Cutter", ' ', 20, "whips", 90, Element.GRASS);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Blade Cutter", ' ', 20, "whips", 90, Element.GRASS);
     }
 
     @Override

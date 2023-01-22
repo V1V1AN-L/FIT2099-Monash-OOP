@@ -5,9 +5,23 @@ import game.tools.Element;
 import game.tools.ElementsHelper;
 import game.tools.Status;
 
+/**
+ * Concrete class of Flood Effect
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
 public class Flood extends WeaponEffectItem {
+    /**
+     * Damage each turn
+     */
     private static final int DAMAGE = 3;
 
+    /**
+     * Constructor
+     *
+     * @param duration of the weaponEffect
+     */
     public Flood(int duration) {
         super("Flood", '-', duration);
         this.addCapability(Element.WATER);
@@ -33,8 +47,10 @@ public class Flood extends WeaponEffectItem {
     @Override
     protected void cleanUp(Location loc) {
         super.cleanUp(loc);
-        if (loc.getActor().hasCapability(Status.MOVEMENT_RESTRICTED)){
-            loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+        if (loc.containsAnActor()) {
+            if (loc.getActor().hasCapability(Status.MOVEMENT_RESTRICTED)) {
+                loc.getActor().removeCapability(Status.MOVEMENT_RESTRICTED);
+            }
         }
     }
 }

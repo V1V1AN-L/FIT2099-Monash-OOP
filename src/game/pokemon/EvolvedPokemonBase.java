@@ -9,9 +9,6 @@ import game.affection.AffectionManager;
 import game.behaviours.BehaviourPriority;
 import game.behaviours.EvolveBehaviour;
 import game.tools.Status;
-import game.weapon.BackupWeapons;
-
-import java.util.ArrayList;
 
 /**
  * Abstract EvolvedPokemonBase class
@@ -29,9 +26,7 @@ public abstract class EvolvedPokemonBase extends PokemonBase{
      */
     public EvolvedPokemonBase(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        if (!this.hasCapability(Status.EVOLUTION_RESTRICTED)){
-            behaviours.put(BehaviourPriority.EVOLVING.getValue(), new EvolveBehaviour(this));
-        }
+        behaviours.put(BehaviourPriority.EVOLVING.getValue(), new EvolveBehaviour(this));
     }
 
     @Override
@@ -45,7 +40,10 @@ public abstract class EvolvedPokemonBase extends PokemonBase{
         return actions;
     }
 
-    protected abstract BackupWeapons backupWeapon();
-
+    /**
+     * Evolve method
+     *
+     * @return the next pokemon in evolution line.
+     */
     public abstract PokemonBase evolve();
 }

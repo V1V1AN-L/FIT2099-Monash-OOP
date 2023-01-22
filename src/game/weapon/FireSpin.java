@@ -6,9 +6,21 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.items.weaponeffect.Fire;
 import game.tools.Element;
 
-public class FireSpin extends BackupWeapons{
+/**
+ * Concrete class of SpecialMove - FireSpin
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
+public class FireSpin extends BackupWeapon {
+    /**
+     * Duration of this special weapon effect
+     */
     private final int FIRE_SPIN_DURATION = 2;
 
+    /**
+     * Constructor.
+     */
     public FireSpin(){
         super("Fire Spin", ' ', 80, "tornadoes", 90, Element.FIRE);
     }

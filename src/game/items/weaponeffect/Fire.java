@@ -5,9 +5,23 @@ import game.tools.Element;
 import game.tools.ElementsHelper;
 import game.tools.Status;
 
+/**
+ * Concrete class of Fire Effect
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
 public class Fire extends WeaponEffectItem {
+    /**
+     * Damage per turn
+     */
     private static final int DAMAGE = 10;
 
+    /**
+     * Constructor
+     *
+     * @param duration of this weaponEffect
+     */
     public Fire(int duration) {
         super("Fire", 'v', duration);
         this.addCapability(Element.FIRE);

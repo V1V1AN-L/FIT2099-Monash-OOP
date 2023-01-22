@@ -34,12 +34,15 @@ public class EvolveBehaviour implements Behaviour {
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        if ((TimePerceptionManager.getInstance().getTurn() - pokemon.getExistTurn()) == EVOLVE_TURN){
+        if ((TimePerceptionManager.getInstance().getTurn() - pokemon.getExistTurn()) >= EVOLVE_TURN){
             //stay live for 5 turn
             // no one near the pokemon
             Actor nearbyActor = null;
             for (Exit exit : map.locationOf(actor).getExits()) {
                 nearbyActor = exit.getDestination().getActor();
+                if (nearbyActor != null){
+                    break;
+                }
             }
 
             // only itself, do evolution

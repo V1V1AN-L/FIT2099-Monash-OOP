@@ -8,9 +8,21 @@ import game.tools.Element;
 
 import java.util.Random;
 
-public class Thunder extends BackupWeapons{
+/**
+ * Concrete class of SpecialMove - Thunder
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
+public class Thunder extends BackupWeapon {
+    /**
+     * Duration of this special weapon Effect
+     */
     private final int THUNDER_DURATION = 2;
 
+    /**
+     * Constructor
+     */
     public Thunder(){
         super("Thunder", ' ', 100, "shocks", 40, Element.ELECTRIC);
     }

@@ -9,6 +9,8 @@ import game.affection.AffectionManager;
 import game.items.Candy;
 import game.items.ball.Greatball;
 import game.items.ball.Masterball;
+import game.items.stone.ThunderStone;
+import game.items.stone.WaterStone;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Status;
@@ -46,6 +48,8 @@ public class Player extends Actor {
 
 		addItemToInventory(new Masterball());
 		addItemToInventory(new Greatball());
+		addItemToInventory(new ThunderStone());
+		addItemToInventory(new WaterStone());
 	}
 
 	@Override

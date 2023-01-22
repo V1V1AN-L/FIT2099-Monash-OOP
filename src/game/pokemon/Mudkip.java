@@ -4,8 +4,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.time.TimePerception;
 import game.time.TimePerceptionManager;
 import game.tools.Element;
-import game.tools.Status;
-import game.weapon.BackupWeapons;
+import game.weapon.BackupWeapon;
 
 /**
  * Concrete class of PokemonBase Mudkip
@@ -33,8 +32,8 @@ public class Mudkip extends EvolvedPokemonBase  implements TimePerception {
     }
 
     @Override
-    protected BackupWeapons backupWeapon(){
-        return new BackupWeapons("Water Blast", ' ', 25, "burbles", 80, Element.WATER);
+    protected BackupWeapon backupWeapon(){
+        return new BackupWeapon("Water Blast", ' ', 25, "burbles", 80, Element.WATER);
     }
 
     @Override

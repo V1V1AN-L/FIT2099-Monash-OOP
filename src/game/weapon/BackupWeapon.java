@@ -14,7 +14,7 @@ import game.tools.Element;
  * @see Actor#getWeapon() method.
  * @see AttackAction uses getWeapon() in the execute() method.
  */
-public class BackupWeapons extends WeaponItem{
+public class BackupWeapon extends WeaponItem{
     /**
      * Constructor
      *
@@ -24,7 +24,7 @@ public class BackupWeapons extends WeaponItem{
      * @param verb
      * @param hitRate
      */
-    public BackupWeapons(String name, char displayChar, int damage, String verb, int hitRate, Element element){
+    public BackupWeapon(String name, char displayChar, int damage, String verb, int hitRate, Element element){
         super(name, displayChar, damage, verb, hitRate);
         this.addCapability(element);
     }

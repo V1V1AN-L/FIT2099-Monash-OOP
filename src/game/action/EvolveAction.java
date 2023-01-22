@@ -2,37 +2,42 @@ package game.action;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.affection.AffectionManager;
+import game.items.stone.Stone;
 import game.pokemon.EvolvedPokemonBase;
 import game.pokemon.PokemonBase;
 
 /**
- * An Action to attack another Actor.
- * Created by: Riordan D. Alfredo
+ * An Action to evolve Pokemon
+ * Created by: Jordan Nathanael
  *
- * @author Riordan D. Alfredo
- * Modified by: Jordan Nathanael
+ * @author jordannathanael
  */
 public class EvolveAction extends Action {
+    /**
+     * Evolution Stone (Optional)
+     */
+    private String evolutionStone;
 
     /**
      * The Actor that wants to evolve
      */
-    protected EvolvedPokemonBase target;
+    private EvolvedPokemonBase target;
 
     /**
      * The direction of incoming evolve manual
      */
-    protected String direction;
+    private String direction;
 
 
     /**
      * Constructor.
      *
-     * @param target the Actor to attack
-     * @param direction the direction of incoming attack
+     * @param target the pokemon that want to be evolved
+     * @param direction the direction of pokemon that need help to evolve
      */
     public EvolveAction(EvolvedPokemonBase target, String direction) {
         this.target = target;
@@ -40,12 +45,18 @@ public class EvolveAction extends Action {
     }
 
     /**
-     * Execute the attack Action: search weapon, decrease the opponent hp, remove opponent if it is unconscious
+     * Constructor for restrictedEvolvedPokemonBase
      *
-     * @param actor The actor performing the action.
-     * @param map The map the actor is on.
-     * @return
+     * @param target the pokemon that want to be evolved
+     * @param direction the direction of pokemon that need help to evolve
+     * @param evolutionStone the stone that need to be used for the evolution
      */
+    public EvolveAction(EvolvedPokemonBase target, String direction, String evolutionStone){
+        this.target = target;
+        this.direction = direction;
+        this.evolutionStone = evolutionStone;
+    }
+    
     @Override
     public String execute(Actor actor, GameMap map) {
         PokemonBase evolvedPokemon = target.evolve();
@@ -62,11 +73,25 @@ public class EvolveAction extends Action {
         map.removeActor(target);
         map.addActor(evolvedPokemon, evolutionLoc);
 
+        //remove evolutionStone from player inventory
+        if (evolutionStone != null){
+            for (Item item : actor.getInventory()){
+                if (item.toString().equals(evolutionStone)){
+                    actor.removeItemFromInventory(item);
+                    break;
+                }
+            }
+        }
+
         return "Evolution is successful. " + target + " evolves into " + evolvedPokemon;
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " helps " + target + " at " + direction + " to evolve.";
+        String output = actor + " helps " + target + " at " + direction + " to evolve";
+        if (evolutionStone != null){
+            return output + " using " + evolutionStone;
+        }
+        return output;
     }
 }

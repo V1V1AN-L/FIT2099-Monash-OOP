@@ -16,6 +16,33 @@ Design Docs for A1 is under docs.DesignDocs.A1 Design Docs Directory which conta
 
 We were in different groups during A1. 
 
+## Design Rationale - Assignment 3
+
+### REQ 1
+![alt text](./assets/UMLDiagram_REQ1_A3.png)
+
+### REQ 2
+![alt text](./assets/UMLDiagram_REQ2_A3.png)
+
+### REQ 3 (Creative Mode)
+![alt text](./assets/UMLDiagram_REQ3_A3.png)
+The diagram represents an object-oriented system for a feature where evolution can be done if the player has a specific item to help the pokemon to evolve.
+
+The new pokemons that have a restriction for the evolution process are Pikachu and Eevee. I created RestrictedEvolvedPokemonBase abstract class that inherits from EvolvedPokemonBase because to avoid repetitions (DRY) and to align with Single-Responsibility Principle where RestrictedEvolvedPokemonBase has a similarity where that need an attribute to save the name of the item for the evolution.
+
+Certain Pokemon will have their unique BackupWeapon with their own unique weapon effect. Due to similarity for each WeaponEffect, there is abstract class WeaponEffectItem that will be inherited by Shock, Flood, and Barren. Those three WeaponEffect concrete class has dependency with Thunder, Surf, and SolarBeam respectively because those weapon will create those WeaponEffect on GameMap. This design also aligns with Open-Closed principle because it will be easy to be extended.
+
+Related BackupWeapon's feedback from Assignment 2, there is another alternative that can be done instead of applying the current design where each PokemonBase will have an association with BackupWeapon as an ArrayList, we can still have an association with BackupWeapon but not as ArrayList, so that the BackupWeapon will store all the weapon for the pokemon. However, with the latter option, we will have issue with access modifier, so that's why I still keep the first approach to be implemented in this Assignment 3.
+
+There is also a new abstract class named Stone that inherits Item that will be used to help RestrictedEvolvedPokemonBase to evolve. This aligns with the Open-Closed principle because we can add more stone based on the situation for the game. Everytime Player helps the evolution, EvolveAction will remove that related stone from the Player inventory, that's why we have dependency between EvolveAction and Item.
+
+There is also a new concrete class that inherits from SpawningGround that will spawn Pikachu named ElectricField. This can be easily created because the original design has already meet the Open-Closed principle.
+
+
+
+### REQ 4 (Creative Mode)
+![alt text](./assets/UMLDiagram_REQ4_A3.png)
+
 ## Design Rationale - Assignment 2 
 
 ### REQ 1

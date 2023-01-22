@@ -6,9 +6,21 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.items.weaponeffect.Barren;
 import game.tools.Element;
 
-public class SolarBeam extends BackupWeapons{
+/**
+ * Concrete class of SpecialMove - SolarBeam
+ *
+ * Created by: Jordan Nathanael
+ * @author jordannathanael
+ */
+public class SolarBeam extends BackupWeapon {
+    /**
+     * Duration of this special weapon effect
+     */
     private final int SOLAR_BEAM_DURATION = 5;
 
+    /**
+     * Constructor
+     */
     public SolarBeam(){
         super("Solar Beam", ' ', 80, "tornadoes", 95, Element.GRASS);
     }
@@ -16,10 +28,10 @@ public class SolarBeam extends BackupWeapons{
     @Override
     public void tick(Location currentLocation, Actor actor) {
         super.tick(currentLocation, actor);
-        for (Exit exit : currentLocation.getExits()) {
-            for (Exit exit2 : exit.getDestination().getExits()){
-                if (exit2.getDestination().getGround().canActorEnter(exit2.getDestination().getActor())){
-                    Location targetLoc = exit2.getDestination();
+        for (Exit outer : currentLocation.getExits()) {
+            for (Exit inner : outer.getDestination().getExits()){
+                if (inner.getDestination().getGround().canActorEnter(inner.getDestination().getActor())){
+                    Location targetLoc = inner.getDestination();
 
                     targetLoc.addItem(new Barren(SOLAR_BEAM_DURATION));
                 }
