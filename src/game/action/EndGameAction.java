@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.GeneralBall;
+import game.items.ball.GeneralBall;
 import game.pokemon.Mudkip;
 import game.pokemon.PokemonBase;
 import game.pokemon.Torchic;
@@ -37,14 +37,14 @@ public class EndGameAction extends Action {
     private  boolean isAllPokemonCaptured(Actor actor) {
         //Checks if Actor (Player, Ash) has captured all three pokemons of diffeent element type
         List<PokemonBase> allPokemons = List.of(new Torchic(), new Mudkip(),new Treecko());
-        List<PokemonBase> captured = actor.getInventory()
-                .stream()
-                .filter(t -> t instanceof GeneralBall)
-                .map(t -> ((GeneralBall) t))
-                .map(GeneralBall::getStoredPokemon)
-                .filter(Objects::nonNull)
-                .toList();
-        return captured.containsAll(allPokemons);
+//        List<PokemonBase> captured = actor.getInventory()
+//                .stream()
+//                .filter(t -> t instanceof GeneralBall)
+//                .map(t -> ((GeneralBall) t))
+//                .map(GeneralBall::getStoredPokemon)
+//                .filter(Objects::nonNull)
+//                .toList();
+        return new Torchic().isConscious();
     }
 
     @Override
